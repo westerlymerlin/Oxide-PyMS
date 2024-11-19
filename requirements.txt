@@ -1,0 +1,13 @@
+PySide6
+certifi
+chardet
+pillow
+pywin32
+requests
+scipy
+shiboken6
+future
+pip
+numpy
+six
+image

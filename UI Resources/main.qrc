@@ -1,0 +1,44 @@
+<RCC>
+  <qresource prefix="main">
+    <file>swirl.svg</file>
+    <file>srs.png</file>
+    <file>hiden-disabled.png</file>
+    <file>hiden-stop.png</file>
+    <file>hiden-profile.png</file>
+    <file>hiden-mid.png</file>
+    <file>iconNccCalc.svg</file>
+    <file>pyrolaser.png</file>
+    <file>iconPyMSRun.svg</file>
+    <file>QMS.png</file>
+    <file>iconGTRun.svg</file>
+    <file>pause.png</file>
+    <file>run.png</file>
+    <file>stop_down.png</file>
+    <file>stop_up.png</file>
+    <file>laser.png</file>
+    <file>main.png</file>
+  </qresource>
+  <qresource prefix="laser">
+    <file>laserform_slider.png</file>
+    <file>laserform_enable.png</file>
+    <file>laserform_disable.png</file>
+    <file>laserform_close.png</file>
+    <file>laserform_off.png</file>
+    <file>laserform_on.png</file>
+    <file>laserform_on_disabled.png</file>
+  </qresource>
+  <qresource prefix="xy setup">
+    <file>arrorwe down.png</file>
+    <file>arrorwe left.png</file>
+    <file>arrorwe right.png</file>
+    <file>arrorwe up.png</file>
+    <file>arrorw down.png</file>
+    <file>arrorw left.png</file>
+    <file>arrorw right.png</file>
+    <file>arrorw up.png</file>
+  </qresource>
+  <qresource prefix="valves">
+    <file>valve green horizontal.png</file>
+    <file>valve green vertical.png</file>
+  </qresource>
+</RCC>
