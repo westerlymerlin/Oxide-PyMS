@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dialogCycleEdit</class>
+ <widget class="QDialog" name="dialogCycleEdit">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>890</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>890</width>
+    <height>900</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>890</width>
+    <height>900</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>PyMS - Cycle Editor</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="main.qrc">
+    <normaloff>:/main/iconPyMSRun.svg</normaloff>:/main/iconPyMSRun.svg</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 10pt &quot;Segoe UI&quot;;</string>
+  </property>
+  <widget class="QTableWidget" name="tableSteps">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>530</width>
+     <height>621</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">selection-background-color: rgb(197, 248, 255);
+selection-color: rgb(0, 0, 0);
+font: 10pt &quot;Segoe UI&quot;;</string>
+   </property>
+   <property name="midLineWidth">
+    <number>1</number>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="dragDropOverwriteMode">
+    <bool>false</bool>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="textElideMode">
+    <enum>Qt::ElideLeft</enum>
+   </property>
+   <property name="rowCount">
+    <number>10</number>
+   </property>
+   <property name="columnCount">
+    <number>3</number>
+   </property>
+   <attribute name="horizontalHeaderVisible">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="horizontalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderMinimumSectionSize">
+    <number>47</number>
+   </attribute>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>130</number>
+   </attribute>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <column>
+    <property name="text">
+     <string>Time (s)</string>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeading|AlignVCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Target</string>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeading|AlignVCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Command</string>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeading|AlignVCenter</set>
+    </property>
+   </column>
+  </widget>
+  <widget class="QComboBox" name="comboCycles">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>300</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the cycle to edit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnClose">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>860</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="default">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textTime">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>270</y>
+     <width>171</width>
+     <height>30</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>270</y>
+     <width>141</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Time slot (seconds)</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>330</y>
+     <width>101</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Target Device</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>390</y>
+     <width>111</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Command</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboTarget">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>330</y>
+     <width>171</width>
+     <height>30</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboCommand">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>390</y>
+     <width>171</width>
+     <height>30</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnAdd">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>460</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Add the task as a new one</string>
+   </property>
+   <property name="text">
+    <string>Add New</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnDelete">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>520</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Delete selected task</string>
+   </property>
+   <property name="text">
+    <string>Delete Selected</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSaveSteps">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>570</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Save thesee changes to the database</string>
+   </property>
+   <property name="text">
+    <string>Save Cycle</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnRevert">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>520</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Cencel all changes and revert to exisitng cycle</string>
+   </property>
+   <property name="text">
+    <string>Revert</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnUpdate">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>460</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Update existing task</string>
+   </property>
+   <property name="text">
+    <string>Update Selected</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cycle</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="txtDescription">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>50</y>
+     <width>541</width>
+     <height>70</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>20</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Description</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chkEnabled">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>100</y>
+     <width>73</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>If checked will appear in simple batch screens</string>
+   </property>
+   <property name="text">
+    <string>Enabled</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chkSample">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>100</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>if checked will apper in planchet forms and will enable laser power settings</string>
+   </property>
+   <property name="text">
+    <string>Enable Laser</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>230</y>
+     <width>869</width>
+     <height>10</height>
+    </rect>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
+   </property>
+   <property name="midLineWidth">
+    <number>1</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtLaserPower">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>140</y>
+     <width>113</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Laser Power must be between o an 99.9 %</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Laser Power %</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>240</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cycle Steps</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSaveCycle">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>180</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Save thesee changes to the database</string>
+   </property>
+   <property name="text">
+    <string>Save Details</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnDuplicate">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>180</y>
+     <width>110</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create a copy of the current cycle&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string>Duplicate</string>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="main.qrc"/>
+ </resources>
+ <connections/>
+</ui>
