@@ -577,7 +577,7 @@ class Ui_MainWindow(object):
         self.label_11.setScaledContents(True)
         self.lblAalarm = QLabel(self.centralwidget)
         self.lblAalarm.setObjectName(u"lblAalarm")
-        self.lblAalarm.setGeometry(QRect(340, 780, 381, 166))
+        self.lblAalarm.setGeometry(QRect(340, 735, 381, 211))
         font3 = QFont()
         font3.setFamilies([u"Segoe UI"])
         font3.setPointSize(8)
