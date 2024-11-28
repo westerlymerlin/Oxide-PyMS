@@ -66,10 +66,12 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.tbValve6.clicked.connect(lambda: valvechange('valve6', self.wValve6.isHidden()))
         self.tbValve7.clicked.connect(lambda: valvechange('valve7', self.wValve7.isHidden()))
         self.tbValve8.clicked.connect(lambda: valvechange('valve8', self.wValve8.isHidden()))
+        self.tbValve9.clicked.connect(lambda: valvechange('valve9', self.wValve9.isHidden()))
         self.tbValve10.clicked.connect(lambda: valvechange('valve10', self.wValve10.isHidden()))
         self.tbValve11.clicked.connect(lambda: valvechange('valve11', self.wValve11.isHidden()))
         self.tbValve12.clicked.connect(lambda: valvechange('valve12', self.wValve12.isHidden()))
-        self.tbValve9.clicked.connect(lambda: valvechange('valve9', self.wValve9.isHidden()))
+        self.tbValve13.clicked.connect(lambda: valvechange('valve13', self.wValve13.isHidden()))
+        self.tbValve14.clicked.connect(lambda: valvechange('valve14', self.wValve14.isHidden()))
         self.tbStop.clicked.connect(self.emergency_stop)
         self.tbRun.clicked.connect(self.run_click)
         self.actionExit.triggered.connect(self.closeEvent)
@@ -310,6 +312,12 @@ class UiMain(QMainWindow, Ui_MainWindow):
             if self.wValve12.isVisible() != valvestatus(status[11]['status']):
                 logger.debug('t=%s mainUIForm: Valve 12 changed', self.secondcount)
                 self.wValve12.setVisible(valvestatus(status[11]['status']))
+            if self.wValve13.isVisible() != valvestatus(status[12]['status']):
+                logger.debug('t=%s mainUIForm: Valve 13 changed', self.secondcount)
+                self.wValve13.setVisible(valvestatus(status[12]['status']))
+            if self.wValve14.isVisible() != valvestatus(status[13]['status']):
+                logger.debug('t=%s mainUIForm: Valve 14 changed', self.secondcount)
+                self.wValve14.setVisible(valvestatus(status[13]['status']))
         self.lblLaserPower.setText('%.1f' % settings['laser']['power'])
         status = lasergetstatus()
         if status['laser'] != 'exception':
