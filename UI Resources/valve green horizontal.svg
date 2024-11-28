@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.69 32.82">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #009640;
+        stroke: #4c81b2;
+        stroke-miterlimit: 2;
+        stroke-width: 1.25px;
+      }
+    </style>
+  </defs>
+  <g id="Valve">
+    <polygon class="cls-1" points="11.34 31.81 11.34 14.8 45.35 31.81 45.35 14.8 11.34 31.81"/>
+    <path class="cls-1" d="M28.34,12.58v10.72M22.68,12.58h11.34s0-11.96,0-11.96h-11.34s0,11.96,0,11.96Z"/>
+    <line class="cls-1" x1="11.34" y1="23.3" x2="0" y2="23.3"/>
+    <line class="cls-1" x1="45.35" y1="23.3" x2="56.69" y2="23.3"/>
+  </g>
+</svg>
