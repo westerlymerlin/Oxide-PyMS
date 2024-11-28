@@ -1,22 +1,21 @@
 <RCC>
   <qresource prefix="main">
+    <file>hiden-disabled.svg</file>
+    <file>hiden-mid.svg</file>
+    <file>qms.svg</file>
+    <file>main.svg</file>
     <file>swirl.svg</file>
-    <file>srs.png</file>
-    <file>hiden-disabled.png</file>
-    <file>hiden-stop.png</file>
-    <file>hiden-profile.png</file>
-    <file>hiden-mid.png</file>
     <file>iconNccCalc.svg</file>
+    <file>hiden-profile.svg</file>
+    <file>hiden-stop.svg</file>
     <file>pyrolaser.png</file>
     <file>iconPyMSRun.svg</file>
-    <file>QMS.png</file>
     <file>iconGTRun.svg</file>
     <file>pause.png</file>
     <file>run.png</file>
     <file>stop_down.png</file>
     <file>stop_up.png</file>
-    <file>laser.png</file>
-    <file>main.png</file>
+    <file>laser.svg</file>
   </qresource>
   <qresource prefix="laser">
     <file>laserform_slider.png</file>
@@ -38,7 +37,7 @@
     <file>arrorw up.png</file>
   </qresource>
   <qresource prefix="valves">
-    <file>valve green horizontal.png</file>
-    <file>valve green vertical.png</file>
+    <file>valve green horizontal.svg</file>
+    <file>valve green vertical.svg</file>
   </qresource>
 </RCC>
