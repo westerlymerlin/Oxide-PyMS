@@ -1478,9 +1478,9 @@ image: &quot;&quot;;</string>
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>780</y>
+      <y>735</y>
       <width>381</width>
-      <height>166</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="font">

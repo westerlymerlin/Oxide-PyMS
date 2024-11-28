@@ -144,7 +144,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.taskrunning = False
         self.turbopumphigh = 0
         self.ionpumphigh = 0
-        self.n2_pressurel_ow = 0
+        self.n2_pressure_low = 0
         self.lblCurrent.setText('idle')
         self.update_ui_batch_list()
         self.update_ui_commandlist()
@@ -255,15 +255,15 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.run = 0
             self.tbRun.setChecked(False)
         if settings['vacuum']['N2']['current'] < settings['vacuum']['N2']['low']:
-            self.n2_pressurel_ow += 1
+            self.n2_pressure_low += 1
             self.lineN2Pressure.setStyleSheet(GUAGE_BAD)
-            if self.n2_pressurel_ow > 29:
+            if self.n2_pressure_low > 29:
                 status = status + 'N2 gauge is showing loss of pressure, the system is paused. \n'
                 self.secondincrement = 0
                 self.run = 0
                 self.tbRun.setChecked(False)
         else:
-            self.n2_pressurel_ow = 0
+            self.n2_pressure_low = 0
             self.lineN2Pressure.setStyleSheet(GUAGE_GOOD)
         if self.lblAalarm.text() != status:
             self.lblAalarm.setText(status)
