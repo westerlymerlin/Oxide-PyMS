@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.48 30.48">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #1d1d1b;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-5 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .cls-8 {
+        fill: #1d1d1b;
+      }
+
+      .cls-2, .cls-4 {
+        stroke: #575756;
+      }
+
+      .cls-9 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        stroke: #e6007e;
+      }
+
+      .cls-3, .cls-4, .cls-6, .cls-7 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-5 {
+        stroke: #ededed;
+      }
+
+      .cls-6 {
+        stroke: #009fe3;
+      }
+
+      .cls-7 {
+        stroke: #e30613;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="1.49" y="1.49" width="27.78" height="27.78"/>
+  <g>
+    <rect class="cls-9" x="3.33" y="10.97" width="24.09" height="16.81"/>
+    <line class="cls-6" x1="3.33" y1="20.5" x2="27.43" y2="20.5"/>
+    <line class="cls-3" x1="3.33" y1="16.47" x2="27.43" y2="16.47"/>
+    <line class="cls-7" x1="3.33" y1="25.37" x2="27.43" y2="25.37"/>
+    <polyline class="cls-4" points="3.33 10.66 3.33 27.47 27.43 27.47"/>
+  </g>
+  <g>
+    <path class="cls-8" d="M14.41,9.71h-.65v-3.76c0-.3.02-.66.05-1.09h-.02c-.06.25-.12.43-.17.54l-1.91,4.3h-.32l-1.91-4.27c-.05-.12-.11-.32-.17-.57h-.02c.02.22.03.59.03,1.1v3.75h-.63v-5.6h.87l1.72,3.91c.13.3.22.52.26.67h.02c.11-.31.2-.54.27-.69l1.75-3.89h.82v5.6Z"/>
+    <path class="cls-8" d="M16.54,9.71h-.66v-5.6h.66v5.6Z"/>
+    <path class="cls-8" d="M18.01,9.71v-5.6h1.55c1.97,0,2.96.91,2.96,2.73,0,.86-.27,1.56-.82,2.08s-1.28.79-2.2.79h-1.48ZM18.67,4.7v4.41h.84c.73,0,1.31-.2,1.71-.59s.61-.95.61-1.67c0-1.44-.76-2.15-2.29-2.15h-.88Z"/>
+  </g>
+  <g>
+    <polyline class="cls-2" points="29.98 1.07 29.98 29.98 1.07 29.98"/>
+    <polyline class="cls-5" points=".5 29.41 .5 .5 29.41 .5"/>
+  </g>
+</svg>
