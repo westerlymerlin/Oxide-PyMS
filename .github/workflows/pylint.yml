@@ -1,4 +1,4 @@
-name: Code checks and merge to the master branch
+name: Code checks and create a pr to merge to the master branch
 
 on:
   push:
