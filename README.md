@@ -3,6 +3,10 @@
 PyMS is a desktop application designed to provide a Graphical User Interface (GUI) control to manage cycles of batches.
 PyMS is designed using Python and QT6 UI framework via PySide6.
 
+Windows installer package can be downloaded from [PyMS-installer](./distribution/PyMS-installer.exe)
+
+---
+
 | Script File       | Description                                                                                                |                                                                      
 |-------------------|------------------------------------------------------------------------------------------------------------|
 | `PyMS.pyw`        | This is the main application.                                                                              |
@@ -16,4 +20,7 @@ PyMS is designed using Python and QT6 UI framework via PySide6.
 Full documentation can be found in the file: [readme.pdf](./readme.pdf)
 
 Change log can be found in the file [changelog.txt](./changelog.txt)
+
+
+
 
