@@ -56,6 +56,8 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.wValve10.setHidden(True)
         self.wValve11.setHidden(True)
         self.wValve12.setHidden(True)
+        self.wValve13.setHidden(True)
+        self.wValve14.setHidden(True)
         self.wValve9.setHidden(True)
         self.move(settings['mainform']['x'], settings['mainform']['y'])
         self.tbValve1.clicked.connect(lambda: valvechange('valve1', self.wValve1.isHidden()))
