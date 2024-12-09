@@ -7,7 +7,7 @@ calculating a file name and removing illegal character.
 import json
 import datetime
 
-VERSION = '1.0.1'
+VERSION = '1.0.4'
 running = True
 alarms = {'laserhost': 0, 'valvehost': 0, 'xyhost': 0, 'pumphost': 0, 'hidenhost': 0, 'laseralarm': 133}
 
@@ -75,13 +75,13 @@ def initialise():
             "resultsdatabasepath": ".\\database\\HeliumResults.db"
         },
         "hosts": {
-            "laserhost": "http://192.168.2.6/api",
+            "laserhost": "http://192.168.2.26/api",
             "laserhost-api-key": "changeme",
-            "pumphost": "http://192.168.2.5/api",
+            "pumphost": "http://192.168.2.23/api",
             "pumphost-api-key": "changeme",
-            "valvehost": "http://192.168.2.3/api",
+            "valvehost": "http://192.168.2.23/api",
             "valvehost-api-key": "changeme",
-            "xyhost": "http://192.168.2.4/api",
+            "xyhost": "http://192.168.2.24/api",
             "xyhost-api-key": "changeme",
             "timeoutseconds": 1
         },

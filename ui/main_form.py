@@ -56,6 +56,8 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.wValve10.setHidden(True)
         self.wValve11.setHidden(True)
         self.wValve12.setHidden(True)
+        self.wValve13.setHidden(True)
+        self.wValve14.setHidden(True)
         self.wValve9.setHidden(True)
         self.move(settings['mainform']['x'], settings['mainform']['y'])
         self.tbValve1.clicked.connect(lambda: valvechange('valve1', self.wValve1.isHidden()))
@@ -104,8 +106,6 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.btnNCCViewer.clicked.connect(self.menu_show_ncc)
         self.lblIonPump.setText('Ion Gauge (%s)' % settings['vacuum']['ion']['units'])
         self.lblTurboPump.setText('Turbo Gauge (%s)' % settings['vacuum']['turbo']['units'])
-        self.lblTankPump.setText('Tank Gauge (%s)' % settings['vacuum']['tank']['units'])
-        self.lblN2Pump.setText('N2 Gauge (%s)' % settings['vacuum']['N2']['units'])
         font1 = QFont()
         font1.setFamilies(['Segoe UI'])
         font1.setPointSize(10)
@@ -254,17 +254,6 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
-        if settings['vacuum']['N2']['current'] < settings['vacuum']['N2']['low']:
-            self.n2_pressure_low += 1
-            self.lineN2Pressure.setStyleSheet(GUAGE_BAD)
-            if self.n2_pressure_low > 29:
-                status = status + 'N2 gauge is showing loss of pressure, the system is paused. \n'
-                self.secondincrement = 0
-                self.run = 0
-                self.tbRun.setChecked(False)
-        else:
-            self.n2_pressure_low = 0
-            self.lineN2Pressure.setStyleSheet(GUAGE_GOOD)
         if self.lblAalarm.text() != status:
             self.lblAalarm.setText(status)
             self.lblFinishTime.setText('')
@@ -571,11 +560,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         pressuresread()
         self.lineIonPump.setText('%.2e' % settings['vacuum']['ion']['current'])
         self.lineTurboPump.setText('%.2e' % settings['vacuum']['turbo']['current'])
-        self.lineScrollPump.setText('%.2e' % settings['vacuum']['tank']['current'])
-        if settings['vacuum']['N2']['current'] > 500:
-            self.lineN2Pressure.setText('N/A')
-        else:
-            self.lineN2Pressure.setText('%.2f' % settings['vacuum']['N2']['current'])
+
 
 
     def update_ui_xy_positions(self):
@@ -614,10 +599,10 @@ class UiMain(QMainWindow, Ui_MainWindow):
         logger.debug('t:%s mainUIform: Move to %s', self.secondcount, batch.nextlocation())
         self.thread_manager.start(move_x)
         self.thread_manager.start(move_y)
-        #movexthread = threading.Timer(0.5, move_x)
-        #movexthread.start()
-        #moveythread = threading.Timer(1.5, move_y)
-        #moveythread.start()
+        # movexthread = threading.Timer(0.5, move_x)
+        # movexthread.start()
+        # moveythread = threading.Timer(1.5, move_y)
+        # moveythread.start()
 
     def manual_message(self, message):
         """ Pop up message box"""
