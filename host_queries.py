@@ -8,7 +8,7 @@ from logmanager import logger
 
 def lasergetalarm():
     """Get laser alarms"""
-    message = {"item": 'laseralarm', "command": 1}
+    message = {"item": 'laserstatus', "command": 1}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     logger.debug('host_queries: get laser alarm')
     try:
@@ -81,10 +81,13 @@ def pressuresread():
         resp = requests.post(settings['hosts']['pumphost'], headers=headers, json=message,
                              timeout=settings['hosts']['timeoutseconds'])
         json_message = resp.json()
-        settings['vacuum']['turbo']['current'] = float(json_message[0]['pressure'])
-        settings['vacuum']['turbo']['units'] = json_message[0]['units']
-        settings['vacuum']['ion']['current'] = float(json_message[1]['pressure'])
-        settings['vacuum']['ion']['units'] = json_message[1]['units']
+        for item in json_message:
+            if item['pump'] == 'turbo':
+                settings['vacuum']['turbo']['current'] = item['pressure']
+                settings['vacuum']['turbo']['units'] = item['units']
+            if item['pump'] == 'ion':
+                settings['vacuum']['ion']['current'] = item['pressure']
+                settings['vacuum']['ion']['units'] = item['units']
         alarms['pumphost'] = 0
         return json_message
     except requests.Timeout:
