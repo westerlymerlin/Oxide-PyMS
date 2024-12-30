@@ -7,7 +7,7 @@ calculating a file name and removing illegal character.
 import json
 import datetime
 
-VERSION = '1.0.4'
+VERSION = '1.0.7'
 running = True
 alarms = {'laserhost': 0, 'valvehost': 0, 'xyhost': 0, 'pumphost': 0, 'hidenhost': 0, 'laseralarm': 133}
 
@@ -94,7 +94,7 @@ def initialise():
             "microscope-reheat": "GXCapture-T"
         },
         "laser": {
-            "power": 00.0,
+            "power": 10.0,
             "ignorestatus": 1
         },
         "laserform": {
