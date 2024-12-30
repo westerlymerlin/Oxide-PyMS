@@ -9,7 +9,7 @@ from PySide6.QtWidgets import QMainWindow, QTableWidgetItem
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt, QTimer, QThreadPool
 from app_control import settings, writesettings, setrunning, alarms, VERSION
-from host_queries import valvegetstatus, lasergetstatus, lasergetalarm, pressuresread, xyread
+from host_queries import valvegetstatus, lasergetstatus, pressuresread, xyread
 from host_commands import lasercommand, lasersetpower, valvechange, xymoveto, xymove, rpi_reboot
 from batchclass import batch
 from cycleclass import currentcycle
@@ -185,12 +185,12 @@ class UiMain(QMainWindow, Ui_MainWindow):
                 self.secondincrement = 0
                 self.run = 0
                 self.tbRun.setChecked(False)
-        if alarms['laseralarm'] != 133:
+        if alarms['laseralarm'] != 0:
             logger.error('%s laser alarm firing', alarms['laseralarm'])
             status = status + ('The laser is not ready, please ensure that the laser is powered on, the key is in '
                                'position 2 and the enable button has been pressed. This error can also follow a '
                                'power fail. \n')
-            alarms['laseralarm'] = lasergetalarm()['status']
+            alarms['laseralarm'] = lasergetstatus()['status']
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
@@ -397,13 +397,11 @@ class UiMain(QMainWindow, Ui_MainWindow):
                     elif current[2] == 'setpower':
                         lasersetpower(currentcycle.laserpower)
                     elif current[2] == 'checkalarms':
-                        if lasergetalarm()['status'] != 133:
-                            alarms['laseralarm'] = 0
+                        if alarms['laseralarm'] != 0:
                             self.run = 0  # pause the run as the laser is not ready
                             self.secondincrement = 0
                             self.tbRun.setChecked(False)
                             return
-                        alarms['laseralarm'] = 133
                     else:
                         lasercommand('off')
                     currentcycle.completecurrent()

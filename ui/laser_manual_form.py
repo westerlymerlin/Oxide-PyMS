@@ -8,7 +8,7 @@ from PySide6.QtCore import Qt, QTimer, QThreadPool
 from PySide6.QtWidgets import QDialog, QApplication
 from ui.ui_layout_laser import Ui_dialogLaserControl
 from app_control import settings
-from host_queries import lasergetalarm
+from host_queries import lasergetstatus
 from host_commands import lasercommand, lasersetpower
 
 
@@ -68,7 +68,7 @@ class LaserFormUI(QDialog, Ui_dialogLaserControl):
 
     def update_laser(self):
         """Update laser status and laser power"""
-        self.state = lasergetalarm()
+        self.state = lasergetstatus()
         if self.state['keyswitch'] + self.state['doorinterlock'] == 0:
             self.lblStatus.setText('Laser On')
             self.sliderEnable.setToolTip('Slide down to enable ON button')
