@@ -26,6 +26,24 @@ def lasergetstatus():
         alarms['laserhost'] += 1
         return {'laser': 'exception'}
 
+def lasergetcamera():
+    """Get laser Camera Image"""
+    message = {"item": 'camera', "command": 'read'}
+    headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
+    try:
+        resp = requests.post(settings['hosts']['laserhost'], headers=headers, json=message,
+                             timeout=settings['hosts']['timeoutseconds'])
+        json_message = resp.json()
+        return json_message
+    except requests.Timeout:
+        logger.debug('host_queries: Laser Get Camera Timeout Error')
+        alarms['laserhost'] += 1
+        return {'laser': 'exception'}
+    except requests.RequestException:
+        logger.exception('host_queries: Laser Get Camera Exception')
+        alarms['laserhost'] += 1
+        return {'laser': 'exception'}
+
 
 def valvegetstatus():
     """Get valve status and return a list with each valve status as an item in the list"""
