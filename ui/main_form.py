@@ -42,6 +42,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.lineYPosition.setHidden(True)  # No x-y controller yet
         self.btnNCCViewer.setHidden(True)
         self.actionNCCViewer.setVisible(False)
+        self.menuXYController.setEnabled(False)
         self.imgLaser.setHidden(True)
         self.imgQMS.setHidden(True)
         self.wValve1.setHidden(True)
