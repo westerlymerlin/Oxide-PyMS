@@ -90,8 +90,8 @@ def initialise():
             "hiden-mid": "MASsoft 10 Professional",
             "hiden-mid-reheat": "MASsoft 10 Professional",
             "hiden-profile": "MASsoft 10 Professional",
-            "microscope": "GXCapture-T",
-            "microscope-reheat": "GXCapture-T"
+            "laser": "laserhost",
+            "laser-reheat": "laserhost"
         },
         "laser": {
             "power": 10.0,
