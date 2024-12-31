@@ -36,6 +36,13 @@ class UiMain(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle('PyMS - Python Mass Spectrometry v%s' % VERSION)
+        self.label_9.setHidden(True)  # No x-y controller yet
+        self.label_10.setHidden(True)  # No x-y controller yet
+        self.lineXPosition.setHidden(True)  # No x-y controller yet
+        self.lineYPosition.setHidden(True)  # No x-y controller yet
+        self.btnNCCViewer.setHidden(True)
+        self.actionNCCViewer.setVisible(False)
+        self.menuXYController.setEnabled(False)
         self.imgLaser.setHidden(True)
         self.imgQMS.setHidden(True)
         self.wValve1.setHidden(True)
@@ -157,8 +164,8 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.thread_manager.start(self.check_alarms)
         if not self.taskrunning:
             self.thread_manager.start(self.event_timer)
-        if self.timertick == 0 or self.timertick == 2:
-            self.thread_manager.start(self.update_ui_xy_positions)
+        # No x-y copntroller yet         if self.timertick == 0 or self.timertick == 2:
+        # No x-y copntroller yet    self.thread_manager.start(self.update_ui_xy_positions)
         if self.timertick == 0:
             self.thread_manager.start(self.update_ui_pressures)
         if self.timertick >= 3:

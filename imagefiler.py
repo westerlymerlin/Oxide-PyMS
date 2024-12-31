@@ -3,11 +3,13 @@ Image Filer
 Author: Gary Twinn
 """
 import os
+from base64 import b64decode
 from ctypes import windll
 import win32ui
 import win32gui
 from PIL import Image
 from app_control import settings, friendlydirname
+from host_queries import lasergetcamera
 from logmanager import logger
 
 
@@ -17,6 +19,12 @@ def imager(application, batchid, batchdescription, formatteddescription):
                friendlydirname(batchid + ' ' + batchdescription)
     os.makedirs(filepath, exist_ok=True)
     filename = filepath + '\\' + friendlydirname(formatteddescription) + ' ' + application + '.png'
+    if application[:5] == 'laser':
+        filedata = b64decode(lasergetcamera()['image'])
+        with open(filename, 'wb') as f:
+            f.write(filedata)
+        f.close()
+        return
     try:
 
         hwnd = win32gui.FindWindow(None, settings['image'][application])
