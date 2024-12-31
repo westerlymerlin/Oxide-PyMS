@@ -281,7 +281,7 @@ class CycleEditUI(QDialog, Ui_dialogCycleEdit):
         elif target[:7] == 'xytable':
             self.comboCommand.addItems(['move'])
         elif target[:5] == 'image':
-            self.comboCommand.addItems(['dynolite', 'microscope', 'microscope-reheat', 'hiden-mid', 'hiden-mid-reheat',
+            self.comboCommand.addItems(['dynolite', 'laser', 'laser-reheat', 'hiden-mid', 'hiden-mid-reheat',
                                         'hiden-profile'])
         elif target[:3] == 'end':
             self.comboCommand.addItems(['end'])
