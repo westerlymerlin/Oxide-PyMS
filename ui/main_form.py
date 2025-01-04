@@ -197,7 +197,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
             status = status + ('The laser is not ready, please ensure that the laser is powered on, the key is in '
                                'position 2 and the enable button has been pressed. This error can also follow a '
                                'power fail. \n')
-            alarms['laseralarm'] = lasergetstatus()['status']
+            lasergetstatus()
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
