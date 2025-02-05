@@ -101,6 +101,16 @@ def initialise():
             "x": 100,
             "y": 100
         },
+        "laserviewerform": {
+            "x": 100,
+            "y": 100,
+            "circle0x": 100,
+            "circle0y": 100,
+            "circle0diameter": 31,
+            "circle1x": 400,
+            "circle1y": 100,
+            "circle1diameter": 81,
+        },
         "logging": {
             "logappname": "PyMS",
             "logfilepath": ".\\logs\\",
