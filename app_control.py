@@ -7,9 +7,9 @@ calculating a file name and removing illegal character.
 import json
 import datetime
 
-VERSION = '1.0.9'
+VERSION = '1.0.10'
 running = True
-alarms = {'laserhost': 0, 'valvehost': 0, 'xyhost': 0, 'pumphost': 0, 'hidenhost': 0, 'laseralarm': 133}
+alarms = {'laserhost': 0, 'valvehost': 0, 'xyhost': 0, 'pumphost': 0, 'hidenhost': 0, 'laseralarm': 0}
 
 
 def friendlydirname(sourcename: str) -> str:
@@ -100,6 +100,16 @@ def initialise():
         "laserform": {
             "x": 100,
             "y": 100
+        },
+        "laserviewerform": {
+            "x": 100,
+            "y": 100,
+            "circle0x": 100,
+            "circle0y": 100,
+            "circle0diameter": 31,
+            "circle1x": 400,
+            "circle1y": 100,
+            "circle1diameter": 81,
         },
         "logging": {
             "logappname": "PyMS",

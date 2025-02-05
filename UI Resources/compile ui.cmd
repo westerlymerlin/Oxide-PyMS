@@ -1,6 +1,7 @@
 "..\.venv\Lib\site-packages\PySide6\uic.exe" -g python about.ui -o ..\ui\ui_layout_about.py
 "..\.venv\Lib\site-packages\PySide6\uic.exe" -g python cycleedit.ui -o ..\ui\ui_layout_cycle_edit.py
 "..\.venv\Lib\site-packages\PySide6\uic.exe" -g python laser.ui -o ..\ui\ui_layout_laser.py
+"..\.venv\Lib\site-packages\PySide6\uic.exe" -g python laserviewer.ui -o ..\ui\ui_layout_laserviewer.py
 "..\.venv\Lib\site-packages\PySide6\uic.exe" -g python logviewer.ui -o ..\ui\ui_layout_log_viewer.py
 "..\.venv\Lib\site-packages\PySide6\uic.exe" -g python main.ui -o ..\ui\ui_layout_main.py
 "..\.venv\Lib\site-packages\PySide6\uic.exe" -g python ncccalc.ui -o ..\ui\ui_layout_ncc_calc.py

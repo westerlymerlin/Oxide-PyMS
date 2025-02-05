@@ -28,7 +28,7 @@ else:
 
 LogFile = RotatingFileHandler('%s%s.log' %(settings['logging']['logfilepath'],settings['logging']['logappname']),
                               maxBytes=1048576, backupCount=10)
-formatter = logging.Formatter('%(asctime)s, %(name)s, %(levelname)s : %(message)s')
+formatter = logging.Formatter('[%(asctime)s] - [%(levelname)s] - %(message)s')
 LogFile.setFormatter(formatter)
 logger.addHandler(LogFile)
 try:
