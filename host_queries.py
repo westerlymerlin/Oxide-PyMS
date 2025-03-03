@@ -26,9 +26,9 @@ def lasergetstatus():
         alarms['laserhost'] += 1
         return {'laser': 'exception'}
 
-def lasergetcamera():
-    """Get laser Camera Image"""
-    message = {"item": 'camera', "command": 'read'}
+def pyroread():
+    """Get Pyrometer reading"""
+    message = {"item": 'gettemperature', "command": 1}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     try:
         resp = requests.post(settings['hosts']['laserhost'], headers=headers, json=message,
@@ -36,11 +36,11 @@ def lasergetcamera():
         json_message = resp.json()
         return json_message
     except requests.Timeout:
-        logger.debug('host_queries: Laser Get Camera Timeout Error')
+        logger.debug('host_queries: Laser Get Pyrometer Timeout Error')
         alarms['laserhost'] += 1
         return {'laser': 'exception'}
     except requests.RequestException:
-        logger.exception('host_queries: Laser Get Camera Exception')
+        logger.exception('host_queries: Laser Get Pyrometer Exception')
         alarms['laserhost'] += 1
         return {'laser': 'exception'}
 

@@ -7,7 +7,7 @@ calculating a file name and removing illegal character.
 import json
 import datetime
 
-VERSION = '1.0.10'
+VERSION = '1.1.2'
 running = True
 alarms = {'laserhost': 0, 'valvehost': 0, 'xyhost': 0, 'pumphost': 0, 'hidenhost': 0, 'laseralarm': 0}
 
@@ -86,12 +86,12 @@ def initialise():
             "timeoutseconds": 1
         },
         "image": {
-            "dynolite": "DinoCapture 2.0",
+            "dynolite": "Camera Viewer",
             "hiden-mid": "MASsoft 10 Professional",
             "hiden-mid-reheat": "MASsoft 10 Professional",
             "hiden-profile": "MASsoft 10 Professional",
-            "laser": "laserhost",
-            "laser-reheat": "laserhost"
+            "laser": "Camera Viewer",
+            "laser-reheat": "Camera Viewer"
         },
         "laser": {
             "power": 10.0,
@@ -104,12 +104,12 @@ def initialise():
         "laserviewerform": {
             "x": 100,
             "y": 100,
-            "circle0x": 100,
-            "circle0y": 100,
-            "circle0diameter": 31,
-            "circle1x": 400,
-            "circle1y": 100,
-            "circle1diameter": 81,
+            "square0x": 400,
+            "square0y": 100,
+            "square0size": 30,
+            "square1x": 1000,
+            "square1y": 100,
+            "square1size": 120,
         },
         "logging": {
             "logappname": "PyMS",
