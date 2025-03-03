@@ -6,11 +6,13 @@ Author: Gary Twinn
 import sys
 from PySide6.QtWidgets import QDialog, QLabel, QApplication
 from PySide6.QtGui import QDrag
-from PySide6.QtCore import Qt, QMimeData, QRect
+from PySide6.QtCore import Qt, QMimeData, QRect, QTimer
 from ui.ui_layout_laserviewer import Ui_LaserViewer
 from app_control import settings, writesettings
+from host_queries import pyroread
 
-class DragCircle(QLabel):
+
+class DragSquare(QLabel):
     """
     Represents a draggable circle UI element that inherits from QLabel.
 
@@ -34,24 +36,37 @@ class LaserViewerUI(QDialog, Ui_LaserViewer):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowTitle('Camera Viewer')
         self.setAcceptDrops(True)
         self.move(settings['laserviewerform']['x'], settings['laserviewerform']['y'])
         self.btnClose.clicked.connect(self.formclose)
-        #self.webEngineView0.setUrl(settings['hosts']['laserhost'][:-3] + 'VideoFeed0')
-        #self.webEngineView1.setUrl(settings['hosts']['laserhost'][:-3] + 'VideoFeed1')
-        self.circle0 = DragCircle(self)
-        self.circle0.setGeometry(QRect(settings['laserviewerform']['circle0x'],
-                                       settings['laserviewerform']['circle0y'],
-                                       settings['laserviewerform']['circle0diameter'],
-                                       settings['laserviewerform']['circle0diameter']))
-        self.circle0.setStyleSheet("image: url(:/laser/circle.svg);")
-        self.circle1 = DragCircle(self)
-        self.circle1.setGeometry(QRect(settings['laserviewerform']['circle1x'],
-                                       settings['laserviewerform']['circle1y'],
-                                       settings['laserviewerform']['circle1diameter'],
-                                       settings['laserviewerform']['circle1diameter']))
-        self.circle1.setStyleSheet("image: url(:/laser/circle.svg);")
+        self.webEngineView0.setUrl(settings['hosts']['laserhost'][:-3] + 'VideoFeed0')
+        self.webEngineView1.setUrl(settings['hosts']['laserhost'][:-3] + 'VideoFeed1')
+        self.square0 = DragSquare(self)
+        self.square0.setGeometry(QRect(settings['laserviewerform']['square0x'],
+                                       settings['laserviewerform']['square0y'],
+                                       settings['laserviewerform']['square0size'],
+                                       settings['laserviewerform']['square0size']))
+        self.square0.setStyleSheet("image: url(:/laser/square.svg);")
+        self.square = DragSquare(self)
+        self.square.setGeometry(QRect(settings['laserviewerform']['square1x'],
+                                      settings['laserviewerform']['square1y'],
+                                      settings['laserviewerform']['square1size'],
+                                      settings['laserviewerform']['square1size']))
+        self.square.setStyleSheet("image: url(:/laser/square.svg);")
+        self.globaltimer = QTimer()
+        self.globaltimer.setTimerType(Qt.TimerType.PreciseTimer)
+        self.globaltimer.setInterval(1000)
+        self.globaltimer.timeout.connect(self.global_timer)
+        self.globaltimer.start()
 
+    def global_timer(self):
+        """Global timer handler - updates Pyro Temeperatures"""
+        pyrotemps = pyroread()
+        self.lbl_temp.setText('%i' % pyrotemps['temperature'])
+        self.lbl_temp_avg.setText('%i' % pyrotemps['averagetemp'])
+        self.lbl_temp_max.setText('%i' % pyrotemps['maxtemp'])
+        self.lbl_temp_avg_max.setText('%i' % pyrotemps['averagemaxtemp'])
 
     def dragEnterEvent(self, e):
         e.accept()
@@ -59,10 +74,10 @@ class LaserViewerUI(QDialog, Ui_LaserViewer):
     def dropEvent(self, e):
         e.source().move(e.position().toPoint())
         e.accept()
-        settings['laserviewerform']['circle0x'] = self.circle0.x()
-        settings['laserviewerform']['circle0y'] = self.circle0.y()
-        settings['laserviewerform']['circle1x'] = self.circle1.x()
-        settings['laserviewerform']['circle1y'] = self.circle1.y()
+        settings['laserviewerform']['square0x'] = self.square0.x()
+        settings['laserviewerform']['square0y'] = self.square0.y()
+        settings['laserviewerform']['square1x'] = self.square.x()
+        settings['laserviewerform']['square1y'] = self.square.y()
         writesettings()
 
     def formclose(self):
