@@ -1,5 +1,5 @@
 """
-Cycle Editor Application
+Laser Camera Viewer Application
 Author: Gary Twinn
 """
 import sys
