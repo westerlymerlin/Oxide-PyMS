@@ -87,8 +87,8 @@ pyinstaller_versionfile.create_versionfile(
 )
 print('Finished updating version info in pyms-version.txt')
 
-if not os.path.exists('.\\distribution'):
-    os.makedirs('.\\distribution')
+if not os.path.exists('..\\distribution'):
+    os.makedirs('..\\distribution')
 
 package_data = []
 with open("package.ifp", "r", encoding='utf-8') as packagefile:
