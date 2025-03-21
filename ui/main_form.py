@@ -192,15 +192,13 @@ class UiMain(QMainWindow, Ui_MainWindow):
                 self.secondincrement = 0
                 self.run = 0
                 self.tbRun.setChecked(False)
-        if alarms['laseralarm'] != 0:
-            logger.error('%s laser alarm firing', alarms['laseralarm'])
-            status = status + ('The laser is not ready, please ensure that the laser is powered on, the key is in '
-                               'position 2 and the enable button has been pressed. This error can also follow a '
-                               'power fail. \n')
-            lasergetstatus()
-            self.secondincrement = 0
-            self.run = 0
-            self.tbRun.setChecked(False)
+        # if alarms['laseralarm'] != 0:
+        #    status = status + ('The laser is not ready, please ensure that the controller laser is powered on, '
+        #                       'the key is in the on position and the door is closed. \n')
+        #    lasergetstatus()
+        #    self.secondincrement = 0
+        #    self.run = 0
+        #    self.tbRun.setChecked(False)
         if alarms['valvehost'] > 10:
             status = status + 'Valve controller is offline, the system is paused. \n'
             self.secondincrement = 0
