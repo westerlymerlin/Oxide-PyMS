@@ -47,7 +47,7 @@ def pyroread():
 
 def valvegetstatus():
     """Get valve status and return a list with each valve status as an item in the list"""
-    message = {"item": 'getstatus', "command": True}
+    message = {"item": 'valvestatus', "command": True}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['valvehost-api-key']}
     statusmessage = [0] * 16
     try:
