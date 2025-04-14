@@ -6,8 +6,8 @@ Author: Gary Twinn
 import sqlite3
 from time import sleep
 import sys
-from PySide6.QtCore import Qt, QTimer, QThreadPool
-from PySide6.QtWidgets import QApplication, QDialog
+from PySide6.QtCore import Qt, QTimer, QThreadPool, QRect
+from PySide6.QtWidgets import QApplication, QDialog, QLabel
 from ui.ui_layout_xy_manual_control import Ui_dialogXYSetup
 from app_control import settings
 from host_queries import xyread
@@ -26,6 +26,13 @@ class ManualXyForm(QDialog, Ui_dialogXYSetup):
         super().__init__()
         self.setupUi(self)
         self.move(settings['xymanualform']['x'], settings['xymanualform']['y'])
+        self.webEngineView0.setUrl(settings['hosts']['laserhost'][:-3] + 'VideoFeed0')
+        self.square0 = QLabel(self)
+        self.square0.setGeometry(QRect(settings['laserviewerform']['square0x'],
+                                       settings['laserviewerform']['square0y'],
+                                       settings['laserviewerform']['square0size'],
+                                       settings['laserviewerform']['square0size']))
+        self.square0.setStyleSheet("image: url(:/laser/square.svg);")
         self.comboLocation1.addItems(currentcycle.locations)
         self.btnClose.clicked.connect(self.formclose)
         self.btnGoto.clicked.connect(self.gotopress)
@@ -42,10 +49,7 @@ class ManualXyForm(QDialog, Ui_dialogXYSetup):
         self.xposition = 0
         self.yposition = 0
         self.running = 1
-        self.calibratelist = ['S1', 'S2', 'S3', 'A7', 'A6', 'A5', 'A4', 'A3', 'A2', 'A1', 'B1', 'B2', 'B3', 'B4', 'B5',
-                              'B6', 'B7', 'C7', 'C6', 'C5', 'C4', 'C3', 'C2', 'C1', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6',
-                              'D7', 'E7', 'E6', 'E5', 'E4', 'E3', 'E2', 'E1', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7',
-                              'G7', 'G6', 'G5', 'G4', 'G3', 'G2', 'G1', 'S4', 'S5', 'S6', 'UL']
+        self.calibratelist = ['S1', 'S2', 'S3', 'S4', 'S5', 'UL']
         self.globaltimer = QTimer()
         self.globaltimer.setTimerType(Qt.TimerType.PreciseTimer)
         self.globaltimer.setInterval(1000)
@@ -69,8 +73,8 @@ class ManualXyForm(QDialog, Ui_dialogXYSetup):
         status = xyread()
         self.xposition = status['xpos']
         self.yposition = status['ypos']
-        self.lineXPosition.setText('%.3f' % self.xposition)
-        self.lineYPosition.setText('%.3f' % self.yposition)
+        self.lineXPosition.setText('%i' % self.xposition)
+        self.lineYPosition.setText('%i' % self.yposition)
         self.bgdXred.setVisible(status['xmoving'])
         self.bgdYred.setVisible(status['ymoving'])
 
