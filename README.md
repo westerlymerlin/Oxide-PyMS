@@ -17,7 +17,7 @@ Windows installer package can be downloaded from [PyMS-installer](./distribution
 
 ---
 
-Full documentation can be found in the file: [readme.pdf](./readme.pdf)
+Full documentation can be found in the folder: [/docs/](./docs/)
 
 Change log can be found in the file [changelog.txt](./changelog.txt)
 
