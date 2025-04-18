@@ -19,8 +19,8 @@
 # app\_control
 
 Application Control module, reads the settings from a settings.json file. If it does not exist or a new setting
-has appeared it will creat from the defaults in the initialise function. Has global vraiables and routine for
-calculating a file name and removing illegal character.
+has appeared it will create a new file from the defaults in the initialise function. Has global variables and routines
+for calculating a file name and removing illegal characters.
 
 <a id="app_control.json"></a>
 
