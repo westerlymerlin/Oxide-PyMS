@@ -16,7 +16,7 @@
 
 # host\_commands
 
-Commands to the controller APIs
+Commands to the various controller APIs
 
 <a id="host_commands.requests"></a>
 

@@ -10,10 +10,15 @@ from datetime import datetime
 import pyinstaller_versionfile
 import PyInstaller.__main__
 from app_control import VERSION
+from document_from_code import create_docs
 
 starttime = datetime.now()
 
+print('Creating documentation from code')
+create_docs()
+
 print('Starting build for Version: %s' % VERSION)
+
 
 
 # set version information

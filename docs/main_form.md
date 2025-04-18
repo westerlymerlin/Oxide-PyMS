@@ -74,7 +74,8 @@
 
 # main\_form
 
-Main Helium line form - graphical outut of the Heliumline state and timers for running samples
+Main PyMS form - graphical outut of the line state and timers for running samples. Allows manual control of the valves
+and access to menus for creating batches and accessing the maual x-y and laser controls.
 Author: Gary Twinn
 
 <a id="main_form.webbrowser"></a>

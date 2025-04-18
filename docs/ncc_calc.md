@@ -28,7 +28,7 @@
 
 # ncc\_calc
 
-Ncc Calculator
+Ncc Calculator Application, calculates the ncc value for a set of results from the mass spectrometer
 Author: Gary Twinn
 
 <a id="ncc_calc.os"></a>

@@ -1,7 +1,7 @@
 """
 Application Control module, reads the settings from a settings.json file. If it does not exist or a new setting
-has appeared it will creat from the defaults in the initialise function. Has global vraiables and routine for
-calculating a file name and removing illegal character.
+has appeared it will create a new file from the defaults in the initialise function. Has global variables and routines
+for calculating a file name and removing illegal characters.
 """
 
 import json
@@ -40,6 +40,7 @@ def initialise():
     """Setup the settings structure with default values"""
     isettings = {
         "LastSave": "01/01/1900 01:00:00",
+        "app-name": "UCL Oxide Pyms Application",
         "MassSpec": {
             "HD/H": 0.01,
             "datadirectory": "C:\\Users\\UCL Helium Line\\Documents\\Helium Line Data\\",

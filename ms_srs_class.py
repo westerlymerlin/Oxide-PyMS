@@ -1,10 +1,11 @@
-"""Class to read data from a Hiden Mass Spectrometer and calculate the best-fit value for t=0"""
+"""Class to read data from a Stanford SRS RGA 100 mass spectrometer and calculate the best-fit value for t=0"""
 import socket
 from datetime import datetime
 import os
 import threading
 import time
 import sqlite3
+from srsinst.rga import RGA100
 from app_control import settings, writesettings, friendlydirname
 from ncc_calc import linbestfit
 from logmanager import logger

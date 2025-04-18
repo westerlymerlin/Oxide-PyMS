@@ -15,7 +15,7 @@
 
 # host\_queries
 
-Queries to the controller APIs
+Queries to the various controller APIs
 
 <a id="host_queries.requests"></a>
 

@@ -1,5 +1,5 @@
 """
-Queries to the controller APIs
+Queries to the various controller APIs
 """
 import requests
 from app_control import settings, alarms

@@ -18,7 +18,7 @@
 
 # new\_batch\_form
 
-New Batch dialog
+New Batch dialog, gives teh user a choice between a new planchet load or a somple batch load
 Author: Gary Twinn
 
 <a id="new_batch_form.QDialog"></a>

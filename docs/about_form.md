@@ -13,7 +13,8 @@
 
 # about\_form
 
-About Dialog
+About Dialog box, dispays version and copyright information
+Author: Gary Twinn
 
 <a id="about_form.datetime"></a>
 

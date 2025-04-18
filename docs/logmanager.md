@@ -15,7 +15,7 @@
 
 # logmanager
 
-logmanager, setus up application logging. use the **logger** property to
+logmanager, setus up application logging. use the logger property to
 write to the log.
 
 <a id="logmanager.sys"></a>
