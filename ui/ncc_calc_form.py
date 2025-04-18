@@ -1,5 +1,6 @@
 """
-NCC Calculation Form
+UI for calculating NCC values, reads a set of helium line daya points and corrects for line blanks and Q-Standard
+values. It will output a csv file that contains all ncc values and standar errors.
 Author: Gary Twinn
 """
 import sys

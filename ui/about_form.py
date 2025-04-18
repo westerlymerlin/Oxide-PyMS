@@ -1,5 +1,6 @@
 """
-About Dialog
+About Dialog box, dispays version and copyright information
+Author: Gary Twinn
 """
 from datetime import datetime
 from PySide6.QtWidgets import QDialog, QMainWindow

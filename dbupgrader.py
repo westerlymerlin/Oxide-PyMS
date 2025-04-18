@@ -1,5 +1,5 @@
 """
-Database upgrader
+Database upgrader, used when database versions need changes to the table mstructure
 Author: Gary Twinn
 """
 

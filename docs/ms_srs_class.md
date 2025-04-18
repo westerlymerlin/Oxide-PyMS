@@ -35,7 +35,7 @@
 
 # ms\_srs\_class
 
-Class to read data from a Hiden Mass Spectrometer and calculate the best-fit value for t=0
+Class to read data from a Stanford SRS RGA 100 mass spectrometer and calculate the best-fit value for t=0
 
 <a id="ms_srs_class.socket"></a>
 

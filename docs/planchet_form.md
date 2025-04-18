@@ -18,7 +18,7 @@
 
 # planchet\_form
 
-Planchet entry form
+Planchet entry form, allows entry per plancte spot of grain data
 Author: Gary Twinn
 
 <a id="planchet_form.sys"></a>

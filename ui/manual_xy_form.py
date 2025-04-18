@@ -1,5 +1,6 @@
 """
-Manual XY-Form
+Manual XY-UI. Displayes image from camera0 and has controls to move the device manually along the X and Y axis. Has
+controls programe locations of planchet spots.
 Author: Gary Twinn
 """
 

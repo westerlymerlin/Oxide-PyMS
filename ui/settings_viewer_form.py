@@ -1,5 +1,6 @@
 """
-Settings Viewer form
+Settings viewer / editor form. allows user to edit setting values manually. settings are then saves in the
+settings.json file
 Author: Gary Twinn
 """
 import sys

@@ -1,5 +1,6 @@
 """
-Image Filer
+Image Filer, creates an iimage from a screen print of an application bsed on the window title. If run as standalone
+it outputs the current open window titles
 Author: Gary Twinn
 """
 import os

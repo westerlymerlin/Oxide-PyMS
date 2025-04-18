@@ -23,7 +23,8 @@
 
 # settings\_viewer\_form
 
-Settings Viewer form
+Settings viewer / editor form. allows user to edit setting values manually. settings are then saves in the
+settings.json file
 Author: Gary Twinn
 
 <a id="settings_viewer_form.sys"></a>

@@ -1,5 +1,5 @@
 """
-UI Form for Editing Cycles
+UI form for editing cycles, allows new cycles to be adedd to the database and cycles to be edited.
 Author: Gary Twinn
 """
 import sys

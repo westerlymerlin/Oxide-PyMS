@@ -24,7 +24,7 @@
 
 # laser\_manual\_form
 
-Laser Manual Form, used to manually control the Helium line laser ina  controlled manner
+Laser manual form, used to manually control the diode laser, mainly used for testing alignment
 Author: Gary Twinn
 
 <a id="laser_manual_form.sys"></a>

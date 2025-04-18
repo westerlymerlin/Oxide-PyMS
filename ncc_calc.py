@@ -1,5 +1,5 @@
 """
-Ncc Calculator
+Ncc Calculator Application, calculates the ncc value for a set of results from the mass spectrometer
 Author: Gary Twinn
 """
 import os

@@ -1,5 +1,5 @@
 """
-Planchet entry form
+Planchet entry form, allows entry per plancte spot of grain data
 Author: Gary Twinn
 """
 import sys

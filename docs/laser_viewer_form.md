@@ -27,7 +27,8 @@
 
 # laser\_viewer\_form
 
-Laser Viewer form
+Laser viewer UI form. Dosplayes images from the two cameras mounted on the laser assembly along with terperatures from
+the pyrometer
 Author: Gary Twinn
 
 <a id="laser_viewer_form.sys"></a>

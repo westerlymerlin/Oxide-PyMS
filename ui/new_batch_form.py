@@ -1,5 +1,5 @@
 """
-New Batch dialog
+New Batch dialog, gives teh user a choice between a new planchet load or a somple batch load
 Author: Gary Twinn
 """
 from PySide6.QtWidgets import QDialog

@@ -11,7 +11,7 @@
 
 # alertmessage
 
-Alert Message Module
+Alert Message Module, send an email alert
 Author: Gary Twinn
 
 <a id="alertmessage.smtplib"></a>

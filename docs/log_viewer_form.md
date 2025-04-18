@@ -15,7 +15,7 @@
 
 # log\_viewer\_form
 
-UI form for viewing the logs
+UI form for viewing the log file.
 
 <a id="log_viewer_form.QDialog"></a>
 

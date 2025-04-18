@@ -1,5 +1,5 @@
 """
-UI form for viewing the logs
+UI form for viewing the log file.
 """
 from PySide6.QtWidgets import QDialog, QApplication
 from logmanager import logger

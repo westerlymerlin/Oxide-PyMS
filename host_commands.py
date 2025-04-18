@@ -1,5 +1,5 @@
 """
-Commands to the controller APIs
+Commands to the various controller APIs
 """
 import requests
 from logmanager import logger
