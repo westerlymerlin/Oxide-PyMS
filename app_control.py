@@ -14,7 +14,7 @@ alarms = {'laserhost': 0, 'valvehost': 0, 'xyhost': 0, 'pumphost': 0, 'hidenhost
 
 def friendlydirname(sourcename: str) -> str:
     """Removes invalid characters from file names"""
-    invalid_chars = ['/', '\\', ':', '*', '?', '<', '>', '"', '&', '%', '#', '$', "'", ',']
+    invalid_chars = ['/', '\\', ':', '*', '?', '<', '>', """, '&', '%', '#', '$', """, ',']
     for invalid_char in invalid_chars:
         sourcename = sourcename.replace(invalid_char, '-')
     # Remove subsequent dash characters effectively
@@ -39,129 +39,131 @@ def writesettings():
 def initialise():
     """Setup the settings structure with default values"""
     isettings = {
-        "LastSave": "01/01/1900 01:00:00",
-        "app-name": "UCL Oxide Pyms Application",
-        "MassSpec": {
-            "HD/H": 0.01,
-            "datadirectory": "C:\\Users\\UCL Helium Line\\Documents\\Helium Line Data\\",
-            "hidenMID": "C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-MID.exp",
-            "hidenProfile": "C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-Profile.exp",
-            "hidenRunfile": "C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-Running.exp",
-            "hidenhost": "127.0.0.1",
-            "hidenport": 5026,
-            "multiplier": 1e-12,
-            "nextH": "HE19096R",
-            "nextQ": 4500,
-            "timeoutretries": 5,
-            "timeoutseconds": 0.5
+        'LastSave': '01/01/1900 01:00:00',
+        'app-name': 'UCL Oxide Pyms Application',
+        'MassSpec': {
+            'HD/H': 0.01,
+            'datadirectory': 'C:\\Users\\garyt\\Documents\\HeliumData',
+            'hidenMID': 'C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-MID.exp',
+            'hidenProfile': 'C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-Profile.exp',
+            'hidenRunfile': 'C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-Running.exp',
+            'SRS-Host': '192.168.2.30',
+            'SRS-User': 'change-me',
+            'SRS-Password': 'change-me',
+            'SRS-Autoconnect': False,
+            'multiplier': 1e-12,
+            'nextH': 'HE00001R',
+            'nextQ': 1,
+            'timeoutretries': 5,
+            'timeoutseconds': 0.5
         },
-        "Ncc": {
-            "HD_H": 0.01,
-            "ncc_filepath": "",
-            "q_dep_factor": 0.9999526,
-            "q_depletion_err": 4e-07,
-            "q_pipette_err": 0.07,
-            "q_pipette_ncc": 10.23,
-            "s_dep_factor": 0.99996107,
-            "s_offset": 231,
-            "s_pipette_ncc": 5.7,
-            "ncc_start_seconds": 30
+        'Ncc': {
+            'HD_H': 0.01,
+            'ncc_filepath': '',
+            'q_dep_factor': 0.9999526,
+            'q_depletion_err': 4e-07,
+            'q_pipette_err': 0.07,
+            'q_pipette_ncc': 10.23,
+            's_dep_factor': 0.99996107,
+            's_offset': 231,
+            's_pipette_ncc': 5.7,
+            'ncc_start_seconds': 30
         },
-        "cycleeditform": {
-            "x": 100,
-            "y": 100
+        'cycleeditform': {
+            'x': 100,
+            'y': 100
         },
-        "database": {
-            "databasepath": ".\\database\\PyMs.db",
-            "resultsdatabasepath": ".\\database\\HeliumResults.db"
+        'database': {
+            'databasepath': '.\\database\\PyMs.db',
+            'resultsdatabasepath': '.\\database\\HeliumResults.db'
         },
-        "hosts": {
-            "laserhost": "http://192.168.2.26/api",
-            "laserhost-api-key": "changeme",
-            "pumphost": "http://192.168.2.23/api",
-            "pumphost-api-key": "changeme",
-            "valvehost": "http://192.168.2.23/api",
-            "valvehost-api-key": "changeme",
-            "xyhost": "http://192.168.2.24/api",
-            "xyhost-api-key": "changeme",
-            "timeoutseconds": 1
+        'hosts': {
+            'laserhost': 'http://192.168.2.26/api',
+            'laserhost-api-key': 'changeme',
+            'pumphost': 'http://192.168.2.23/api',
+            'pumphost-api-key': 'changeme',
+            'valvehost': 'http://192.168.2.23/api',
+            'valvehost-api-key': 'changeme',
+            'xyhost': 'http://192.168.2.24/api',
+            'xyhost-api-key': 'changeme',
+            'timeoutseconds': 1
         },
-        "image": {
-            "dynolite": "Camera Viewer",
-            "hiden-mid": "MASsoft 10 Professional",
-            "hiden-mid-reheat": "MASsoft 10 Professional",
-            "hiden-profile": "MASsoft 10 Professional",
-            "laser": "Camera Viewer",
-            "laser-reheat": "Camera Viewer"
+        'image': {
+            'dynolite': 'Camera Viewer',
+            'hiden-mid': 'MASsoft 10 Professional',
+            'hiden-mid-reheat': 'MASsoft 10 Professional',
+            'hiden-profile': 'MASsoft 10 Professional',
+            'laser': 'Camera Viewer',
+            'laser-reheat': 'Camera Viewer'
         },
-        "laser": {
-            "power": 10.0,
-            "ignorestatus": 1
+        'laser': {
+            'power': 10.0,
+            'ignorestatus': 1
         },
-        "laserform": {
-            "x": 100,
-            "y": 100
+        'laserform': {
+            'x': 100,
+            'y': 100
         },
-        "laserviewerform": {
-            "x": 100,
-            "y": 100,
-            "square0x": 400,
-            "square0y": 100,
-            "square0size": 30,
-            "square1x": 1000,
-            "square1y": 100,
-            "square1size": 120,
+        'laserviewerform': {
+            'x': 100,
+            'y': 100,
+            'square0x': 400,
+            'square0y': 100,
+            'square0size': 30,
+            'square1x': 1000,
+            'square1y': 100,
+            'square1size': 120,
         },
-        "logging": {
-            "logappname": "PyMS",
-            "logfilepath": ".\\logs\\",
-            "level": "INFO"
+        'logging': {
+            'logappname': 'PyMS',
+            'logfilepath': '.\\logs\\',
+            'level': 'INFO'
         },
-        "mainform": {
-            "x": 100,
-            "y": 100
+        'mainform': {
+            'x': 100,
+            'y': 100
         },
-        "ncccalcform": {
-            "x": 100,
-            "y": 100
+        'ncccalcform': {
+            'x': 100,
+            'y': 100
         },
-        "newbatchform": {
-            "x": 600,
-            "y": 100
+        'newbatchform': {
+            'x': 600,
+            'y': 100
         },
-        "planchetform": {
-            "x": 600,
-            "y": 100
+        'planchetform': {
+            'x': 600,
+            'y': 100
         },
-        "simplebatchform": {
-            "x": 600,
-            "y": 100
+        'simplebatchform': {
+            'x': 600,
+            'y': 100
         },
-        "vacuum": {
-            "ion": {
-                "current": 4.5e-09,
-                "high": 9.9e-08,
-                "units": "mbar"
+        'vacuum': {
+            'ion': {
+                'current': 4.5e-09,
+                'high': 9.9e-08,
+                'units': 'mbar'
             },
-            "tank": {
-                "current": 0.00116,
-                "high": 0.0001,
-                "units": "mbar"
+            'tank': {
+                'current': 0.00116,
+                'high': 0.0001,
+                'units': 'mbar'
             },
-            "turbo": {
-                "current": 3.41e-08,
-                "high": 9.9e-08,
-                "units": "mbar"
+            'turbo': {
+                'current': 3.41e-08,
+                'high': 9.9e-08,
+                'units': 'mbar'
             },
-            "N2": {"current": 1,
-                   "high": 9.0,
-                   "low": 5.0,
-                   "units": "bar"
+            'N2': {'current': 1,
+                   'high': 9.0,
+                   'low': 5.0,
+                   'units': 'bar'
                    }
         },
-        "xymanualform": {
-            "x": 1137,
-            "y": 870
+        'xymanualform': {
+            'x': 1137,
+            'y': 870
         }
     }
     return isettings

@@ -1,12 +1,11 @@
 # Contents for: ms_srs_class
 
 * [ms\_srs\_class](#ms_srs_class)
-  * [socket](#ms_srs_class.socket)
   * [datetime](#ms_srs_class.datetime)
   * [os](#ms_srs_class.os)
   * [threading](#ms_srs_class.threading)
-  * [time](#ms_srs_class.time)
   * [sqlite3](#ms_srs_class.sqlite3)
+  * [exceptions](#ms_srs_class.exceptions)
   * [RGA100](#ms_srs_class.RGA100)
   * [settings](#ms_srs_class.settings)
   * [writesettings](#ms_srs_class.writesettings)
@@ -18,14 +17,13 @@
     * [command\_parser](#ms_srs_class.MsClass.command_parser)
     * [resetclass](#ms_srs_class.MsClass.resetclass)
     * [starttimer](#ms_srs_class.MsClass.starttimer)
+    * [connect\_to\_rga](#ms_srs_class.MsClass.connect_to_rga)
+    * [disconnect\_from\_rga](#ms_srs_class.MsClass.disconnect_from_rga)
+    * [get\_rga\_status](#ms_srs_class.MsClass.get_rga_status)
+    * [getdata](#ms_srs_class.MsClass.getdata)
     * [check\_quad\_is\_online](#ms_srs_class.MsClass.check_quad_is_online)
     * [start\_mid](#ms_srs_class.MsClass.start_mid)
     * [start\_profile](#ms_srs_class.MsClass.start_profile)
-    * [getdata](#ms_srs_class.MsClass.getdata)
-    * [getcolumns](#ms_srs_class.MsClass.getcolumns)
-    * [getcycle](#ms_srs_class.MsClass.getcycle)
-    * [getenv](#ms_srs_class.MsClass.getenv)
-    * [getloadedfile](#ms_srs_class.MsClass.getloadedfile)
     * [stop\_runnning](#ms_srs_class.MsClass.stop_runnning)
     * [next\_id](#ms_srs_class.MsClass.next_id)
     * [writefile](#ms_srs_class.MsClass.writefile)
@@ -36,10 +34,7 @@
 # ms\_srs\_class
 
 Class to read data from a Stanford SRS RGA 100 mass spectrometer and calculate the best-fit value for t=0
-
-<a id="ms_srs_class.socket"></a>
-
-## socket
+Uses the rsrinst.rga module from the srsinst package.
 
 <a id="ms_srs_class.datetime"></a>
 
@@ -53,13 +48,13 @@ Class to read data from a Stanford SRS RGA 100 mass spectrometer and calculate t
 
 ## threading
 
-<a id="ms_srs_class.time"></a>
-
-## time
-
 <a id="ms_srs_class.sqlite3"></a>
 
 ## sqlite3
+
+<a id="ms_srs_class.exceptions"></a>
+
+## exceptions
 
 <a id="ms_srs_class.RGA100"></a>
 
@@ -93,7 +88,7 @@ Class to read data from a Stanford SRS RGA 100 mass spectrometer and calculate t
 class MsClass()
 ```
 
-Class representing a Hiden Mass Spectrometer.
+Class representing a Stanford SRS RGA 100 Mass Spectrometer.
 
 Attributes:
 - __resultstabasepath: str - the path to the results database
@@ -173,6 +168,46 @@ def starttimer(batchtype, identifier, batchdescription, batchid, batchitemid)
 
 Start timer - used as t=0 when calculating best-fits
 
+<a id="ms_srs_class.MsClass.connect_to_rga"></a>
+
+#### connect\_to\_rga
+
+```python
+def connect_to_rga()
+```
+
+Connect to the SRS RGA using the settings in the config file.
+
+<a id="ms_srs_class.MsClass.disconnect_from_rga"></a>
+
+#### disconnect\_from\_rga
+
+```python
+def disconnect_from_rga()
+```
+
+Disconnect from the SRS RGA.
+
+<a id="ms_srs_class.MsClass.get_rga_status"></a>
+
+#### get\_rga\_status
+
+```python
+def get_rga_status()
+```
+
+Get the status of the SRS RGA
+
+<a id="ms_srs_class.MsClass.getdata"></a>
+
+#### getdata
+
+```python
+def getdata()
+```
+
+Get data from the SRS RGA
+
 <a id="ms_srs_class.MsClass.check_quad_is_online"></a>
 
 #### check\_quad\_is\_online
@@ -202,56 +237,6 @@ def start_profile()
 ```
 
 Start a 1 to 10 amu scan on the Hiden Mass Spectrometer
-
-<a id="ms_srs_class.MsClass.getdata"></a>
-
-#### getdata
-
-```python
-def getdata()
-```
-
-Request mid data from Hiden Mass Spectrometer
-
-<a id="ms_srs_class.MsClass.getcolumns"></a>
-
-#### getcolumns
-
-```python
-def getcolumns()
-```
-
-Request columns from Hiden Mass Spectrometer
-
-<a id="ms_srs_class.MsClass.getcycle"></a>
-
-#### getcycle
-
-```python
-def getcycle()
-```
-
-Request cycles from Hiden Mass Spectrometer
-
-<a id="ms_srs_class.MsClass.getenv"></a>
-
-#### getenv
-
-```python
-def getenv()
-```
-
-Request environment from Hiden Mass Spectrometer
-
-<a id="ms_srs_class.MsClass.getloadedfile"></a>
-
-#### getloadedfile
-
-```python
-def getloadedfile()
-```
-
-Return the loaded file from the Hiden Mass Spectrometer
 
 <a id="ms_srs_class.MsClass.stop_runnning"></a>
 

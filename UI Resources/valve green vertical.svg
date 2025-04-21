@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.82 56.69">
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 32.8 56.7">
+  <!-- Generator: Adobe Illustrator 29.4.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 152)  -->
   <defs>
     <style>
-      .cls-1 {
-        fill: #009640;
+      .st0 {
+        fill: none;
+      }
+
+      .st0, .st1 {
         stroke: #4c81b2;
         stroke-miterlimit: 2;
-        stroke-width: 1.25px;
+        stroke-width: 1.2px;
+      }
+
+      .st1 {
+        fill: #009640;
       }
     </style>
   </defs>
   <g id="Valve">
-    <polygon class="cls-1" points="1.01 11.34 18.02 11.34 1.01 45.35 18.02 45.35 1.01 11.34"/>
-    <path class="cls-1" d="M20.23,28.34h-10.72M20.23,22.68v11.34s11.96,0,11.96,0v-11.34s-11.96,0-11.96,0Z"/>
-    <line class="cls-1" x1="9.52" y1="11.34" x2="9.52" y2="0"/>
-    <line class="cls-1" x1="9.52" y1="45.35" x2="9.52" y2="56.69"/>
+    <polygon class="st1" points="15.2 45.3 32.2 45.3 15.2 11.3 32.2 11.3 15.2 45.3"/>
+    <path class="st1" d="M23.7,28.3h-10.7M1,22.7v11.3s12,0,12,0v-11.3s-12,0-12,0Z"/>
+    <line class="st0" x1="23.7" y1="0" x2="23.7" y2="11.3"/>
+    <line class="st0" x1="23.7" y1="56.7" x2="23.7" y2="45.3"/>
   </g>
 </svg>
