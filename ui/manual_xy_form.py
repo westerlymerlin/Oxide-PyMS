@@ -33,7 +33,7 @@ class ManualXyForm(QDialog, Ui_dialogXYSetup):
                                        settings['laserviewerform']['square0y'],
                                        settings['laserviewerform']['square0size'],
                                        settings['laserviewerform']['square0size']))
-        self.square0.setStyleSheet("image: url(:/laser/square.svg);")
+        self.square0.setStyleSheet("image: url(:/laser/lasersquare.svg);")
         self.comboLocation1.addItems(currentcycle.locations)
         self.btnClose.clicked.connect(self.formclose)
         self.btnGoto.clicked.connect(self.gotopress)

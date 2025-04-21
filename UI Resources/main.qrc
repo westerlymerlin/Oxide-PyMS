@@ -19,6 +19,7 @@
   </qresource>
   <qresource prefix="laser">
     <file>laserform_slider.png</file>
+    <file>lasersquare.svg</file>
     <file>laserform_enable.png</file>
     <file>laserform_disable.png</file>
     <file>laserform_close.png</file>
