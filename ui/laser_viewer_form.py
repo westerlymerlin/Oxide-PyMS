@@ -48,13 +48,13 @@ class LaserViewerUI(QDialog, Ui_LaserViewer):
                                        settings['laserviewerform']['square0y'],
                                        settings['laserviewerform']['square0size'],
                                        settings['laserviewerform']['square0size']))
-        self.square0.setStyleSheet("image: url(:/laser/square.svg);")
+        self.square0.setStyleSheet("image: url(:/laser/lasersquare.svg);")
         self.square = DragSquare(self)
         self.square.setGeometry(QRect(settings['laserviewerform']['square1x'],
                                       settings['laserviewerform']['square1y'],
                                       settings['laserviewerform']['square1size'],
                                       settings['laserviewerform']['square1size']))
-        self.square.setStyleSheet("image: url(:/laser/square.svg);")
+        self.square.setStyleSheet("image: url(:/laser/lasersquare.svg);")
         self.globaltimer = QTimer()
         self.globaltimer.setTimerType(Qt.TimerType.PreciseTimer)
         self.globaltimer.setInterval(1000)

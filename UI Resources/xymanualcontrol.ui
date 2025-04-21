@@ -30,7 +30,7 @@
    <string>Calibrate X-Y Control</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="main.qrc">
     <normaloff>:/main/iconGTRun.svg</normaloff>:/main/iconGTRun.svg</iconset>
   </property>
   <property name="styleSheet">
@@ -161,7 +161,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="main.qrc">
      <normaloff>:/xy setup/arrorwe up.png</normaloff>
      <normalon>:/xy setup/arrorw up.png</normalon>:/xy setup/arrorwe up.png</iconset>
    </property>
@@ -191,7 +191,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="main.qrc">
      <normaloff>:/xy setup/arrorwe left.png</normaloff>
      <normalon>:/xy setup/arrorw left.png</normalon>:/xy setup/arrorwe left.png</iconset>
    </property>
@@ -221,7 +221,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="main.qrc">
      <normaloff>:/xy setup/arrorwe right.png</normaloff>
      <normalon>:/xy setup/arrorw right.png</normalon>:/xy setup/arrorwe right.png</iconset>
    </property>
@@ -257,7 +257,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="main.qrc">
      <normaloff>:/xy setup/arrorwe down.png</normaloff>
      <normalon>:/xy setup/arrorw down.png</normalon>:/xy setup/arrorwe down.png</iconset>
    </property>

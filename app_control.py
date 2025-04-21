@@ -7,7 +7,7 @@ for calculating a file name and removing illegal characters.
 import json
 import datetime
 
-VERSION = '1.2.0'
+VERSION = '1.2.2'
 running = True
 alarms = {'laserhost': 0, 'valvehost': 0, 'xyhost': 0, 'pumphost': 0, 'hidenhost': 0, 'laseralarm': 0}
 
@@ -47,10 +47,16 @@ def initialise():
             'hidenMID': 'C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-MID.exp',
             'hidenProfile': 'C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-Profile.exp',
             'hidenRunfile': 'C:\\Users\\UCL Helium Line\\Documents\\Hiden Analytical\\MASsoft10\\PyMS-Running.exp',
-            'SRS-Host': '192.168.2.30',
-            'SRS-User': 'change-me',
-            'SRS-Password': 'change-me',
-            'SRS-Autoconnect': False,
+            'SRS-host': '192.168.2.30',
+            'SRS-user': 'change-me',
+            'SRS-password': 'change-me',
+            'SRS-electron_energy': 70,
+            'SRS-ion_energy': 12,
+            'SRS-focus_voltage': 90,
+            'SRS-emission_current': 1.0,
+            'SRS-cem_voltage': 700,
+            'SRS-mid-masses': [1, 3, 4, 40],
+            'SRS-profile-range': [1, 100, 3, 5],
             'multiplier': 1e-12,
             'nextH': 'HE00001R',
             'nextQ': 1,
@@ -79,13 +85,13 @@ def initialise():
         },
         'hosts': {
             'laserhost': 'http://192.168.2.26/api',
-            'laserhost-api-key': 'changeme',
+            'laserhost-api-key': 'change-me',
             'pumphost': 'http://192.168.2.23/api',
-            'pumphost-api-key': 'changeme',
+            'pumphost-api-key': 'change-me',
             'valvehost': 'http://192.168.2.23/api',
-            'valvehost-api-key': 'changeme',
+            'valvehost-api-key': 'change-me',
             'xyhost': 'http://192.168.2.24/api',
-            'xyhost-api-key': 'changeme',
+            'xyhost-api-key': 'change-me',
             'timeoutseconds': 1
         },
         'image': {
