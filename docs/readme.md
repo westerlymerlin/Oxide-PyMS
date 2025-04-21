@@ -75,6 +75,7 @@ Author: Gary Twinn
 
 [ms_srs_class](./ms_srs_class.md)  
 Class to read data from a Stanford SRS RGA 100 mass spectrometer and calculate the best-fit value for t=0
+Uses the rsrinst.rga module from the srsinst package.
 
 [ncc_calc](./ncc_calc.md)  
 Ncc Calculator Application, calculates the ncc value for a set of results from the mass spectrometer

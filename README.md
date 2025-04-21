@@ -17,7 +17,7 @@ Windows installer package can be downloaded from [PyMS-installer](./distribution
 
 ---
 
-Application dcumentaton can be found in [readme.pdf](./readme.pdf)
+Application dcumentaton can be found in [manual.pdf](./manual.pdf)
 
 Python module documentation can be found in the folder: [docs](./docs/readme.md)
 
