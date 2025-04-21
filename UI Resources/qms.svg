@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57.94 46.6">
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 57.9 46.6">
+  <!-- Generator: Adobe Illustrator 29.4.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 152)  -->
   <defs>
     <style>
-      .cls-1 {
+      .st0 {
         fill: #009245;
-        stroke-width: 1.25px;
+        stroke-width: 1.2px;
       }
 
-      .cls-1, .cls-2 {
+      .st0, .st1 {
         stroke: #4a80b1;
         stroke-linecap: round;
         stroke-linejoin: round;
       }
 
-      .cls-2 {
+      .st1 {
         fill: #fff;
       }
     </style>
   </defs>
-  <g id="Mass_Spectrometer" data-name="Mass Spectrometer">
-    <polygon class="cls-1" points="57.32 .62 40.31 6.29 17.63 6.29 17.63 23.3 .62 23.3 17.63 23.3 17.63 40.31 40.31 40.31 57.32 45.98 57.32 .62"/>
-    <circle class="cls-2" cx="34.64" cy="17.63" r="5.67"/>
-    <circle class="cls-2" cx="34.64" cy="28.97" r="5.67"/>
-    <circle class="cls-2" cx="23.3" cy="17.63" r="5.67"/>
-    <circle class="cls-2" cx="23.3" cy="28.97" r="5.67"/>
+  <g id="Mass_Spectrometer">
+    <polygon class="st0" points=".6 46 17.6 40.3 40.3 40.3 40.3 23.3 57.3 23.3 40.3 23.3 40.3 6.3 17.6 6.3 .6 .6 .6 46"/>
+    <circle class="st1" cx="23.3" cy="17.6" r="5.7"/>
+    <circle class="st1" cx="23.3" cy="29" r="5.7"/>
+    <circle class="st1" cx="34.6" cy="17.6" r="5.7"/>
+    <circle class="st1" cx="34.6" cy="29" r="5.7"/>
   </g>
 </svg>

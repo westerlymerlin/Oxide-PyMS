@@ -121,8 +121,8 @@ image: &quot;&quot;;</string>
      </property>
      <property name="geometry">
       <rect>
-       <x>23</x>
-       <y>356</y>
+       <x>848</x>
+       <y>409</y>
        <width>80</width>
        <height>80</height>
       </rect>
@@ -140,8 +140,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve1" native="true">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>367</y>
+       <x>677</x>
+       <y>421</y>
        <width>65</width>
        <height>40</height>
       </rect>
@@ -153,8 +153,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve1">
      <property name="geometry">
       <rect>
-       <x>225</x>
-       <y>366</y>
+       <x>687</x>
+       <y>422</y>
        <width>40</width>
        <height>45</height>
       </rect>
@@ -172,8 +172,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve2" native="true">
      <property name="geometry">
       <rect>
-       <x>320</x>
-       <y>131</y>
+       <x>590</x>
+       <y>649</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -185,8 +185,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve2">
      <property name="geometry">
       <rect>
-       <x>322</x>
-       <y>142</y>
+       <x>590</x>
+       <y>660</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -204,8 +204,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve6" native="true">
      <property name="geometry">
       <rect>
-       <x>543</x>
-       <y>131</y>
+       <x>367</x>
+       <y>649</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -217,8 +217,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve7" native="true">
      <property name="geometry">
       <rect>
-       <x>543</x>
-       <y>217</y>
+       <x>367</x>
+       <y>563</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -230,8 +230,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve3" native="true">
      <property name="geometry">
       <rect>
-       <x>320</x>
-       <y>217</y>
+       <x>590</x>
+       <y>563</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -243,8 +243,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve4" native="true">
      <property name="geometry">
       <rect>
-       <x>406</x>
-       <y>131</y>
+       <x>504</x>
+       <y>649</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -256,8 +256,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve12" native="true">
      <property name="geometry">
       <rect>
-       <x>546</x>
-       <y>542</y>
+       <x>364</x>
+       <y>237</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -269,8 +269,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve13" native="true">
      <property name="geometry">
       <rect>
-       <x>719</x>
-       <y>373</y>
+       <x>191</x>
+       <y>406</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -282,8 +282,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve14" native="true">
      <property name="geometry">
       <rect>
-       <x>719</x>
-       <y>542</y>
+       <x>191</x>
+       <y>237</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -295,8 +295,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve10" native="true">
      <property name="geometry">
       <rect>
-       <x>470</x>
-       <y>546</y>
+       <x>441</x>
+       <y>237</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -308,8 +308,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve5" native="true">
      <property name="geometry">
       <rect>
-       <x>407</x>
-       <y>217</y>
+       <x>504</x>
+       <y>563</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -321,8 +321,8 @@ image: &quot;&quot;;</string>
     <widget class="QWidget" name="wValve11" native="true">
      <property name="geometry">
       <rect>
-       <x>546</x>
-       <y>373</y>
+       <x>364</x>
+       <y>406</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -334,8 +334,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve6">
      <property name="geometry">
       <rect>
-       <x>540</x>
-       <y>144</y>
+       <x>367</x>
+       <y>661</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -353,8 +353,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve7">
      <property name="geometry">
       <rect>
-       <x>540</x>
-       <y>230</y>
+       <x>364</x>
+       <y>574</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -372,8 +372,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve10">
      <property name="geometry">
       <rect>
-       <x>469</x>
-       <y>555</y>
+       <x>442</x>
+       <y>249</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -391,8 +391,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve3">
      <property name="geometry">
       <rect>
-       <x>324</x>
-       <y>230</y>
+       <x>590</x>
+       <y>573</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -410,8 +410,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve4">
      <property name="geometry">
       <rect>
-       <x>407</x>
-       <y>144</y>
+       <x>503</x>
+       <y>662</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -429,8 +429,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve12">
      <property name="geometry">
       <rect>
-       <x>546</x>
-       <y>555</y>
+       <x>363</x>
+       <y>249</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -448,8 +448,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve13">
      <property name="geometry">
       <rect>
-       <x>718</x>
-       <y>385</y>
+       <x>190</x>
+       <y>420</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -467,8 +467,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve5">
      <property name="geometry">
       <rect>
-       <x>410</x>
-       <y>230</y>
+       <x>502</x>
+       <y>572</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -486,8 +486,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve11">
      <property name="geometry">
       <rect>
-       <x>545</x>
-       <y>386</y>
+       <x>365</x>
+       <y>419</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -505,8 +505,8 @@ image: &quot;&quot;;</string>
     <widget class="QPushButton" name="tbValve14">
      <property name="geometry">
       <rect>
-       <x>716</x>
-       <y>555</y>
+       <x>183</x>
+       <y>249</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -524,8 +524,8 @@ image: &quot;&quot;;</string>
     <widget class="QLabel" name="lblMS">
      <property name="geometry">
       <rect>
-       <x>787</x>
-       <y>190</y>
+       <x>9</x>
+       <y>440</y>
        <width>149</width>
        <height>29</height>
       </rect>
@@ -542,14 +542,14 @@ image: &quot;&quot;;</string>
       <string>Connecting . . .</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
      </property>
     </widget>
     <widget class="QFrame" name="imgQMS">
      <property name="geometry">
       <rect>
-       <x>816</x>
-       <y>209</y>
+       <x>16</x>
+       <y>465</y>
        <width>73</width>
        <height>67</height>
       </rect>
@@ -568,8 +568,8 @@ background-color: rgba(255, 255, 255, 0);</string>
     <widget class="QToolButton" name="btnHidenMID">
      <property name="geometry">
       <rect>
-       <x>780</x>
-       <y>30</y>
+       <x>20</x>
+       <y>630</y>
        <width>50</width>
        <height>50</height>
       </rect>
@@ -602,8 +602,8 @@ background-color: rgba(255, 255, 255, 0);</string>
     <widget class="QToolButton" name="btnHidenProfile">
      <property name="geometry">
       <rect>
-       <x>835</x>
-       <y>30</y>
+       <x>70</x>
+       <y>630</y>
        <width>50</width>
        <height>50</height>
       </rect>
@@ -630,8 +630,8 @@ background-color: rgba(255, 255, 255, 0);</string>
     <widget class="QToolButton" name="btnHidenStop">
      <property name="geometry">
       <rect>
-       <x>890</x>
-       <y>30</y>
+       <x>120</x>
+       <y>630</y>
        <width>50</width>
        <height>50</height>
       </rect>
@@ -658,8 +658,8 @@ background-color: rgba(255, 255, 255, 0);</string>
     <widget class="QLabel" name="lblLaserPower">
      <property name="geometry">
       <rect>
-       <x>115</x>
-       <y>214</y>
+       <x>810</x>
+       <y>577</y>
        <width>89</width>
        <height>21</height>
       </rect>
@@ -691,8 +691,8 @@ border-color: rgb(76, 76, 76);</string>
     <widget class="QPushButton" name="tbValve8">
      <property name="geometry">
       <rect>
-       <x>630</x>
-       <y>143</y>
+       <x>277</x>
+       <y>661</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -710,8 +710,8 @@ border-color: rgb(76, 76, 76);</string>
     <widget class="QPushButton" name="tbValve9">
      <property name="geometry">
       <rect>
-       <x>630</x>
-       <y>229</y>
+       <x>278</x>
+       <y>574</y>
        <width>45</width>
        <height>40</height>
       </rect>
@@ -729,8 +729,8 @@ border-color: rgb(76, 76, 76);</string>
     <widget class="QWidget" name="wValve8" native="true">
      <property name="geometry">
       <rect>
-       <x>633</x>
-       <y>131</y>
+       <x>278</x>
+       <y>649</y>
        <width>40</width>
        <height>65</height>
       </rect>
@@ -742,14 +742,53 @@ border-color: rgb(76, 76, 76);</string>
     <widget class="QWidget" name="wValve9" native="true">
      <property name="geometry">
       <rect>
-       <x>632</x>
-       <y>217</y>
+       <x>278</x>
+       <y>563</y>
        <width>40</width>
        <height>65</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">image: url(:/valves/valve green vertical.svg);</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblAalarm">
+     <property name="geometry">
+      <rect>
+       <x>557</x>
+       <y>10</y>
+       <width>381</width>
+       <height>280</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>8</pointsize>
+       <italic>false</italic>
+       <fontweight>DemiBold</fontweight>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(255, 255, 255, 0);
+font: 600 8pt &quot;Segoe UI&quot;;
+color: rgb(255, 0, 0);
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextInteractionFlag::NoTextInteraction</set>
      </property>
     </widget>
     <zorder>imgLaser</zorder>
@@ -787,6 +826,7 @@ border-color: rgb(76, 76, 76);</string>
     <zorder>wValve9</zorder>
     <zorder>tbValve8</zorder>
     <zorder>tbValve9</zorder>
+    <zorder>lblAalarm</zorder>
    </widget>
    <widget class="QLCDNumber" name="lcdElapsedTime">
     <property name="geometry">
@@ -1419,45 +1459,6 @@ image: &quot;&quot;;</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="lblAalarm">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>735</y>
-      <width>381</width>
-      <height>211</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe UI</family>
-      <pointsize>8</pointsize>
-      <italic>false</italic>
-      <fontweight>DemiBold</fontweight>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgba(255, 255, 255, 0);
-font: 600 8pt &quot;Segoe UI&quot;;
-color: rgb(255, 0, 0);
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-    </property>
-    <property name="wordWrap">
-     <bool>true</bool>
-    </property>
-    <property name="textInteractionFlags">
-     <set>Qt::TextInteractionFlag::NoTextInteraction</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="lblFinishTime">
     <property name="geometry">
      <rect>
@@ -1660,7 +1661,6 @@ image: &quot;&quot;;</string>
    <zorder>lineYPosition</zorder>
    <zorder>lblCurrent</zorder>
    <zorder>label_11</zorder>
-   <zorder>lblAalarm</zorder>
    <zorder>lblFinishTime</zorder>
    <zorder>label_13</zorder>
    <zorder>btnNCCViewer</zorder>
