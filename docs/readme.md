@@ -1,7 +1,7 @@
 # Module Documentation
 
 
-This document contains the documentation for all the modules in the **UCL Oxide Pyms Application** version 1.2.0 application.
+This document contains the documentation for all the modules in the **UCL Oxide Pyms Application** version 1.2.3 application.
 
 ---
 
@@ -60,13 +60,48 @@ Author: Gary Twinn
 UI form for viewing the log file.
 
 [logmanager](./logmanager.md)  
-logmanager, setus up application logging. use the logger property to
-write to the log.
+Logging configuration and management module.
+
+This module sets up application-wide logging with rotating file handlers based on settings.
+It creates the necessary log directory if it doesn't exist and configures logging with
+the following features:
+
+- Rotating log files with size limit of 1MB and 10 backup files
+- Timestamp and log level in each entry
+- Configurable log level (DEBUG/INFO) via settings
+- Log format: [timestamp] - [level] - message
+
+Usage:
+    from logmanager import logger
+
+    logger.debug('Debug message')
+    logger.info('Info message')
+    logger.warning('Warning message')
+    logger.error('Error message')
+
+Configuration:
+    Logging settings are read from settings dictionary with the following keys:
+    - logging.logfilepath: Path to log file directory
+    - logging.logappname: Application name used in log file
+    - logging.loglevel: Logging level (DEBUG/INFO)
 
 [main_form](./main_form.md)  
-Main PyMS form - graphical outut of the line state and timers for running samples. Allows manual control of the valves
-and access to menus for creating batches and accessing the maual x-y and laser controls.
-Author: Gary Twinn
+PyMS Main Application Form Module
+
+This module defines the main user interface for the PyMS application.
+It contains the UiMain class which represents the primary window of the
+application and handles the core UI functionality.
+
+The UiMain class initializes the application interface, sets up the main window,
+and connects the UI elements to their corresponding functionality in the application.
+
+Classes:
+    UiMain: The main application window class that inherits from a PySide6 window class
+            and provides the graphical interface for PyMS.
+
+Usage:
+    This module is imported and used by the main PyMS.pyw script to create
+    and display the application's main window.
 
 [manual_xy_form](./manual_xy_form.md)  
 Manual XY-UI. Displayes image from camera0 and has controls to move the device manually along the X and Y axis. Has

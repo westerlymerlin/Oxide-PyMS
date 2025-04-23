@@ -37,8 +37,9 @@
   * [ManualXyForm](#main_form.ManualXyForm)
   * [LaserFormUI](#main_form.LaserFormUI)
   * [NccCalcUI](#main_form.NccCalcUI)
-  * [GUAGE\_GOOD](#main_form.GUAGE_GOOD)
-  * [GUAGE\_BAD](#main_form.GUAGE_BAD)
+  * [LaserViewerUI](#main_form.LaserViewerUI)
+  * [GAUGE\_GOOD](#main_form.GAUGE_GOOD)
+  * [GAUGE\_BAD](#main_form.GAUGE_BAD)
   * [UiMain](#main_form.UiMain)
     * [\_\_init\_\_](#main_form.UiMain.__init__)
     * [global\_timer](#main_form.UiMain.global_timer)
@@ -57,6 +58,7 @@
     * [menu\_show\_settings\_viewer](#main_form.UiMain.menu_show_settings_viewer)
     * [menu\_show\_xymanual](#main_form.UiMain.menu_show_xymanual)
     * [menu\_show\_lasermanual](#main_form.UiMain.menu_show_lasermanual)
+    * [menu\_show\_laserviewer](#main_form.UiMain.menu_show_laserviewer)
     * [menu\_show\_ncc](#main_form.UiMain.menu_show_ncc)
     * [update\_ui\_batch\_list](#main_form.UiMain.update_ui_batch_list)
     * [update\_ui\_commandlist](#main_form.UiMain.update_ui_commandlist)
@@ -74,9 +76,22 @@
 
 # main\_form
 
-Main PyMS form - graphical outut of the line state and timers for running samples. Allows manual control of the valves
-and access to menus for creating batches and accessing the maual x-y and laser controls.
-Author: Gary Twinn
+PyMS Main Application Form Module
+
+This module defines the main user interface for the PyMS application.
+It contains the UiMain class which represents the primary window of the
+application and handles the core UI functionality.
+
+The UiMain class initializes the application interface, sets up the main window,
+and connects the UI elements to their corresponding functionality in the application.
+
+Classes:
+    UiMain: The main application window class that inherits from a PySide6 window class
+            and provides the graphical interface for PyMS.
+
+Usage:
+    This module is imported and used by the main PyMS.pyw script to create
+    and display the application's main window.
 
 <a id="main_form.webbrowser"></a>
 
@@ -222,13 +237,17 @@ Author: Gary Twinn
 
 ## NccCalcUI
 
-<a id="main_form.GUAGE_GOOD"></a>
+<a id="main_form.LaserViewerUI"></a>
 
-#### GUAGE\_GOOD
+## LaserViewerUI
 
-<a id="main_form.GUAGE_BAD"></a>
+<a id="main_form.GAUGE_GOOD"></a>
 
-#### GUAGE\_BAD
+#### GAUGE\_GOOD
+
+<a id="main_form.GAUGE_BAD"></a>
+
+#### GAUGE\_BAD
 
 <a id="main_form.UiMain"></a>
 
@@ -266,7 +285,20 @@ Timer routine for updating displays, runs every second
 def read_ms()
 ```
 
-Update the Hiden Mass Spectrometer widget with its status
+Check the mass spectrometer is online status, update the visibility of an image widget
+and update the text label accordingly.
+
+This method verifies the ms is online status through the
+check_quad_is_online function. Based on the returned status, it updates
+the visibility of the associated image widget and modifies the label
+to reflect the current state.
+
+:raises AttributeError: If the image widget or label referenced by
+                         self.imgQMS or self.lblMS are not properly defined.
+:raises Exception: If the check_quad_is_online function encounters an
+                   unspecified error while determining the status.
+
+:return: None
 
 <a id="main_form.UiMain.check_alarms"></a>
 
@@ -296,7 +328,13 @@ Update the valve and laser widgets on the display
 def emergency_stop()
 ```
 
-Emergency stop event triggered
+Initiates an emergency stop procedure by closing all valves, stopping movements,
+and resetting the system's state.
+
+This function is typically called in response to a critical failure or user-initiated emergency stop,
+ensuring that the system is brought to a safe state as quickly as possible. Components such
+as valves, lasers, and movement systems are turned off or reset. Additionally, it updates
+the internal state flags and GUI-related elements.
 
 <a id="main_form.UiMain.run_click"></a>
 
@@ -326,7 +364,12 @@ Events dependent on run state
 def closeEvent(event)
 ```
 
-Application close handler
+Handle the close event for the main UI form to perform cleanup and save its state.
+
+This method is triggered automatically when the main UI form receives a close
+event. It ensures that the application state is preserved, including the form's
+position settings, and shuts down processes properly. Additionally, the form
+itself is marked for deletion.
 
 <a id="main_form.UiMain.event_timer"></a>
 
@@ -404,6 +447,16 @@ Menu Handler show xy manual form
 
 ```python
 def menu_show_lasermanual()
+```
+
+Menu Handler show lasermanual form
+
+<a id="main_form.UiMain.menu_show_laserviewer"></a>
+
+#### menu\_show\_laserviewer
+
+```python
+def menu_show_laserviewer()
 ```
 
 Menu Handler show lasermanual form
