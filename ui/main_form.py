@@ -1,7 +1,20 @@
 """
-Main PyMS form - graphical outut of the line state and timers for running samples. Allows manual control of the valves
-and access to menus for creating batches and accessing the maual x-y and laser controls.
-Author: Gary Twinn
+PyMS Main Application Form Module
+
+This module defines the main user interface for the PyMS application.
+It contains the UiMain class which represents the primary window of the
+application and handles the core UI functionality.
+
+The UiMain class initializes the application interface, sets up the main window,
+and connects the UI elements to their corresponding functionality in the application.
+
+Classes:
+    UiMain: The main application window class that inherits from a PySide6 window class
+            and provides the graphical interface for PyMS.
+
+Usage:
+    This module is imported and used by the main PyMS.pyw script to create
+    and display the application's main window.
 """
 
 import webbrowser
@@ -25,10 +38,11 @@ from ui.settings_viewer_form import UiSettingsViewer
 from ui.manual_xy_form import ManualXyForm
 from ui.laser_manual_form import LaserFormUI
 from ui.ncc_calc_form import NccCalcUI
+from ui.laser_viewer_form import LaserViewerUI
 
 
-GUAGE_GOOD = 'background-color: rgb(255, 255, 255);  color: rgb(10, 10, 10); font: 14pt "Segoe UI"; image: "";'
-GUAGE_BAD = 'background-color: rgb(180, 0, 0); color: rgb(255, 255, 255); font: 14pt "Segoe UI"; image: "";'
+GAUGE_GOOD = 'background-color: rgb(255, 255, 255);  color: rgb(10, 10, 10); font: 14pt "Segoe UI"; image: "";'
+GAUGE_BAD = 'background-color: rgb(180, 0, 0); color: rgb(255, 255, 255); font: 14pt "Segoe UI"; image: "";'
 
 
 class UiMain(QMainWindow, Ui_MainWindow):
@@ -87,7 +101,8 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.actionLaserOpenStatusPage.triggered.connect(lambda: menu_open_web_page('Laser Status'))
         self.actionLaserOpenLogPage.triggered.connect(lambda: menu_open_web_page('Laser Log'))
         self.actionReboot_Laser.triggered.connect(lambda: restart_pi('laserhost'))
-        self.actionCO2LaserOn.triggered.connect(self.menu_show_lasermanual)
+        self.actionLaserViewerForm.triggered.connect(self.menu_show_laserviewer)
+        self.actionManualLaserForm.triggered.connect(self.menu_show_lasermanual)
         self.actionAboutPyMS.triggered.connect(self.menu_show_about)
         self.actionHelp.triggered.connect(lambda: menu_open_web_page('Help File'))
         self.actionViewPyMSLog.triggered.connect(self.menu_show_log_viewer)
@@ -171,7 +186,22 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.timertick += 1
 
     def read_ms(self):
-        """Update the Hiden Mass Spectrometer widget with its status"""
+        """
+        Check the mass spectrometer is online status, update the visibility of an image widget
+        and update the text label accordingly.
+
+        This method verifies the ms is online status through the
+        check_quad_is_online function. Based on the returned status, it updates
+        the visibility of the associated image widget and modifies the label
+        to reflect the current state.
+
+        :raises AttributeError: If the image widget or label referenced by
+                                 self.imgQMS or self.lblMS are not properly defined.
+        :raises Exception: If the check_quad_is_online function encounters an
+                           unspecified error while determining the status.
+
+        :return: None
+        """
         labletext = ms.check_quad_is_online()
         if labletext != 'Off Line':
             self.imgQMS.setHidden(False)
@@ -222,7 +252,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.tbRun.setChecked(False)
         if settings['vacuum']['ion']['current'] > settings['vacuum']['ion']['high']:
             self.ionpumphigh += 1
-            self.lineIonPump.setStyleSheet(GUAGE_BAD)
+            self.lineIonPump.setStyleSheet(GAUGE_BAD)
             if self.ionpumphigh > 29:
                 status = status + 'Ion pump is showing loss of vacuum, the system is paused. \n'
                 self.secondincrement = 0
@@ -230,10 +260,10 @@ class UiMain(QMainWindow, Ui_MainWindow):
                 self.tbRun.setChecked(False)
         else:
             self.ionpumphigh = 0
-            self.lineIonPump.setStyleSheet(GUAGE_GOOD)
+            self.lineIonPump.setStyleSheet(GAUGE_GOOD)
         if settings['vacuum']['turbo']['current'] > settings['vacuum']['turbo']['high']:
             self.turbopumphigh += 1
-            self.lineTurboPump.setStyleSheet(GUAGE_BAD)
+            self.lineTurboPump.setStyleSheet(GAUGE_BAD)
             if self.turbopumphigh > 29:
                 status = status + 'Turbo gauge is showing loss of vacuum, the system is paused. \n' \
                                   'This is norrmal during a planchet load \n'
@@ -242,7 +272,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
                 self.tbRun.setChecked(False)
         else:
             self.turbopumphigh = 0
-            self.lineTurboPump.setStyleSheet(GUAGE_GOOD)
+            self.lineTurboPump.setStyleSheet(GAUGE_GOOD)
         if settings['vacuum']['turbo']['current'] == 0:
             status = status + 'Turbo gauge is offline, the system is paused. \n'
             self.secondincrement = 0
@@ -309,7 +339,15 @@ class UiMain(QMainWindow, Ui_MainWindow):
                 self.imgLaser.setVisible(status['laser'])
 
     def emergency_stop(self):
-        """Emergency stop event triggered"""
+        """
+        Initiates an emergency stop procedure by closing all valves, stopping movements,
+        and resetting the system's state.
+
+        This function is typically called in response to a critical failure or user-initiated emergency stop,
+        ensuring that the system is brought to a safe state as quickly as possible. Components such
+        as valves, lasers, and movement systems are turned off or reset. Additionally, it updates
+        the internal state flags and GUI-related elements.
+        """
         logger.warning('Main form: Emergency stop triggred')
         self.secondincrement = 0
         self.secondcount = 0
@@ -357,7 +395,14 @@ class UiMain(QMainWindow, Ui_MainWindow):
             logger.error('t=%s mainUIForm: Runstate error', self.secondcount)
 
     def closeEvent(self, event):
-        """Application close handler"""
+        """
+        Handle the close event for the main UI form to perform cleanup and save its state.
+
+        This method is triggered automatically when the main UI form receives a close
+        event. It ensures that the application state is preserved, including the form's
+        position settings, and shuts down processes properly. Additionally, the form
+        itself is marked for deletion.
+        """
         logger.debug('mainUIForm: Main Form close event triggered')
         settings['mainform']['x'] = self.x()
         settings['mainform']['y'] = self.y()
@@ -515,6 +560,12 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.newdialog = LaserFormUI()
         self.newdialog.setModal(True)
         self.newdialog.show()
+
+    def menu_show_laserviewer(self):
+        """Menu Handler show lasermanual form"""
+        self.laserdialog = LaserViewerUI()
+        self.laserdialog.setModal(False)
+        self.laserdialog.show()
 
     def menu_show_ncc(self):
         """Menu Handler show NCC Form"""
