@@ -658,7 +658,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <widget class="QLabel" name="lblLaserPower">
      <property name="geometry">
       <rect>
-       <x>810</x>
+       <x>829</x>
        <y>577</y>
        <width>89</width>
        <height>21</height>
@@ -1548,8 +1548,8 @@ image: &quot;&quot;;</string>
     <widget class="QTableWidget" name="tableResults">
      <property name="geometry">
       <rect>
-       <x>1</x>
-       <y>1</y>
+       <x>-50</x>
+       <y>-10</y>
        <width>500</width>
        <height>851</height>
       </rect>
@@ -1754,7 +1754,9 @@ image: &quot;&quot;;</string>
     <addaction name="actionLaserOpenLogPage"/>
     <addaction name="actionReboot_Laser"/>
     <addaction name="separator"/>
-    <addaction name="actionCO2LaserOn"/>
+    <addaction name="actionLaserViewerForm"/>
+    <addaction name="separator"/>
+    <addaction name="actionManualLaserForm"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuBatch"/>
@@ -1917,7 +1919,7 @@ image: &quot;&quot;;</string>
     <string>Open Log Page</string>
    </property>
   </action>
-  <action name="actionCO2LaserOn">
+  <action name="actionManualLaserForm">
    <property name="text">
     <string>Manual Laser Control</string>
    </property>
@@ -1950,6 +1952,11 @@ image: &quot;&quot;;</string>
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionLaserViewerForm">
+   <property name="text">
+    <string>Laser Viewer</string>
    </property>
   </action>
  </widget>

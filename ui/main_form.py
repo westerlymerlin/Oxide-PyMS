@@ -1,7 +1,20 @@
 """
-Main PyMS form - graphical outut of the line state and timers for running samples. Allows manual control of the valves
-and access to menus for creating batches and accessing the maual x-y and laser controls.
-Author: Gary Twinn
+PyMS Main Application Form Module
+
+This module defines the main user interface for the PyMS application.
+It contains the UiMain class which represents the primary window of the
+application and handles the core UI functionality.
+
+The UiMain class initializes the application interface, sets up the main window,
+and connects the UI elements to their corresponding functionality in the application.
+
+Classes:
+    UiMain: The main application window class that inherits from a PySide6 window class
+            and provides the graphical interface for PyMS.
+
+Usage:
+    This module is imported and used by the main PyMS.pyw script to create
+    and display the application's main window.
 """
 
 import webbrowser
@@ -25,11 +38,11 @@ from ui.settings_viewer_form import UiSettingsViewer
 from ui.manual_xy_form import ManualXyForm
 from ui.laser_manual_form import LaserFormUI
 from ui.ncc_calc_form import NccCalcUI
+from ui.laser_viewer_form import LaserViewerUI
 
 
-GUAGE_GOOD = 'background-color: rgb(255, 255, 255);  color: rgb(10, 10, 10); font: 14pt "Segoe UI"; image: "";'
-GUAGE_BAD = 'background-color: rgb(180, 0, 0); color: rgb(255, 255, 255); font: 14pt "Segoe UI"; image: "";'
-
+GAUGE_GOOD = 'background-color: rgb(255, 255, 255);  color: rgb(10, 10, 10); font: 14pt "Segoe UI"; image: "";'
+GAUGE_BAD = 'background-color: rgb(180, 0, 0); color: rgb(255, 255, 255); font: 14pt "Segoe UI"; image: "";'
 
 class UiMain(QMainWindow, Ui_MainWindow):
     """Qt Class for main window"""
@@ -55,7 +68,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.wValve13.setHidden(True)
         self.wValve14.setHidden(True)
         self.wValve9.setHidden(True)
-        self.move(settings['mainform']['x'], settings['mainform']['y'])
+        self.__position_window__(settings['mainform']['x'], settings['mainform']['y'])
         self.tbValve1.clicked.connect(lambda: valvechange('valve1', self.wValve1.isHidden()))
         self.tbValve2.clicked.connect(lambda: valvechange('valve2', self.wValve2.isHidden()))
         self.tbValve3.clicked.connect(lambda: valvechange('valve3', self.wValve3.isHidden()))
@@ -87,7 +100,8 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.actionLaserOpenStatusPage.triggered.connect(lambda: menu_open_web_page('Laser Status'))
         self.actionLaserOpenLogPage.triggered.connect(lambda: menu_open_web_page('Laser Log'))
         self.actionReboot_Laser.triggered.connect(lambda: restart_pi('laserhost'))
-        self.actionCO2LaserOn.triggered.connect(self.menu_show_lasermanual)
+        self.actionLaserViewerForm.triggered.connect(self.menu_show_laserviewer)
+        self.actionManualLaserForm.triggered.connect(self.menu_show_lasermanual)
         self.actionAboutPyMS.triggered.connect(self.menu_show_about)
         self.actionHelp.triggered.connect(lambda: menu_open_web_page('Help File'))
         self.actionViewPyMSLog.triggered.connect(self.menu_show_log_viewer)
@@ -151,8 +165,43 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.globaltimer.timeout.connect(self.global_timer)
         self.globaltimer.start()
 
+    def __position_window__(self, x, y):
+        """
+        Moves the current window to the specified coordinates, while ensuring
+        it remains within the available virtual screen space. If the specified
+        position causes
+        the window to go out of bounds, the position is reset
+        to an initial value, and settings are updated.
+
+        :param x: The x-coordinate to move the window to
+        :param y: The y-coordinate to move the window to
+        :return: None
+        """
+        minx, miny, maxx, maxy = self.screen().availableVirtualGeometry().getRect()
+        if x + self.width() > maxx:
+            x = 100
+            writesettings()
+        if y + self.height() > maxy:
+            y = 100
+            writesettings()
+        if x < minx:
+            x = 100
+            writesettings()
+        if y < miny:
+            y = 100
+            writesettings()
+        self.move(x, y)
+
     def global_timer(self):
-        """Timer routine for updating displays, runs every second"""
+        """
+        Updates various components and manages periodic tasks in a defined interval.
+
+        The function increments a timer, updates the UI display, and triggers multiple
+        threads to manage tasks such as updating the UI display items, reading sensor
+        data, checking alarms, and handling event timers. Depending on its state, it
+        also handles specific periodic updates like refreshing UI positions, pressures,
+        and repainting the interface.
+        """
         self.secondcount = self.secondcount + self.secondincrement
         self.lcdElapsedTime.display(self.secondcount)
         self.thread_manager.start(self.update_ui_display_items)
@@ -171,7 +220,15 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.timertick += 1
 
     def read_ms(self):
-        """Update the Hiden Mass Spectrometer widget with its status"""
+        """
+        Check the mass spectrometer is online status, update the visibility of an image widget
+        and update the text label accordingly.
+
+        This method verifies the ms is online status through the
+        check_quad_is_online function. Based on the returned status, it updates
+        the visibility of the associated image widget and modifies the label
+        to reflect the current state.
+        """
         labletext = ms.check_quad_is_online()
         if labletext != 'Off Line':
             self.imgQMS.setHidden(False)
@@ -222,7 +279,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.tbRun.setChecked(False)
         if settings['vacuum']['ion']['current'] > settings['vacuum']['ion']['high']:
             self.ionpumphigh += 1
-            self.lineIonPump.setStyleSheet(GUAGE_BAD)
+            self.lineIonPump.setStyleSheet(GAUGE_BAD)
             if self.ionpumphigh > 29:
                 status = status + 'Ion pump is showing loss of vacuum, the system is paused. \n'
                 self.secondincrement = 0
@@ -230,10 +287,10 @@ class UiMain(QMainWindow, Ui_MainWindow):
                 self.tbRun.setChecked(False)
         else:
             self.ionpumphigh = 0
-            self.lineIonPump.setStyleSheet(GUAGE_GOOD)
+            self.lineIonPump.setStyleSheet(GAUGE_GOOD)
         if settings['vacuum']['turbo']['current'] > settings['vacuum']['turbo']['high']:
             self.turbopumphigh += 1
-            self.lineTurboPump.setStyleSheet(GUAGE_BAD)
+            self.lineTurboPump.setStyleSheet(GAUGE_BAD)
             if self.turbopumphigh > 29:
                 status = status + 'Turbo gauge is showing loss of vacuum, the system is paused. \n' \
                                   'This is norrmal during a planchet load \n'
@@ -242,7 +299,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
                 self.tbRun.setChecked(False)
         else:
             self.turbopumphigh = 0
-            self.lineTurboPump.setStyleSheet(GUAGE_GOOD)
+            self.lineTurboPump.setStyleSheet(GAUGE_GOOD)
         if settings['vacuum']['turbo']['current'] == 0:
             status = status + 'Turbo gauge is offline, the system is paused. \n'
             self.secondincrement = 0
@@ -309,7 +366,15 @@ class UiMain(QMainWindow, Ui_MainWindow):
                 self.imgLaser.setVisible(status['laser'])
 
     def emergency_stop(self):
-        """Emergency stop event triggered"""
+        """
+        Initiates an emergency stop procedure by closing all valves, stopping movements,
+        and resetting the system's state.
+
+        This function is typically called in response to a critical failure or user-initiated emergency stop,
+        ensuring that the system is brought to a safe state as quickly as possible. Components such
+        as valves, lasers, and movement systems are turned off or reset. Additionally, it updates
+        the internal state flags and GUI-related elements.
+        """
         logger.warning('Main form: Emergency stop triggred')
         self.secondincrement = 0
         self.secondcount = 0
@@ -357,7 +422,14 @@ class UiMain(QMainWindow, Ui_MainWindow):
             logger.error('t=%s mainUIForm: Runstate error', self.secondcount)
 
     def closeEvent(self, event):
-        """Application close handler"""
+        """
+        Handle the close event for the main UI form to perform cleanup and save its state.
+
+        This method is triggered automatically when the main UI form receives a close
+        event. It ensures that the application state is preserved, including the form's
+        position settings, and shuts down processes properly. Additionally, the form
+        itself is marked for deletion.
+        """
         logger.debug('mainUIForm: Main Form close event triggered')
         settings['mainform']['x'] = self.x()
         settings['mainform']['y'] = self.y()
@@ -382,7 +454,15 @@ class UiMain(QMainWindow, Ui_MainWindow):
             logger.error('t=%s mainUIForm: timedevents type error %s', self.secondcount, Exception())
 
     def event_parser(self):
-        """Reads tasks from the current cycle list and initiates them if the time is correct"""
+        """
+        Handles the parsing and execution of events during a task cycle.
+
+        The method evaluates the current step in the cycle and performs the necessary operations
+        based on the type of command specified. It manages a variety of tasks, including valve
+        operations, laser control, movement of an XY table, timer processes, imaging, and manual
+        instructions. It also handles transitioning between cycles and completing each task in
+        the command list.
+        """
         try:
             self.taskrunning = True
             current = currentcycle.currentstep()
@@ -481,43 +561,90 @@ class UiMain(QMainWindow, Ui_MainWindow):
             logger.error('t=%s mainUIForm: runevents error %s', self.secondcount, Exception)
 
     def menu_show_new_batch(self):
-        """Menu handler new batch"""
+        """
+        Displays a modal dialog for creating or managing a new batch.
+
+        This method initializes a new instance of the UiBatch dialog and sets it as
+        modal. It opens the batch check functionality associated with the dialog and
+        renders the dialog for user interaction.
+        """
         self.newdialog = UiBatch()
         self.newdialog.setModal(True)
         self.newdialog.openbatcheck()
         self.newdialog.show()
 
     def menu_show_about(self):
-        """Menu handler show about form"""
+        """
+        Displays the "About" dialog of the application.
+
+        This method instantiates the `UiAbout` dialog and displays it to
+        present information about the application. It is invoked as part of
+        the UI menu action corresponding to the "About" option.
+        """
         self.newdialog = UiAbout()
         self.newdialog.show()
 
     def menu_show_log_viewer(self):
-        """Menu handler show log viewer"""
+        """
+        Displays the log viewer interface.
+
+        This function initializes a new instance of the `UiLogViewer` class, loads
+        log data using its `loadlog` method, and makes the log viewer visible by
+        calling its `show` method.
+        """
         self.newdialog = UiLogViewer()
         self.newdialog.loadlog()
         self.newdialog.show()
 
     def menu_show_settings_viewer(self):
-        """Menu handler show settings viewer"""
+        """
+        Displays the settings viewer dialog.
+
+        This function initializes and shows the settings viewer dialog. It creates
+        an instance of the UiSettingsViewer class, loads the settings, and displays
+        the dialog to the user.
+        """
         self.newdialog = UiSettingsViewer()
         self.newdialog.loadsettings()
         self.newdialog.show()
 
     def menu_show_xymanual(self):
-        """Menu Handler show xy manual form"""
+        """
+        Display the manual XY form in a modal dialog.
+
+        This method initializes and displays a modal dialog using the ManualXyForm
+        class. Once invoked, the dialog is presented to the user where interaction
+        is restricted to the form itself until it is closed.
+        """
         self.newdialog = ManualXyForm()
         self.newdialog.setModal(True)
         self.newdialog.show()
 
     def menu_show_lasermanual(self):
-        """Menu Handler show lasermanual form"""
+        """
+        Displays the Laser Manual dialog interface.
+
+        This function initializes a new instance of the LaserFormUI class, sets the dialog
+        to modal, and then displays it.
+        """
         self.newdialog = LaserFormUI()
         self.newdialog.setModal(True)
         self.newdialog.show()
 
+    def menu_show_laserviewer(self):
+        """Menu Handler show lasermanual form"""
+        self.laserdialog = LaserViewerUI()
+        self.laserdialog.setModal(False)
+        self.laserdialog.show()
+
     def menu_show_ncc(self):
-        """Menu Handler show NCC Form"""
+        """
+        Displays and handles the NCC calculator UI dialog window.
+
+        This method is responsible for creating an instance of the NCC calculator user
+        interface, configuring it as a modal dialog, refreshing its content, and
+        displaying it to the user.
+        """
         self.newdialog = NccCalcUI()
         self.newdialog.setModal(True)
         self.newdialog.refreshlist()
@@ -597,7 +724,10 @@ class UiMain(QMainWindow, Ui_MainWindow):
         # moveythread.start()
 
     def manual_message(self, message):
-        """ Pop up message box"""
+        """
+        Logs and displays a manual popup message indicating a manual step is required during
+        execution. Temporarily pauses the timer during the process.
+        """
         logger.info('Main Form Popup Message sent :%s', message)
         secondinc = self.secondincrement
         self.secondincrement = 0
@@ -633,7 +763,12 @@ def restart_pi(host):
 
 
 def menu_open_web_page(page):
-    """Menu handler - open host web page"""
+    """
+    Opens a webpage or file in a default web browser based on the provided
+    menu option. The function determines the correct URL or file path for
+    each supported menu option and calls the appropriate system utility
+    to open the page or file.
+    """
     if page == 'Valve Status':
         url = settings['hosts']['valvehost'][:-4]
         webbrowser.open(url)

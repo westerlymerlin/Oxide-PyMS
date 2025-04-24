@@ -33,8 +33,29 @@
 
 # ms\_srs\_class
 
-Class to read data from a Stanford SRS RGA 100 mass spectrometer and calculate the best-fit value for t=0
-Uses the rsrinst.rga module from the srsinst package.
+MS SRS Class - Interface for Stanford SRS RGA 100 Mass Spectrometer
+
+This module provides a class-based interface for controlling and gathering data
+from a Stanford SRS RGA 100 mass spectrometer. It handles communication with the
+spectrometer, data collection, processing, and storage to both files and SQLite database.
+
+The module uses the srsinst.rga package to communicate with the spectrometer hardware
+and provides functionality to:
+- Connect to and control the RGA100 mass spectrometer
+- Run multiple ion detection (MID) and profile scans
+- Collect and process time-series mass spectral data
+- Calculate best-fit values for t=0 measurements
+- Store data in both raw file format and SQLite database
+- Track experiment IDs, sample identifiers, and batch information
+
+Key Classes:
+- MsClass: Main class implementing all RGA100 spectrometer functionality
+
+Dependencies:
+- srsinst.rga: Stanford Research Systems instrument interface
+- ncc_calc: Contains mathematical utilities like linbestfit
+- app_control: Application settings and utilities
+- logmanager: Logging functionality
 
 <a id="ms_srs_class.datetime"></a>
 

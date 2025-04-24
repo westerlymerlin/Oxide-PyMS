@@ -18,6 +18,7 @@
     * [mouseMoveEvent](#laser_viewer_form.DragSquare.mouseMoveEvent)
   * [LaserViewerUI](#laser_viewer_form.LaserViewerUI)
     * [\_\_init\_\_](#laser_viewer_form.LaserViewerUI.__init__)
+    * [\_\_position\_window\_\_](#laser_viewer_form.LaserViewerUI.__position_window__)
     * [global\_timer](#laser_viewer_form.LaserViewerUI.global_timer)
     * [dragEnterEvent](#laser_viewer_form.LaserViewerUI.dragEnterEvent)
     * [dropEvent](#laser_viewer_form.LaserViewerUI.dropEvent)
@@ -122,6 +123,24 @@ Initialise the settings viewer form
 ```python
 def __init__()
 ```
+
+<a id="laser_viewer_form.LaserViewerUI.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="laser_viewer_form.LaserViewerUI.global_timer"></a>
 

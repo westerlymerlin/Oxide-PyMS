@@ -37,10 +37,12 @@
   * [ManualXyForm](#main_form.ManualXyForm)
   * [LaserFormUI](#main_form.LaserFormUI)
   * [NccCalcUI](#main_form.NccCalcUI)
-  * [GUAGE\_GOOD](#main_form.GUAGE_GOOD)
-  * [GUAGE\_BAD](#main_form.GUAGE_BAD)
+  * [LaserViewerUI](#main_form.LaserViewerUI)
+  * [GAUGE\_GOOD](#main_form.GAUGE_GOOD)
+  * [GAUGE\_BAD](#main_form.GAUGE_BAD)
   * [UiMain](#main_form.UiMain)
     * [\_\_init\_\_](#main_form.UiMain.__init__)
+    * [\_\_position\_window\_\_](#main_form.UiMain.__position_window__)
     * [global\_timer](#main_form.UiMain.global_timer)
     * [read\_ms](#main_form.UiMain.read_ms)
     * [check\_alarms](#main_form.UiMain.check_alarms)
@@ -57,6 +59,7 @@
     * [menu\_show\_settings\_viewer](#main_form.UiMain.menu_show_settings_viewer)
     * [menu\_show\_xymanual](#main_form.UiMain.menu_show_xymanual)
     * [menu\_show\_lasermanual](#main_form.UiMain.menu_show_lasermanual)
+    * [menu\_show\_laserviewer](#main_form.UiMain.menu_show_laserviewer)
     * [menu\_show\_ncc](#main_form.UiMain.menu_show_ncc)
     * [update\_ui\_batch\_list](#main_form.UiMain.update_ui_batch_list)
     * [update\_ui\_commandlist](#main_form.UiMain.update_ui_commandlist)
@@ -74,9 +77,22 @@
 
 # main\_form
 
-Main PyMS form - graphical outut of the line state and timers for running samples. Allows manual control of the valves
-and access to menus for creating batches and accessing the maual x-y and laser controls.
-Author: Gary Twinn
+PyMS Main Application Form Module
+
+This module defines the main user interface for the PyMS application.
+It contains the UiMain class which represents the primary window of the
+application and handles the core UI functionality.
+
+The UiMain class initializes the application interface, sets up the main window,
+and connects the UI elements to their corresponding functionality in the application.
+
+Classes:
+    UiMain: The main application window class that inherits from a PySide6 window class
+            and provides the graphical interface for PyMS.
+
+Usage:
+    This module is imported and used by the main PyMS.pyw script to create
+    and display the application's main window.
 
 <a id="main_form.webbrowser"></a>
 
@@ -222,13 +238,17 @@ Author: Gary Twinn
 
 ## NccCalcUI
 
-<a id="main_form.GUAGE_GOOD"></a>
+<a id="main_form.LaserViewerUI"></a>
 
-#### GUAGE\_GOOD
+## LaserViewerUI
 
-<a id="main_form.GUAGE_BAD"></a>
+<a id="main_form.GAUGE_GOOD"></a>
 
-#### GUAGE\_BAD
+#### GAUGE\_GOOD
+
+<a id="main_form.GAUGE_BAD"></a>
+
+#### GAUGE\_BAD
 
 <a id="main_form.UiMain"></a>
 
@@ -248,6 +268,24 @@ Qt Class for main window
 def __init__()
 ```
 
+<a id="main_form.UiMain.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
+
 <a id="main_form.UiMain.global_timer"></a>
 
 #### global\_timer
@@ -256,7 +294,13 @@ def __init__()
 def global_timer()
 ```
 
-Timer routine for updating displays, runs every second
+Updates various components and manages periodic tasks in a defined interval.
+
+The function increments a timer, updates the UI display, and triggers multiple
+threads to manage tasks such as updating the UI display items, reading sensor
+data, checking alarms, and handling event timers. Depending on its state, it
+also handles specific periodic updates like refreshing UI positions, pressures,
+and repainting the interface.
 
 <a id="main_form.UiMain.read_ms"></a>
 
@@ -266,7 +310,13 @@ Timer routine for updating displays, runs every second
 def read_ms()
 ```
 
-Update the Hiden Mass Spectrometer widget with its status
+Check the mass spectrometer is online status, update the visibility of an image widget
+and update the text label accordingly.
+
+This method verifies the ms is online status through the
+check_quad_is_online function. Based on the returned status, it updates
+the visibility of the associated image widget and modifies the label
+to reflect the current state.
 
 <a id="main_form.UiMain.check_alarms"></a>
 
@@ -296,7 +346,13 @@ Update the valve and laser widgets on the display
 def emergency_stop()
 ```
 
-Emergency stop event triggered
+Initiates an emergency stop procedure by closing all valves, stopping movements,
+and resetting the system's state.
+
+This function is typically called in response to a critical failure or user-initiated emergency stop,
+ensuring that the system is brought to a safe state as quickly as possible. Components such
+as valves, lasers, and movement systems are turned off or reset. Additionally, it updates
+the internal state flags and GUI-related elements.
 
 <a id="main_form.UiMain.run_click"></a>
 
@@ -326,7 +382,12 @@ Events dependent on run state
 def closeEvent(event)
 ```
 
-Application close handler
+Handle the close event for the main UI form to perform cleanup and save its state.
+
+This method is triggered automatically when the main UI form receives a close
+event. It ensures that the application state is preserved, including the form's
+position settings, and shuts down processes properly. Additionally, the form
+itself is marked for deletion.
 
 <a id="main_form.UiMain.event_timer"></a>
 
@@ -346,7 +407,13 @@ Event timer used when a batch is running
 def event_parser()
 ```
 
-Reads tasks from the current cycle list and initiates them if the time is correct
+Handles the parsing and execution of events during a task cycle.
+
+The method evaluates the current step in the cycle and performs the necessary operations
+based on the type of command specified. It manages a variety of tasks, including valve
+operations, laser control, movement of an XY table, timer processes, imaging, and manual
+instructions. It also handles transitioning between cycles and completing each task in
+the command list.
 
 <a id="main_form.UiMain.menu_show_new_batch"></a>
 
@@ -356,7 +423,11 @@ Reads tasks from the current cycle list and initiates them if the time is correc
 def menu_show_new_batch()
 ```
 
-Menu handler new batch
+Displays a modal dialog for creating or managing a new batch.
+
+This method initializes a new instance of the UiBatch dialog and sets it as
+modal. It opens the batch check functionality associated with the dialog and
+renders the dialog for user interaction.
 
 <a id="main_form.UiMain.menu_show_about"></a>
 
@@ -366,7 +437,11 @@ Menu handler new batch
 def menu_show_about()
 ```
 
-Menu handler show about form
+Displays the "About" dialog of the application.
+
+This method instantiates the `UiAbout` dialog and displays it to
+present information about the application. It is invoked as part of
+the UI menu action corresponding to the "About" option.
 
 <a id="main_form.UiMain.menu_show_log_viewer"></a>
 
@@ -376,7 +451,11 @@ Menu handler show about form
 def menu_show_log_viewer()
 ```
 
-Menu handler show log viewer
+Displays the log viewer interface.
+
+This function initializes a new instance of the `UiLogViewer` class, loads
+log data using its `loadlog` method, and makes the log viewer visible by
+calling its `show` method.
 
 <a id="main_form.UiMain.menu_show_settings_viewer"></a>
 
@@ -386,7 +465,11 @@ Menu handler show log viewer
 def menu_show_settings_viewer()
 ```
 
-Menu handler show settings viewer
+Displays the settings viewer dialog.
+
+This function initializes and shows the settings viewer dialog. It creates
+an instance of the UiSettingsViewer class, loads the settings, and displays
+the dialog to the user.
 
 <a id="main_form.UiMain.menu_show_xymanual"></a>
 
@@ -396,7 +479,11 @@ Menu handler show settings viewer
 def menu_show_xymanual()
 ```
 
-Menu Handler show xy manual form
+Display the manual XY form in a modal dialog.
+
+This method initializes and displays a modal dialog using the ManualXyForm
+class. Once invoked, the dialog is presented to the user where interaction
+is restricted to the form itself until it is closed.
 
 <a id="main_form.UiMain.menu_show_lasermanual"></a>
 
@@ -404,6 +491,19 @@ Menu Handler show xy manual form
 
 ```python
 def menu_show_lasermanual()
+```
+
+Displays the Laser Manual dialog interface.
+
+This function initializes a new instance of the LaserFormUI class, sets the dialog
+to modal, and then displays it.
+
+<a id="main_form.UiMain.menu_show_laserviewer"></a>
+
+#### menu\_show\_laserviewer
+
+```python
+def menu_show_laserviewer()
 ```
 
 Menu Handler show lasermanual form
@@ -416,7 +516,11 @@ Menu Handler show lasermanual form
 def menu_show_ncc()
 ```
 
-Menu Handler show NCC Form
+Displays and handles the NCC calculator UI dialog window.
+
+This method is responsible for creating an instance of the NCC calculator user
+interface, configuring it as a modal dialog, refreshing its content, and
+displaying it to the user.
 
 <a id="main_form.UiMain.update_ui_batch_list"></a>
 
@@ -486,7 +590,8 @@ Move to the next planchet location
 def manual_message(message)
 ```
 
-Pop up message box
+Logs and displays a manual popup message indicating a manual step is required during
+execution. Temporarily pauses the timer during the process.
 
 <a id="main_form.move_x"></a>
 
@@ -526,5 +631,8 @@ Reboot a raspberry pi
 def menu_open_web_page(page)
 ```
 
-Menu handler - open host web page
+Opens a webpage or file in a default web browser based on the provided
+menu option. The function determines the correct URL or file path for
+each supported menu option and calls the appropriate system utility
+to open the page or file.
 

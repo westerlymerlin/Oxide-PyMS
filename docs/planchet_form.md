@@ -6,10 +6,12 @@
   * [QApplication](#planchet_form.QApplication)
   * [Ui\_dialogPlanchet](#planchet_form.Ui_dialogPlanchet)
   * [settings](#planchet_form.settings)
+  * [writesettings](#planchet_form.writesettings)
   * [batch](#planchet_form.batch)
   * [currentcycle](#planchet_form.currentcycle)
   * [UiPlanchet](#planchet_form.UiPlanchet)
     * [\_\_init\_\_](#planchet_form.UiPlanchet.__init__)
+    * [\_\_position\_window\_\_](#planchet_form.UiPlanchet.__position_window__)
     * [startup](#planchet_form.UiPlanchet.startup)
     * [formclose](#planchet_form.UiPlanchet.formclose)
     * [savechecks](#planchet_form.UiPlanchet.savechecks)
@@ -41,6 +43,10 @@ Author: Gary Twinn
 
 ## settings
 
+<a id="planchet_form.writesettings"></a>
+
+## writesettings
+
 <a id="planchet_form.batch"></a>
 
 ## batch
@@ -66,6 +72,24 @@ Form class for the planchet
 ```python
 def __init__()
 ```
+
+<a id="planchet_form.UiPlanchet.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="planchet_form.UiPlanchet.startup"></a>
 

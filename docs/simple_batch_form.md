@@ -6,12 +6,14 @@
   * [QApplication](#simple_batch_form.QApplication)
   * [Ui\_dialogSimpleBatch](#simple_batch_form.Ui_dialogSimpleBatch)
   * [settings](#simple_batch_form.settings)
+  * [writesettings](#simple_batch_form.writesettings)
   * [batch](#simple_batch_form.batch)
   * [currentcycle](#simple_batch_form.currentcycle)
   * [logger](#simple_batch_form.logger)
   * [UiSimpleBatch](#simple_batch_form.UiSimpleBatch)
     * [\_\_init\_\_](#simple_batch_form.UiSimpleBatch.__init__)
     * [startup](#simple_batch_form.UiSimpleBatch.startup)
+    * [\_\_position\_window\_\_](#simple_batch_form.UiSimpleBatch.__position_window__)
     * [formclose](#simple_batch_form.UiSimpleBatch.formclose)
     * [taskcomboclick](#simple_batch_form.UiSimpleBatch.taskcomboclick)
     * [savechecks](#simple_batch_form.UiSimpleBatch.savechecks)
@@ -42,6 +44,10 @@ Author: Gary Twinn
 <a id="simple_batch_form.settings"></a>
 
 ## settings
+
+<a id="simple_batch_form.writesettings"></a>
+
+## writesettings
 
 <a id="simple_batch_form.batch"></a>
 
@@ -83,6 +89,24 @@ def startup()
 
 Initialise the form, if new set to blank but if the batch exists populate sample names into the relavent
 locations
+
+<a id="simple_batch_form.UiSimpleBatch.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="simple_batch_form.UiSimpleBatch.formclose"></a>
 

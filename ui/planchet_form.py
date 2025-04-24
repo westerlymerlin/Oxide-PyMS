@@ -5,7 +5,7 @@ Author: Gary Twinn
 import sys
 from PySide6.QtWidgets import QDialog, QApplication
 from ui.ui_layout_planchet_batch import Ui_dialogPlanchet
-from app_control import settings
+from app_control import settings, writesettings
 from batchclass import batch
 from cycleclass import currentcycle
 
@@ -15,8 +15,36 @@ class UiPlanchet(QDialog, Ui_dialogPlanchet):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.move(settings['planchetform']['x'], settings['planchetform']['y'])
+        self.__position_window__(settings['planchetform']['x'], settings['planchetform']['y'])
         self.recordnumber = -1
+
+    def __position_window__(self, x, y):
+        """
+        Moves the current window to the specified coordinates, while ensuring
+        it remains within the available virtual screen space. If the specified
+        position causes
+        the window to go out of bounds, the position is reset
+        to an initial value, and settings are updated.
+
+        :param x: The x-coordinate to move the window to
+        :param y: The y-coordinate to move the window to
+        :return: None
+        """
+        minx, miny, maxx, maxy = self.screen().availableVirtualGeometry().getRect()
+        if x + self.width() > maxx:
+            x = 100
+            writesettings()
+        if y + self.height() > maxy:
+            y = 100
+            writesettings()
+        if x < minx:
+            x = 100
+            writesettings()
+        if y < miny:
+            y = 100
+            writesettings()
+        self.move(x, y)
+
 
     def startup(self):
         """Initialise the planchet, if new set to blank but if the batch exists populate sample names int the planchet

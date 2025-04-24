@@ -5,7 +5,7 @@ Author: Gary Twinn
 import sys
 from PySide6.QtWidgets import QDialog, QApplication
 from ui.ui_layout_simple_batch import Ui_dialogSimpleBatch
-from app_control import settings
+from app_control import settings, writesettings
 from batchclass import batch
 from cycleclass import currentcycle
 from logmanager import logger
@@ -16,7 +16,7 @@ class UiSimpleBatch(QDialog, Ui_dialogSimpleBatch):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.move(settings['simplebatchform']['x'], settings['simplebatchform']['y'])
+        self.__position_window__(settings['simplebatchform']['x'], settings['simplebatchform']['y'])
         self.recordnumber = -1
 
     def startup(self):
@@ -93,6 +93,35 @@ class UiSimpleBatch(QDialog, Ui_dialogSimpleBatch):
             self.lineDescription.setText(batch.description)
             self.setWindowTitle('Unfinished steps from batch # %i' % batch.id)
             self.taskcomboclick(1)
+
+    def __position_window__(self, x, y):
+        """
+        Moves the current window to the specified coordinates, while ensuring
+        it remains within the available virtual screen space. If the specified
+        position causes
+        the window to go out of bounds, the position is reset
+        to an initial value, and settings are updated.
+
+        :param x: The x-coordinate to move the window to
+        :param y: The y-coordinate to move the window to
+        :return: None
+        """
+        minx, miny, maxx, maxy = self.screen().availableVirtualGeometry().getRect()
+        if x + self.width() > maxx:
+            x = 100
+            writesettings()
+        if y + self.height() > maxy:
+            y = 100
+            writesettings()
+        if x < minx:
+            x = 100
+            writesettings()
+        if y < miny:
+            y = 100
+            writesettings()
+        self.move(x, y)
+
+
     def formclose(self):
         """Form close handler"""
         settings['simplebatchform']['x'] = self.x()

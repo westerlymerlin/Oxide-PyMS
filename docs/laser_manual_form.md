@@ -9,11 +9,13 @@
   * [QApplication](#laser_manual_form.QApplication)
   * [Ui\_dialogLaserControl](#laser_manual_form.Ui_dialogLaserControl)
   * [settings](#laser_manual_form.settings)
+  * [writesettings](#laser_manual_form.writesettings)
   * [lasergetstatus](#laser_manual_form.lasergetstatus)
   * [lasercommand](#laser_manual_form.lasercommand)
   * [lasersetpower](#laser_manual_form.lasersetpower)
   * [LaserFormUI](#laser_manual_form.LaserFormUI)
     * [\_\_init\_\_](#laser_manual_form.LaserFormUI.__init__)
+    * [\_\_position\_window\_\_](#laser_manual_form.LaserFormUI.__position_window__)
     * [formclose](#laser_manual_form.LaserFormUI.formclose)
     * [slidermove](#laser_manual_form.LaserFormUI.slidermove)
     * [enable\_click](#laser_manual_form.LaserFormUI.enable_click)
@@ -59,6 +61,10 @@ Author: Gary Twinn
 
 ## settings
 
+<a id="laser_manual_form.writesettings"></a>
+
+## writesettings
+
 <a id="laser_manual_form.lasergetstatus"></a>
 
 ## lasergetstatus
@@ -88,6 +94,24 @@ The LaserFormUI class represents a dialog window for controlling a laser.
 ```python
 def __init__()
 ```
+
+<a id="laser_manual_form.LaserFormUI.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="laser_manual_form.LaserFormUI.formclose"></a>
 

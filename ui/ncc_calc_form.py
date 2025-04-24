@@ -22,7 +22,7 @@ class NccCalcUI(QDialog, Ui_dialogNccCalc):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.move(settings['ncccalcform']['x'], settings['ncccalcform']['y'])
+        self.__position_window__(settings['ncccalcform']['x'], settings['ncccalcform']['y'])
         self.btnFileOpen.clicked.connect(self.choose_source_dir)
         self.btnNcc.clicked.connect(self.generate_ncc_file)
         self.btnRefresh.clicked.connect(self.refreshlist)
@@ -87,6 +87,34 @@ class NccCalcUI(QDialog, Ui_dialogNccCalc):
         self.m4chartview.setFrameShape(QFrame.Box)
         self.spinSeconds.setValue(settings['Ncc']['ncc_start_seconds'])
         self.spinSeconds.valueChanged.connect(self.secondchanged)
+
+    def __position_window__(self, x, y):
+        """
+        Moves the current window to the specified coordinates, while ensuring
+        it remains within the available virtual screen space. If the specified
+        position causes
+        the window to go out of bounds, the position is reset
+        to an initial value, and settings are updated.
+
+        :param x: The x-coordinate to move the window to
+        :param y: The y-coordinate to move the window to
+        :return: None
+        """
+        minx, miny, maxx, maxy = self.screen().availableVirtualGeometry().getRect()
+        if x + self.width() > maxx:
+            x = 100
+            writesettings()
+        if y + self.height() > maxy:
+            y = 100
+            writesettings()
+        if x < minx:
+            x = 100
+            writesettings()
+        if y < miny:
+            y = 100
+            writesettings()
+        self.move(x, y)
+
 
     def formclose(self):
         """Close event handler for the form"""

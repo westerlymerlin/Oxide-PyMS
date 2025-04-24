@@ -11,3 +11,5 @@ pip
 numpy
 six
 image
+srsinst.rga
+matplotlib

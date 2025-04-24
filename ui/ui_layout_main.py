@@ -101,8 +101,8 @@ class Ui_MainWindow(object):
         self.actionLaserOpenStatusPage.setObjectName(u"actionLaserOpenStatusPage")
         self.actionLaserOpenLogPage = QAction(MainWindow)
         self.actionLaserOpenLogPage.setObjectName(u"actionLaserOpenLogPage")
-        self.actionCO2LaserOn = QAction(MainWindow)
-        self.actionCO2LaserOn.setObjectName(u"actionCO2LaserOn")
+        self.actionManualLaserForm = QAction(MainWindow)
+        self.actionManualLaserForm.setObjectName(u"actionManualLaserForm")
         self.actionReboot_XY = QAction(MainWindow)
         self.actionReboot_XY.setObjectName(u"actionReboot_XY")
         self.actionReboot_Laser = QAction(MainWindow)
@@ -115,6 +115,8 @@ class Ui_MainWindow(object):
         self.actionNCCViewer.setObjectName(u"actionNCCViewer")
         self.actionHelp = QAction(MainWindow)
         self.actionHelp.setObjectName(u"actionHelp")
+        self.actionLaserViewerForm = QAction(MainWindow)
+        self.actionLaserViewerForm.setObjectName(u"actionLaserViewerForm")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.frmHeLine = QFrame(self.centralwidget)
@@ -295,7 +297,7 @@ class Ui_MainWindow(object):
         self.btnHidenStop.setIconSize(QSize(46, 46))
         self.lblLaserPower = QLabel(self.frmHeLine)
         self.lblLaserPower.setObjectName(u"lblLaserPower")
-        self.lblLaserPower.setGeometry(QRect(810, 577, 89, 21))
+        self.lblLaserPower.setGeometry(QRect(829, 577, 89, 21))
         self.lblLaserPower.setStyleSheet(u"font: 12pt \"Segoe UI\";\n"
 "background-color: rgb(255, 255, 255);\n"
 "border-color: rgb(76, 76, 76);")
@@ -622,7 +624,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem3.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
         self.tableResults.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.tableResults.setObjectName(u"tableResults")
-        self.tableResults.setGeometry(QRect(1, 1, 500, 851))
+        self.tableResults.setGeometry(QRect(-50, -10, 500, 851))
         self.tableResults.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-color: rgb(61, 61, 61);\n"
 "alternate-background-color: rgb(225, 245, 255);\n"
@@ -737,7 +739,9 @@ class Ui_MainWindow(object):
         self.menuLaser_Controller.addAction(self.actionLaserOpenLogPage)
         self.menuLaser_Controller.addAction(self.actionReboot_Laser)
         self.menuLaser_Controller.addSeparator()
-        self.menuLaser_Controller.addAction(self.actionCO2LaserOn)
+        self.menuLaser_Controller.addAction(self.actionLaserViewerForm)
+        self.menuLaser_Controller.addSeparator()
+        self.menuLaser_Controller.addAction(self.actionManualLaserForm)
 
         self.retranslateUi(MainWindow)
 
@@ -769,13 +773,14 @@ class Ui_MainWindow(object):
         self.actionStopScan.setText(QCoreApplication.translate("MainWindow", u"STOP Scan", None))
         self.actionLaserOpenStatusPage.setText(QCoreApplication.translate("MainWindow", u"Open Status Page", None))
         self.actionLaserOpenLogPage.setText(QCoreApplication.translate("MainWindow", u"Open Log Page", None))
-        self.actionCO2LaserOn.setText(QCoreApplication.translate("MainWindow", u"Manual Laser Control", None))
+        self.actionManualLaserForm.setText(QCoreApplication.translate("MainWindow", u"Manual Laser Control", None))
         self.actionReboot_XY.setText(QCoreApplication.translate("MainWindow", u"Reboot X-Y Raspberry Pi", None))
         self.actionReboot_Laser.setText(QCoreApplication.translate("MainWindow", u"Reboot Laser Raspberry Pi", None))
         self.actionReboot_Valve.setText(QCoreApplication.translate("MainWindow", u"Reboot Valve Raspberry Pi", None))
         self.actionReboot_Pump.setText(QCoreApplication.translate("MainWindow", u"Reboot Pumps Raspberry Pi", None))
         self.actionNCCViewer.setText(QCoreApplication.translate("MainWindow", u"Ncc Viewer", None))
         self.actionHelp.setText(QCoreApplication.translate("MainWindow", u"Help", None))
+        self.actionLaserViewerForm.setText(QCoreApplication.translate("MainWindow", u"Laser Viewer", None))
         self.tbValve1.setText("")
         self.tbValve2.setText("")
         self.tbValve6.setText("")
