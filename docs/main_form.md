@@ -42,6 +42,7 @@
   * [GAUGE\_BAD](#main_form.GAUGE_BAD)
   * [UiMain](#main_form.UiMain)
     * [\_\_init\_\_](#main_form.UiMain.__init__)
+    * [\_\_position\_window\_\_](#main_form.UiMain.__position_window__)
     * [global\_timer](#main_form.UiMain.global_timer)
     * [read\_ms](#main_form.UiMain.read_ms)
     * [check\_alarms](#main_form.UiMain.check_alarms)
@@ -266,6 +267,24 @@ Qt Class for main window
 ```python
 def __init__()
 ```
+
+<a id="main_form.UiMain.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="main_form.UiMain.global_timer"></a>
 

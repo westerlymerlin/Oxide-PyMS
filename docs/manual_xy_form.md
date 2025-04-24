@@ -13,6 +13,7 @@
   * [QLabel](#manual_xy_form.QLabel)
   * [Ui\_dialogXYSetup](#manual_xy_form.Ui_dialogXYSetup)
   * [settings](#manual_xy_form.settings)
+  * [writesettings](#manual_xy_form.writesettings)
   * [xyread](#manual_xy_form.xyread)
   * [xymove](#manual_xy_form.xymove)
   * [xymoveto](#manual_xy_form.xymoveto)
@@ -20,6 +21,7 @@
   * [batch](#manual_xy_form.batch)
   * [ManualXyForm](#manual_xy_form.ManualXyForm)
     * [\_\_init\_\_](#manual_xy_form.ManualXyForm.__init__)
+    * [\_\_position\_window\_\_](#manual_xy_form.ManualXyForm.__position_window__)
     * [formclose](#manual_xy_form.ManualXyForm.formclose)
     * [timer](#manual_xy_form.ManualXyForm.timer)
     * [update\_xy](#manual_xy_form.ManualXyForm.update_xy)
@@ -85,6 +87,10 @@ Author: Gary Twinn
 
 ## settings
 
+<a id="manual_xy_form.writesettings"></a>
+
+## writesettings
+
 <a id="manual_xy_form.xyread"></a>
 
 ## xyread
@@ -124,6 +130,24 @@ It allows the user to manually control the X and Y positions of a device.
 ```python
 def __init__()
 ```
+
+<a id="manual_xy_form.ManualXyForm.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="manual_xy_form.ManualXyForm.formclose"></a>
 

@@ -16,6 +16,7 @@
   * [listkey](#cycle_edit_form.listkey)
   * [CycleEditUI](#cycle_edit_form.CycleEditUI)
     * [\_\_init\_\_](#cycle_edit_form.CycleEditUI.__init__)
+    * [\_\_position\_window\_\_](#cycle_edit_form.CycleEditUI.__position_window__)
     * [formclose](#cycle_edit_form.CycleEditUI.formclose)
     * [loadcycles](#cycle_edit_form.CycleEditUI.loadcycles)
     * [combochange](#cycle_edit_form.CycleEditUI.combochange)
@@ -123,6 +124,24 @@ Returns:
 ```python
 def __init__()
 ```
+
+<a id="cycle_edit_form.CycleEditUI.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="cycle_edit_form.CycleEditUI.formclose"></a>
 

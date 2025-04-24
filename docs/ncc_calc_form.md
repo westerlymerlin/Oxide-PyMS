@@ -25,6 +25,7 @@
   * [singlefilereader](#ncc_calc_form.singlefilereader)
   * [NccCalcUI](#ncc_calc_form.NccCalcUI)
     * [\_\_init\_\_](#ncc_calc_form.NccCalcUI.__init__)
+    * [\_\_position\_window\_\_](#ncc_calc_form.NccCalcUI.__position_window__)
     * [formclose](#ncc_calc_form.NccCalcUI.formclose)
     * [columnheader](#ncc_calc_form.NccCalcUI.columnheader)
     * [readncc](#ncc_calc_form.NccCalcUI.readncc)
@@ -151,6 +152,24 @@ This class is a QDialog that implements the user interface for the NCC Calculato
 ```python
 def __init__()
 ```
+
+<a id="ncc_calc_form.NccCalcUI.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="ncc_calc_form.NccCalcUI.formclose"></a>
 

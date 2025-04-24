@@ -7,8 +7,10 @@
   * [UiPlanchet](#new_batch_form.UiPlanchet)
   * [batch](#new_batch_form.batch)
   * [settings](#new_batch_form.settings)
+  * [writesettings](#new_batch_form.writesettings)
   * [UiBatch](#new_batch_form.UiBatch)
     * [\_\_init\_\_](#new_batch_form.UiBatch.__init__)
+    * [\_\_position\_window\_\_](#new_batch_form.UiBatch.__position_window__)
     * [formclose](#new_batch_form.UiBatch.formclose)
     * [openbatcheck](#new_batch_form.UiBatch.openbatcheck)
     * [newbatch](#new_batch_form.UiBatch.newbatch)
@@ -45,6 +47,10 @@ Author: Gary Twinn
 
 ## settings
 
+<a id="new_batch_form.writesettings"></a>
+
+## writesettings
+
 <a id="new_batch_form.UiBatch"></a>
 
 ## UiBatch Objects
@@ -62,6 +68,24 @@ Dialog class to handle the form
 ```python
 def __init__()
 ```
+
+<a id="new_batch_form.UiBatch.__position_window__"></a>
+
+#### \_\_position\_window\_\_
+
+```python
+def __position_window__(x, y)
+```
+
+Moves the current window to the specified coordinates, while ensuring
+it remains within the available virtual screen space. If the specified
+position causes
+the window to go out of bounds, the position is reset
+to an initial value, and settings are updated.
+
+:param x: The x-coordinate to move the window to
+:param y: The y-coordinate to move the window to
+:return: None
 
 <a id="new_batch_form.UiBatch.formclose"></a>
 
