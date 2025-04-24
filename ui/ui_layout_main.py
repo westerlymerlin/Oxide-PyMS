@@ -297,7 +297,7 @@ class Ui_MainWindow(object):
         self.btnHidenStop.setIconSize(QSize(46, 46))
         self.lblLaserPower = QLabel(self.frmHeLine)
         self.lblLaserPower.setObjectName(u"lblLaserPower")
-        self.lblLaserPower.setGeometry(QRect(810, 577, 89, 21))
+        self.lblLaserPower.setGeometry(QRect(829, 577, 89, 21))
         self.lblLaserPower.setStyleSheet(u"font: 12pt \"Segoe UI\";\n"
 "background-color: rgb(255, 255, 255);\n"
 "border-color: rgb(76, 76, 76);")
@@ -624,7 +624,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem3.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
         self.tableResults.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.tableResults.setObjectName(u"tableResults")
-        self.tableResults.setGeometry(QRect(1, 1, 500, 851))
+        self.tableResults.setGeometry(QRect(-50, -10, 500, 851))
         self.tableResults.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-color: rgb(61, 61, 61);\n"
 "alternate-background-color: rgb(225, 245, 255);\n"
