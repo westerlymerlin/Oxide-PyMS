@@ -68,7 +68,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.wValve13.setHidden(True)
         self.wValve14.setHidden(True)
         self.wValve9.setHidden(True)
-        self.move(settings['mainform']['x'], settings['mainform']['y'])
+        self.__position_window__(settings['mainform']['x'], settings['mainform']['y'])
         self.tbValve1.clicked.connect(lambda: valvechange('valve1', self.wValve1.isHidden()))
         self.tbValve2.clicked.connect(lambda: valvechange('valve2', self.wValve2.isHidden()))
         self.tbValve3.clicked.connect(lambda: valvechange('valve3', self.wValve3.isHidden()))
@@ -164,6 +164,33 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.globaltimer.setInterval(1000)
         self.globaltimer.timeout.connect(self.global_timer)
         self.globaltimer.start()
+
+    def __position_window__(self, x, y):
+        """
+        Moves the current window to the specified coordinates, while ensuring
+        it remains within the available virtual screen space. If the specified
+        position causes
+        the window to go out of bounds, the position is reset
+        to an initial value, and settings are updated.
+
+        :param x: The x-coordinate to move the window to
+        :param y: The y-coordinate to move the window to
+        :return: None
+        """
+        minx, miny, maxx, maxy = self.screen().availableVirtualGeometry().getRect()
+        if x + self.width() > maxx:
+            x = 100
+            writesettings()
+        if y + self.height() > maxy:
+            y = 100
+            writesettings()
+        if x < minx:
+            x = 100
+            writesettings()
+        if y < miny:
+            y = 100
+            writesettings()
+        self.move(x, y)
 
     def global_timer(self):
         """

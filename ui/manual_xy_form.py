@@ -10,7 +10,7 @@ import sys
 from PySide6.QtCore import Qt, QTimer, QThreadPool, QRect
 from PySide6.QtWidgets import QApplication, QDialog, QLabel
 from ui.ui_layout_xy_manual_control import Ui_dialogXYSetup
-from app_control import settings
+from app_control import settings, writesettings
 from host_queries import xyread
 from host_commands import xymove, xymoveto
 from cycleclass import currentcycle
@@ -26,7 +26,7 @@ class ManualXyForm(QDialog, Ui_dialogXYSetup):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.move(settings['xymanualform']['x'], settings['xymanualform']['y'])
+        self.__position_window__(settings['xymanualform']['x'], settings['xymanualform']['y'])
         self.webEngineView0.setUrl(settings['hosts']['laserhost'][:-3] + 'VideoFeed0')
         self.square0 = QLabel(self)
         self.square0.setGeometry(QRect(settings['laserviewerform']['square0x'],
@@ -56,6 +56,34 @@ class ManualXyForm(QDialog, Ui_dialogXYSetup):
         self.globaltimer.setInterval(1000)
         self.globaltimer.timeout.connect(self.timer)
         self.globaltimer.start()
+
+    def __position_window__(self, x, y):
+        """
+        Moves the current window to the specified coordinates, while ensuring
+        it remains within the available virtual screen space. If the specified
+        position causes
+        the window to go out of bounds, the position is reset
+        to an initial value, and settings are updated.
+
+        :param x: The x-coordinate to move the window to
+        :param y: The y-coordinate to move the window to
+        :return: None
+        """
+        minx, miny, maxx, maxy = self.screen().availableVirtualGeometry().getRect()
+        if x + self.width() > maxx:
+            x = 100
+            writesettings()
+        if y + self.height() > maxy:
+            y = 100
+            writesettings()
+        if x < minx:
+            x = 100
+            writesettings()
+        if y < miny:
+            y = 100
+            writesettings()
+        self.move(x, y)
+
 
     def formclose(self):
         """Close event"""
