@@ -245,13 +245,9 @@ Usage:
 
 #### GAUGE\_GOOD
 
-Stylesheet for a guage with an acceptable value
-
 <a id="main_form.GAUGE_BAD"></a>
 
 #### GAUGE\_BAD
-
-Stylesheet for a guage with an alarming value
 
 <a id="main_form.UiMain"></a>
 

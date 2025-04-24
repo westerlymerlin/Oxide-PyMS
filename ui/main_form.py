@@ -44,7 +44,6 @@ from ui.laser_viewer_form import LaserViewerUI
 GAUGE_GOOD = 'background-color: rgb(255, 255, 255);  color: rgb(10, 10, 10); font: 14pt "Segoe UI"; image: "";'
 GAUGE_BAD = 'background-color: rgb(180, 0, 0); color: rgb(255, 255, 255); font: 14pt "Segoe UI"; image: "";'
 
-
 class UiMain(QMainWindow, Ui_MainWindow):
     """Qt Class for main window"""
     def __init__(self):
@@ -167,7 +166,15 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.globaltimer.start()
 
     def global_timer(self):
-        """Timer routine for updating displays, runs every second"""
+        """
+        Updates various components and manages periodic tasks in a defined interval.
+
+        The function increments a timer, updates the UI display, and triggers multiple
+        threads to manage tasks such as updating the UI display items, reading sensor
+        data, checking alarms, and handling event timers. Depending on its state, it
+        also handles specific periodic updates like refreshing UI positions, pressures,
+        and repainting the interface.
+        """
         self.secondcount = self.secondcount + self.secondincrement
         self.lcdElapsedTime.display(self.secondcount)
         self.thread_manager.start(self.update_ui_display_items)
@@ -194,13 +201,6 @@ class UiMain(QMainWindow, Ui_MainWindow):
         check_quad_is_online function. Based on the returned status, it updates
         the visibility of the associated image widget and modifies the label
         to reflect the current state.
-
-        :raises AttributeError: If the image widget or label referenced by
-                                 self.imgQMS or self.lblMS are not properly defined.
-        :raises Exception: If the check_quad_is_online function encounters an
-                           unspecified error while determining the status.
-
-        :return: None
         """
         labletext = ms.check_quad_is_online()
         if labletext != 'Off Line':
@@ -427,7 +427,15 @@ class UiMain(QMainWindow, Ui_MainWindow):
             logger.error('t=%s mainUIForm: timedevents type error %s', self.secondcount, Exception())
 
     def event_parser(self):
-        """Reads tasks from the current cycle list and initiates them if the time is correct"""
+        """
+        Handles the parsing and execution of events during a task cycle.
+
+        The method evaluates the current step in the cycle and performs the necessary operations
+        based on the type of command specified. It manages a variety of tasks, including valve
+        operations, laser control, movement of an XY table, timer processes, imaging, and manual
+        instructions. It also handles transitioning between cycles and completing each task in
+        the command list.
+        """
         try:
             self.taskrunning = True
             current = currentcycle.currentstep()
@@ -526,37 +534,72 @@ class UiMain(QMainWindow, Ui_MainWindow):
             logger.error('t=%s mainUIForm: runevents error %s', self.secondcount, Exception)
 
     def menu_show_new_batch(self):
-        """Menu handler new batch"""
+        """
+        Displays a modal dialog for creating or managing a new batch.
+
+        This method initializes a new instance of the UiBatch dialog and sets it as
+        modal. It opens the batch check functionality associated with the dialog and
+        renders the dialog for user interaction.
+        """
         self.newdialog = UiBatch()
         self.newdialog.setModal(True)
         self.newdialog.openbatcheck()
         self.newdialog.show()
 
     def menu_show_about(self):
-        """Menu handler show about form"""
+        """
+        Displays the "About" dialog of the application.
+
+        This method instantiates the `UiAbout` dialog and displays it to
+        present information about the application. It is invoked as part of
+        the UI menu action corresponding to the "About" option.
+        """
         self.newdialog = UiAbout()
         self.newdialog.show()
 
     def menu_show_log_viewer(self):
-        """Menu handler show log viewer"""
+        """
+        Displays the log viewer interface.
+
+        This function initializes a new instance of the `UiLogViewer` class, loads
+        log data using its `loadlog` method, and makes the log viewer visible by
+        calling its `show` method.
+        """
         self.newdialog = UiLogViewer()
         self.newdialog.loadlog()
         self.newdialog.show()
 
     def menu_show_settings_viewer(self):
-        """Menu handler show settings viewer"""
+        """
+        Displays the settings viewer dialog.
+
+        This function initializes and shows the settings viewer dialog. It creates
+        an instance of the UiSettingsViewer class, loads the settings, and displays
+        the dialog to the user.
+        """
         self.newdialog = UiSettingsViewer()
         self.newdialog.loadsettings()
         self.newdialog.show()
 
     def menu_show_xymanual(self):
-        """Menu Handler show xy manual form"""
+        """
+        Display the manual XY form in a modal dialog.
+
+        This method initializes and displays a modal dialog using the ManualXyForm
+        class. Once invoked, the dialog is presented to the user where interaction
+        is restricted to the form itself until it is closed.
+        """
         self.newdialog = ManualXyForm()
         self.newdialog.setModal(True)
         self.newdialog.show()
 
     def menu_show_lasermanual(self):
-        """Menu Handler show lasermanual form"""
+        """
+        Displays the Laser Manual dialog interface.
+
+        This function initializes a new instance of the LaserFormUI class, sets the dialog
+        to modal, and then displays it.
+        """
         self.newdialog = LaserFormUI()
         self.newdialog.setModal(True)
         self.newdialog.show()
@@ -568,7 +611,13 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.laserdialog.show()
 
     def menu_show_ncc(self):
-        """Menu Handler show NCC Form"""
+        """
+        Displays and handles the NCC calculator UI dialog window.
+
+        This method is responsible for creating an instance of the NCC calculator user
+        interface, configuring it as a modal dialog, refreshing its content, and
+        displaying it to the user.
+        """
         self.newdialog = NccCalcUI()
         self.newdialog.setModal(True)
         self.newdialog.refreshlist()
@@ -648,7 +697,10 @@ class UiMain(QMainWindow, Ui_MainWindow):
         # moveythread.start()
 
     def manual_message(self, message):
-        """ Pop up message box"""
+        """
+        Logs and displays a manual popup message indicating a manual step is required during
+        execution. Temporarily pauses the timer during the process.
+        """
         logger.info('Main Form Popup Message sent :%s', message)
         secondinc = self.secondincrement
         self.secondincrement = 0
@@ -684,7 +736,12 @@ def restart_pi(host):
 
 
 def menu_open_web_page(page):
-    """Menu handler - open host web page"""
+    """
+    Opens a webpage or file in a default web browser based on the provided
+    menu option. The function determines the correct URL or file path for
+    each supported menu option and calls the appropriate system utility
+    to open the page or file.
+    """
     if page == 'Valve Status':
         url = settings['hosts']['valvehost'][:-4]
         webbrowser.open(url)
