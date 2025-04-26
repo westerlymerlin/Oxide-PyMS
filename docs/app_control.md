@@ -8,6 +8,7 @@
   * [alarms](#app_control.alarms)
   * [friendlydirname](#app_control.friendlydirname)
   * [setrunning](#app_control.setrunning)
+  * [getrunning](#app_control.getrunning)
   * [writesettings](#app_control.writesettings)
   * [initialise](#app_control.initialise)
   * [readsettings](#app_control.readsettings)
@@ -58,6 +59,16 @@ Removes invalid characters from file names
 
 ```python
 def setrunning(state)
+```
+
+Global signal to detect if app is running - used to kill off threads
+
+<a id="app_control.getrunning"></a>
+
+#### getrunning
+
+```python
+def getrunning()
 ```
 
 Global signal to detect if app is running - used to kill off threads

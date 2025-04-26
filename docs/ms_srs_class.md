@@ -10,6 +10,7 @@
   * [settings](#ms_srs_class.settings)
   * [writesettings](#ms_srs_class.writesettings)
   * [friendlydirname](#ms_srs_class.friendlydirname)
+  * [getrunning](#ms_srs_class.getrunning)
   * [linbestfit](#ms_srs_class.linbestfit)
   * [logger](#ms_srs_class.logger)
   * [MsClass](#ms_srs_class.MsClass)
@@ -92,6 +93,10 @@ Dependencies:
 <a id="ms_srs_class.friendlydirname"></a>
 
 ## friendlydirname
+
+<a id="ms_srs_class.getrunning"></a>
+
+## getrunning
 
 <a id="ms_srs_class.linbestfit"></a>
 

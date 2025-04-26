@@ -13,6 +13,7 @@
   * [Ui\_LaserViewer](#laser_viewer_form.Ui_LaserViewer)
   * [settings](#laser_viewer_form.settings)
   * [writesettings](#laser_viewer_form.writesettings)
+  * [getrunning](#laser_viewer_form.getrunning)
   * [pyroread](#laser_viewer_form.pyroread)
   * [DragSquare](#laser_viewer_form.DragSquare)
     * [mouseMoveEvent](#laser_viewer_form.DragSquare.mouseMoveEvent)
@@ -79,6 +80,10 @@ Author: Gary Twinn
 <a id="laser_viewer_form.writesettings"></a>
 
 ## writesettings
+
+<a id="laser_viewer_form.getrunning"></a>
+
+## getrunning
 
 <a id="laser_viewer_form.pyroread"></a>
 
