@@ -9,7 +9,7 @@ from PySide6.QtWidgets import QDialog, QLabel, QApplication
 from PySide6.QtGui import QDrag
 from PySide6.QtCore import Qt, QMimeData, QRect, QTimer
 from ui.ui_layout_laserviewer import Ui_LaserViewer
-from app_control import settings, writesettings
+from app_control import settings, writesettings, getrunning
 from host_queries import pyroread
 
 
@@ -94,6 +94,10 @@ class LaserViewerUI(QDialog, Ui_LaserViewer):
         self.lbl_temp_avg.setText('%i' % pyrotemps['averagetemp'])
         self.lbl_temp_max.setText('%i' % pyrotemps['maxtemp'])
         self.lbl_temp_avg_max.setText('%i' % pyrotemps['averagemaxtemp'])
+        if getrunning() is False:
+            self.globaltimer.stop()
+            self.lbl_temp.setText('stopped')
+            self.formclose()
 
     def dragEnterEvent(self, e):
         e.accept()

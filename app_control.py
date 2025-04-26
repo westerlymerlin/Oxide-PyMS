@@ -7,7 +7,7 @@ for calculating a file name and removing illegal characters.
 import json
 import datetime
 
-VERSION = '1.2.3'
+VERSION = '1.2.5'
 running = True
 alarms = {'laserhost': 0, 'valvehost': 0, 'xyhost': 0, 'pumphost': 0, 'hidenhost': 0, 'laseralarm': 0}
 
@@ -28,6 +28,10 @@ def setrunning(state):
     global running
     running = state
 
+def getrunning():
+    """Global signal to detect if app is running - used to kill off threads"""
+    global running
+    return running
 
 def writesettings():
     """Write settings to json file"""
@@ -111,6 +115,7 @@ def initialise():
             'y': 100
         },
         'laserviewerform': {
+            'autoopen': False,
             'x': 100,
             'y': 100,
             'square0x': 400,

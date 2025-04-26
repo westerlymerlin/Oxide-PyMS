@@ -19,13 +19,17 @@ Dependencies:
 import sys
 from PySide6.QtWidgets import QApplication
 from logmanager import logger
-from app_control import setrunning, VERSION
+from app_control import settings, setrunning, VERSION
 from ui.main_form import UiMain
+from ui.laser_viewer_form import LaserViewerUI
 
 logger.info('****** Oxide PyMS version %s started ******', VERSION)
 setrunning(True)
 app = QApplication(sys.argv)
 mainform = UiMain()
 mainform.show()
+if settings['laserviewerform']['autoopen']:
+    laserform = LaserViewerUI()
+    laserform.show()
 
 sys.exit(app.exec())
