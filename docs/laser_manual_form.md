@@ -13,6 +13,7 @@
   * [lasergetstatus](#laser_manual_form.lasergetstatus)
   * [lasercommand](#laser_manual_form.lasercommand)
   * [lasersetpower](#laser_manual_form.lasersetpower)
+  * [logger](#laser_manual_form.logger)
   * [LaserFormUI](#laser_manual_form.LaserFormUI)
     * [\_\_init\_\_](#laser_manual_form.LaserFormUI.__init__)
     * [\_\_position\_window\_\_](#laser_manual_form.LaserFormUI.__position_window__)
@@ -21,6 +22,7 @@
     * [enable\_click](#laser_manual_form.LaserFormUI.enable_click)
     * [laser\_click](#laser_manual_form.LaserFormUI.laser_click)
     * [update\_laser](#laser_manual_form.LaserFormUI.update_laser)
+    * [\_\_save\_pyro\_calibration](#laser_manual_form.LaserFormUI.__save_pyro_calibration)
 
 <a id="laser_manual_form"></a>
 
@@ -76,6 +78,10 @@ Author: Gary Twinn
 <a id="laser_manual_form.lasersetpower"></a>
 
 ## lasersetpower
+
+<a id="laser_manual_form.logger"></a>
+
+## logger
 
 <a id="laser_manual_form.LaserFormUI"></a>
 
@@ -162,4 +168,17 @@ def update_laser()
 ```
 
 Update laser status and laser power
+
+<a id="laser_manual_form.LaserFormUI.__save_pyro_calibration"></a>
+
+#### \_\_save\_pyro\_calibration
+
+```python
+def __save_pyro_calibration()
+```
+
+Saves the pyrometer calibration settings comprising slope and intercept from
+the UI input fields to the application configuration. If the input values
+are invalid (not convertible to float), defaults to the previously saved
+settings and logs an error.
 
