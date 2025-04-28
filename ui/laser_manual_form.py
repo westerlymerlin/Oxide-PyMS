@@ -10,6 +10,7 @@ from ui.ui_layout_laser import Ui_dialogLaserControl
 from app_control import settings, writesettings
 from host_queries import lasergetstatus
 from host_commands import lasercommand, lasersetpower
+from logmanager import logger
 
 
 class LaserFormUI(QDialog, Ui_dialogLaserControl):
@@ -22,9 +23,12 @@ class LaserFormUI(QDialog, Ui_dialogLaserControl):
         self.sliderLaser.setValue(self.laserpower * 10)
         self.imgLaser.setVisible(False)
         self.btnClose.clicked.connect(self.formclose)
+        self.btnSave.clicked.connect(self.__save_pyro_calibration)
         self.sliderEnable.valueChanged.connect(self.enable_click)
         self.btnOn.clicked.connect(self.laser_click)
         self.sliderLaser.valueChanged.connect(self.slidermove)
+        self.txtPyroSlope.setText('%s' % settings['pyrometer']['slope'])
+        self.txtPyroIntercept.setText('%s' % settings['pyrometer']['intercept'])
         self.btnOn.setEnabled(False)
         self.thread_manager = QThreadPool()
         self.state = {'laser': 0, 'power': 0, 'status': 0}
@@ -108,6 +112,23 @@ class LaserFormUI(QDialog, Ui_dialogLaserControl):
             self.imgLaser.setVisible(True)
         else:
             self.imgLaser.setVisible(False)
+
+    def __save_pyro_calibration(self):
+        """
+        Saves the pyrometer calibration settings comprising slope and intercept from
+        the UI input fields to the application configuration. If the input values
+        are invalid (not convertible to float), defaults to the previously saved
+        settings and logs an error.
+        """
+        try:
+            settings['pyrometer']['slope'] = float(self.txtPyroSlope.text())
+            settings['pyrometer']['intercept'] = float(self.txtPyroIntercept.text())
+            writesettings()
+            logger.info('Pyrometer calibration saved')
+        except ValueError:
+            logger.error('Invalid pyrometer calibration values')
+            self.txtPyroSlope.setText('%s' % settings['pyrometer']['slope'])
+            self.txtPyroIntercept.setText('%s' % settings['pyrometer']['intercept'])
 
 
 

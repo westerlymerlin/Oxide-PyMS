@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>242</width>
-    <height>234</height>
+    <width>240</width>
+    <height>407</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -24,15 +24,15 @@
     <normaloff>:/main/iconPyMSRun.svg</normaloff>:/main/iconPyMSRun.svg</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">font: 10pt &quot;Segoe UI&quot;;</string>
+   <string notr="true">font: 11pt &quot;Segoe UI&quot;;</string>
   </property>
   <widget class="QLabel" name="imgLaser">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>10</y>
-     <width>133</width>
-     <height>133</height>
+     <x>11</x>
+     <y>50</y>
+     <width>100</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -48,11 +48,14 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>160</y>
-     <width>81</width>
+     <x>20</x>
+     <y>200</y>
+     <width>91</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>Laser Power</string>
@@ -65,17 +68,13 @@
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>200</y>
+     <y>370</y>
      <width>63</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="main.qrc">
-     <normaloff>:/laser/laserform_close.png</normaloff>:/laser/laserform_close.png</iconset>
+    <string>Close</string>
    </property>
    <property name="iconSize">
     <size>
@@ -87,8 +86,8 @@
   <widget class="QToolButton" name="btnOn">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>200</y>
+     <x>170</x>
+     <y>240</y>
      <width>63</width>
      <height>31</height>
     </rect>
@@ -123,10 +122,10 @@
   <widget class="QSlider" name="sliderEnable">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>53</y>
+     <x>140</x>
+     <y>110</y>
      <width>22</width>
-     <height>41</height>
+     <height>71</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -157,9 +156,9 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>185</x>
-     <y>50</y>
-     <width>49</width>
+     <x>170</x>
+     <y>110</y>
+     <width>61</width>
      <height>16</height>
     </rect>
    </property>
@@ -170,9 +169,9 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>185</x>
-     <y>80</y>
-     <width>49</width>
+     <x>170</x>
+     <y>160</y>
+     <width>61</width>
      <height>16</height>
     </rect>
    </property>
@@ -183,10 +182,10 @@
   <widget class="QLabel" name="lblStatus">
    <property name="geometry">
     <rect>
-     <x>128</x>
-     <y>10</y>
+     <x>140</x>
+     <y>30</y>
      <width>101</width>
-     <height>20</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -215,14 +214,14 @@
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>150</y>
+     <y>190</y>
      <width>101</width>
      <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 700 12pt &quot;Segoe UI&quot;;
-border-color: rgb(0, 0, 0);</string>
+    <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="frame">
     <bool>true</bool>
@@ -234,6 +233,136 @@ border-color: rgb(0, 0, 0);</string>
     <number>1</number>
    </property>
   </widget>
+  <widget class="QLineEdit" name="txtPyroIntercept">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>313</y>
+     <width>113</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>0.0</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtPyroSlope">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>340</y>
+     <width>113</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255)</string>
+   </property>
+   <property name="text">
+    <string>0.0</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>273</y>
+     <width>230</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Orientation::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>310</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Intercept</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>340</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Slope</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Laser Control</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>280</y>
+     <width>211</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pyrometer Calibration</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="btnSave">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>370</y>
+     <width>63</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>61</width>
+     <height>31</height>
+    </size>
+   </property>
+  </widget>
   <zorder>label</zorder>
   <zorder>btnClose</zorder>
   <zorder>btnOn</zorder>
@@ -243,6 +372,14 @@ border-color: rgb(0, 0, 0);</string>
   <zorder>imgLaser</zorder>
   <zorder>lblStatus</zorder>
   <zorder>sliderLaser</zorder>
+  <zorder>txtPyroIntercept</zorder>
+  <zorder>txtPyroSlope</zorder>
+  <zorder>line</zorder>
+  <zorder>label_4</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_6</zorder>
+  <zorder>label_7</zorder>
+  <zorder>btnSave</zorder>
  </widget>
  <resources>
   <include location="main.qrc"/>

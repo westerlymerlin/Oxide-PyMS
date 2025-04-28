@@ -34,6 +34,12 @@ def pyroread():
         resp = requests.post(settings['hosts']['laserhost'], headers=headers, json=message,
                              timeout=settings['hosts']['timeoutseconds'])
         json_message = resp.json()
+        slope = settings['pyrometer']['slope']
+        intercept = settings['pyrometer']['intercept']
+        json_message['temperature'] = int(json_message['temperature'] * slope + intercept)
+        json_message['averagetemp'] = int(json_message['averagetemp'] * slope + intercept)
+        json_message['maxtemp'] = int(json_message['maxtemp'] * slope + intercept)
+        json_message['averagemaxtemp'] = int(json_message['averagemaxtemp'] * slope + intercept)
         return json_message
     except requests.Timeout:
         logger.debug('host_queries: Laser Get Pyrometer Timeout Error')
