@@ -297,7 +297,7 @@ class Ui_MainWindow(object):
         self.btnHidenStop.setIconSize(QSize(46, 46))
         self.lblLaserPower = QLabel(self.frmHeLine)
         self.lblLaserPower.setObjectName(u"lblLaserPower")
-        self.lblLaserPower.setGeometry(QRect(829, 676, 89, 21))
+        self.lblLaserPower.setGeometry(QRect(733, 676, 89, 21))
         self.lblLaserPower.setStyleSheet(u"font: 12pt \"Segoe UI\";\n"
 "background-color: rgb(255, 255, 255);\n"
 "border-color: rgb(76, 76, 76);")
