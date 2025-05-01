@@ -624,7 +624,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem3.setTextAlignment(Qt.AlignLeading|Qt.AlignVCenter);
         self.tableResults.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.tableResults.setObjectName(u"tableResults")
-        self.tableResults.setGeometry(QRect(-50, -10, 500, 851))
+        self.tableResults.setGeometry(QRect(1, 1, 500, 851))
         self.tableResults.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-color: rgb(61, 61, 61);\n"
 "alternate-background-color: rgb(225, 245, 255);\n"

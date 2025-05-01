@@ -1548,8 +1548,8 @@ image: &quot;&quot;;</string>
     <widget class="QTableWidget" name="tableResults">
      <property name="geometry">
       <rect>
-       <x>-50</x>
-       <y>-10</y>
+       <x>1</x>
+       <y>1</y>
        <width>500</width>
        <height>851</height>
       </rect>
