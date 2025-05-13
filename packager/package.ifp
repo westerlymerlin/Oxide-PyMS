@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = PyMS
-Program version = 1.1.4
+Program version = 1.2.7
 Windows XP = 0
 Windows Server 2003 = 0
 Windows Vista = 0
@@ -89,15 +89,15 @@ exe
 C:\Users\garyt\DEVELOPER\UCL-Oxide\UCL-Oxide-PyMS\packager\dist\PyMS\testgen.exe
 10.2 MB
 exe
-C:\Users\garyt\DEVELOPER\UCL-Oxide\UCL-Oxide-PyMS\readme.pdf
-5.9 MB
-pdf
 C:\Users\garyt\DEVELOPER\UCL-Oxide\UCL-Oxide-PyMS\LICENSE
 31.7 KB
 
 C:\Users\garyt\DEVELOPER\UCL-Oxide\UCL-Oxide-PyMS\packager\dist\PyMS\PyMSLV.exe
 1.6 MB
 exe
+C:\Users\garyt\DEVELOPER\UCL-Oxide\UCL-Oxide-PyMS\manual.pdf
+5.7 MB
+pdf
 [Licence_Begin]
 33602
 {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang2057{\fonttbl{\f0\fnil Arial;}}
