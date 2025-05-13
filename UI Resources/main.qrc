@@ -38,6 +38,8 @@
     <file>arrorw up.png</file>
   </qresource>
   <qresource prefix="valves">
+    <file>m-valvegreen-h.svg</file>
+    <file>m-valvegreen-v.svg</file>
     <file>valve green horizontal.svg</file>
     <file>valve green vertical.svg</file>
   </qresource>

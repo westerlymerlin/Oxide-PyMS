@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.27 19.03">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #95c11f;
+        stroke: #4c81b2;
+        stroke-miterlimit: 2;
+        stroke-width: 1.25px;
+      }
+    </style>
+  </defs>
+  <g id="Valve">
+    <polygon class="cls-1" points=".63 18.02 .63 1.01 34.64 18.02 34.64 1.01 .63 18.02"/>
+  </g>
+</svg>

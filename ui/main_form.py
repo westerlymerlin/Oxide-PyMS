@@ -22,9 +22,11 @@ from tkinter import messagebox
 from PySide6.QtWidgets import QMainWindow, QTableWidgetItem
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt, QTimer, QThreadPool
+from pywin.dialogs import status
+
 from app_control import settings, writesettings, setrunning, alarms, VERSION
 from host_queries import valvegetstatus, lasergetstatus, pressuresread, xyread
-from host_commands import lasercommand, lasersetpower, valvechange, xymoveto, xymove, rpi_reboot
+from host_commands import lasercommand, lasersetpower, valvechange, xymoveto, xymove
 from batchclass import batch
 from cycleclass import currentcycle
 from ms_srs_class import ms
@@ -68,6 +70,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.wValve13.setHidden(True)
         self.wValve14.setHidden(True)
         self.wValve9.setHidden(True)
+        self.setmanaulvalves()
         self.__position_window__(settings['mainform']['x'], settings['mainform']['y'])
         self.tbValve1.clicked.connect(lambda: valvechange('valve1', self.wValve1.isHidden()))
         self.tbValve2.clicked.connect(lambda: valvechange('valve2', self.wValve2.isHidden()))
@@ -90,16 +93,19 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.actionManualControl.triggered.connect(self.menu_show_xymanual)
         self.actionXYOpenStatusPage.triggered.connect(lambda: menu_open_web_page('XY Status'))
         self.actionXYOpenLogPage.triggered.connect(lambda: menu_open_web_page('XY Log'))
-        self.actionReboot_XY.triggered.connect(lambda: restart_pi('xyhost'))
         self.actionValveOpenStatusPage.triggered.connect(lambda: menu_open_web_page('Valve Status'))
         self.actionValveOpenLogPage.triggered.connect(lambda: menu_open_web_page('Valve Log'))
-        self.actionReboot_Valve.triggered.connect(lambda: restart_pi('valvehost'))
+        self.actionValve_A.triggered.connect(lambda: self.setmanaulvalves('valvea'))
+        self.actionValve_B.triggered.connect(lambda: self.setmanaulvalves('valveb'))
+        self.actionValve_C.triggered.connect(lambda: self.setmanaulvalves('valvec'))
+        self.actionValve_D.triggered.connect(lambda: self.setmanaulvalves('valved'))
+        self.actionValve_E.triggered.connect(lambda: self.setmanaulvalves('valvee'))
+        self.actionValve_F.triggered.connect(lambda: self.setmanaulvalves('valvef'))
+        self.actionValve_G.triggered.connect(lambda: self.setmanaulvalves('valveg'))
         self.actionPumpOpenStatusPage.triggered.connect(lambda: menu_open_web_page('Pump Status'))
         self.actionPumpOpenLogPage.triggered.connect(lambda: menu_open_web_page('Pump Log'))
-        self.actionReboot_Pump.triggered.connect(lambda: restart_pi('pumphost'))
         self.actionLaserOpenStatusPage.triggered.connect(lambda: menu_open_web_page('Laser Status'))
         self.actionLaserOpenLogPage.triggered.connect(lambda: menu_open_web_page('Laser Log'))
-        self.actionReboot_Laser.triggered.connect(lambda: restart_pi('laserhost'))
         self.actionLaserViewerForm.triggered.connect(self.menu_show_laserviewer)
         self.actionManualLaserForm.triggered.connect(self.menu_show_lasermanual)
         self.actionAboutPyMS.triggered.connect(self.menu_show_about)
@@ -164,6 +170,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.globaltimer.setInterval(1000)
         self.globaltimer.timeout.connect(self.global_timer)
         self.globaltimer.start()
+
 
     def __position_window__(self, x, y):
         """
@@ -238,42 +245,42 @@ class UiMain(QMainWindow, Ui_MainWindow):
 
     def check_alarms(self):
         """Test for alarms"""
-        status = ''
+        alarm_status = ''
         if ms.timeoutcounter > ms.timeoutretries:
             if ms.check_quad_is_online() == 'Off Line':
-                status = status + 'The SRS Quad is showing as offline. \n'
+                alarm_status = alarm_status + 'The SRS Quad is showing as offline. \n'
                 self.secondincrement = 0
                 self.run = 0
                 self.tbRun.setChecked(False)
         if alarms['laseralarm'] != 0:
-            status = status + ('The laser is not ready, please ensure that the controller laser is powered on, '
+            alarm_status = alarm_status + ('The laser is not ready, please ensure that the controller laser is powered on, '
                               'the key is in the on position and the door is closed. \n')
             lasergetstatus()
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
         if alarms['valvehost'] > 10:
-            status = status + 'Valve controller is offline, the system is paused. \n'
+            alarm_status = alarm_status + 'Valve controller is offline, the system is paused. \n'
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
         if alarms['xyhost'] > 10:
-            status = status + 'X-Y controller is offline, the system is paused. \n'
+            alarm_status = alarm_status + 'X-Y controller is offline, the system is paused. \n'
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
         if alarms['pumphost'] > 10:
-            status = status + 'Pump reader is offline, the system is paused. \n'
+            alarm_status = alarm_status + 'Pump reader is offline, the system is paused. \n'
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
         if alarms['laserhost'] > 10:
-            status = status + 'Laser controller is offline, the system is paused. \n'
+            alarm_status = alarm_status + 'Laser controller is offline, the system is paused. \n'
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
         if settings['vacuum']['ion']['current'] == 0:
-            status = status + 'Ion pump is offline, the system is paused. \n'
+            alarm_status = alarm_status + 'Ion pump is offline, the system is paused. \n'
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
@@ -281,7 +288,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.ionpumphigh += 1
             self.lineIonPump.setStyleSheet(GAUGE_BAD)
             if self.ionpumphigh > 29:
-                status = status + 'Ion pump is showing loss of vacuum, the system is paused. \n'
+                alarm_status = alarm_status + 'Ion pump is showing loss of vacuum, the system is paused. \n'
                 self.secondincrement = 0
                 self.run = 0
                 self.tbRun.setChecked(False)
@@ -292,7 +299,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.turbopumphigh += 1
             self.lineTurboPump.setStyleSheet(GAUGE_BAD)
             if self.turbopumphigh > 29:
-                status = status + 'Turbo gauge is showing loss of vacuum, the system is paused. \n' \
+                alarm_status = alarm_status + 'Turbo gauge is showing loss of vacuum, the system is paused. \n' \
                                   'This is norrmal during a planchet load \n'
                 self.secondincrement = 0
                 self.run = 0
@@ -301,69 +308,69 @@ class UiMain(QMainWindow, Ui_MainWindow):
             self.turbopumphigh = 0
             self.lineTurboPump.setStyleSheet(GAUGE_GOOD)
         if settings['vacuum']['turbo']['current'] == 0:
-            status = status + 'Turbo gauge is offline, the system is paused. \n'
+            alarm_status = alarm_status + 'Turbo gauge is offline, the system is paused. \n'
             self.secondincrement = 0
             self.run = 0
             self.tbRun.setChecked(False)
-        if self.lblAalarm.text() != status:
-            self.lblAalarm.setText(status)
+        if self.lblAalarm.text() != alarm_status:
+            self.lblAalarm.setText(alarm_status)
             self.lblFinishTime.setText('')
-            if status != '':
-                alert(status)
-                logger.error('Main form major alarm: %s', status)
+            if alarm_status != '':
+                alert(alarm_status)
+                logger.error('Main form major alarm: %s', alarm_status)
 
     def update_ui_display_items(self):
         """Update the valve and laser widgets on the display"""
-        status = valvegetstatus()
-        if status[0] == 0:
-            if self.wValve1.isVisible() != status[1]:
+        valve_status = valvegetstatus()
+        if valve_status[0] == 0:
+            if self.wValve1.isVisible() != valve_status[1]:
                 logger.debug('t=%s mainUIForm: Valve 1 changed', self.secondcount)
-                self.wValve1.setVisible(status[1])
-            if self.wValve2.isVisible() != status[2]:
+                self.wValve1.setVisible(valve_status[1])
+            if self.wValve2.isVisible() != valve_status[2]:
                 logger.debug('t=%s mainUIForm: Valve 2 changed', self.secondcount)
-                self.wValve2.setVisible(status[2])
-            if self.wValve3.isVisible() != status[3]:
+                self.wValve2.setVisible(valve_status[2])
+            if self.wValve3.isVisible() != valve_status[3]:
                 logger.debug('t=%s mainUIForm: Valve 3 changed', self.secondcount)
-                self.wValve3.setVisible(status[3])
-            if self.wValve4.isVisible() != status[4]:
+                self.wValve3.setVisible(valve_status[3])
+            if self.wValve4.isVisible() != valve_status[4]:
                 logger.debug('t=%s mainUIForm: Valve 4 changed', self.secondcount)
-                self.wValve4.setVisible(status[4])
-            if self.wValve5.isVisible() != status[5]:
+                self.wValve4.setVisible(valve_status[4])
+            if self.wValve5.isVisible() != valve_status[5]:
                 logger.debug('t=%s mainUIForm: Valve 5 changed', self.secondcount)
-                self.wValve5.setVisible(status[5])
-            if self.wValve6.isVisible() != status[6]:
+                self.wValve5.setVisible(valve_status[5])
+            if self.wValve6.isVisible() != valve_status[6]:
                 logger.debug('t=%s mainUIForm: Valve 6 changed', self.secondcount)
-                self.wValve6.setVisible(status[6])
-            if self.wValve7.isVisible() != status[7]:
+                self.wValve6.setVisible(valve_status[6])
+            if self.wValve7.isVisible() != valve_status[7]:
                 logger.debug('t=%s mainUIForm: Valve 7 changed', self.secondcount)
-                self.wValve7.setVisible(status[7])
-            if self.wValve8.isVisible() != status[8]:
+                self.wValve7.setVisible(valve_status[7])
+            if self.wValve8.isVisible() != valve_status[8]:
                 logger.debug('t=%s mainUIForm: Valve 8 changed', self.secondcount)
-                self.wValve8.setVisible(status[8])
-            if self.wValve9.isVisible() != status[9]:
+                self.wValve8.setVisible(valve_status[8])
+            if self.wValve9.isVisible() != valve_status[9]:
                 logger.debug('t=%s mainUIForm: Valve 9 changed', self.secondcount)
-                self.wValve9.setVisible(status[9])
-            if self.wValve10.isVisible() != status[10]:
+                self.wValve9.setVisible(valve_status[9])
+            if self.wValve10.isVisible() != valve_status[10]:
                 logger.debug('t=%s mainUIForm: Valve 10 changed', self.secondcount)
-                self.wValve10.setVisible(status[10])
-            if self.wValve11.isVisible() != status[11]:
+                self.wValve10.setVisible(valve_status[10])
+            if self.wValve11.isVisible() != valve_status[11]:
                 logger.debug('t=%s mainUIForm: Valve 11 changed', self.secondcount)
-                self.wValve11.setVisible(status[11])
-            if self.wValve12.isVisible() != status[12]:
+                self.wValve11.setVisible(valve_status[11])
+            if self.wValve12.isVisible() != valve_status[12]:
                 logger.debug('t=%s mainUIForm: Valve 12 changed', self.secondcount)
-                self.wValve12.setVisible(status[12])
-            if self.wValve13.isVisible() != status[13]:
+                self.wValve12.setVisible(valve_status[12])
+            if self.wValve13.isVisible() != valve_status[13]:
                 logger.debug('t=%s mainUIForm: Valve 13 changed', self.secondcount)
-                self.wValve13.setVisible(status[13])
-            if self.wValve14.isVisible() != status[14]:
+                self.wValve13.setVisible(valve_status[13])
+            if self.wValve14.isVisible() != valve_status[14]:
                 logger.debug('t=%s mainUIForm: Valve 14 changed', self.secondcount)
-                self.wValve14.setVisible(status[14])
+                self.wValve14.setVisible(valve_status[14])
         self.lblLaserPower.setText('%.1f' % settings['laser']['power'])
-        status = lasergetstatus()
-        if status['laser'] != 'exception':
-            if self.imgLaser.isVisible() != status['laser']:
+        valve_status = lasergetstatus()
+        if valve_status['laser'] != 'exception':
+            if self.imgLaser.isVisible() != valve_status['laser']:
                 logger.debug('t=%s mainUIForm: Laser Status changed', self.secondcount)
-                self.imgLaser.setVisible(status['laser'])
+                self.imgLaser.setVisible(valve_status['laser'])
 
     def emergency_stop(self):
         """
@@ -409,11 +416,9 @@ class UiMain(QMainWindow, Ui_MainWindow):
             if self.run > 0:
                 self.frmHeLine.setEnabled(False)
                 self.lblStatus.setText('Status: Automated Control Enabled')
-                self.actionCO2LaserOn.setEnabled(False)
                 self.secondincrement = 1
             else:
                 self.frmHeLine.setEnabled(True)
-                self.actionCO2LaserOn.setEnabled(True)
                 self.lblFinishTime.setText('')
                 self.lblStatus.setText('Status: Manual Control')
                 self.secondincrement = 0
@@ -737,6 +742,22 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.lblFinishTime.setText(batch.finishtime())
         logger.info('Main Form Popup Message clicked: %s', message)
 
+    def setmanaulvalves(self, changed = ''):
+        """
+        Configures the visibility of the valves in the user interface based on the
+        settings defined for each valve. Each valve's visibility is toggled through
+        its corresponding property in the settings dictionary.
+        """
+        if changed != '':
+            settings['valves'][changed] = not settings['valves'][changed]
+            writesettings()
+        self.wValveA.setVisible(settings['valves']['valvea'])
+        self.wValveB.setVisible(settings['valves']['valveb'])
+        self.wValveC.setVisible(settings['valves']['valvec'])
+        self.wValveD.setVisible(settings['valves']['valved'])
+        self.wValveE.setVisible(settings['valves']['valvee'])
+        self.wValveF.setVisible(settings['valves']['valvef'])
+        self.wValveG.setVisible(settings['valves']['valveg'])
 
 def move_x():
     """Move the x axis to the next planchet location"""
@@ -748,18 +769,6 @@ def move_y():
     """Move the Y axis to the next planchet location"""
     location = batch.locxy(batch.nextlocation())
     xymoveto('y', location[1])
-
-
-def restart_pi(host):
-    """Reboot a raspberry pi"""
-    logger.info('Reboot requested for %s', host)
-    msg_box = messagebox.askyesno('Restart the Raspberry Pi',
-                                  'Are you really sure you want to reboot the %s?' % host, type=messagebox.YESNO)
-    if msg_box:
-        logger.warning('Restart confirmed for %s', host)
-        rpi_reboot(host)
-    else:
-        logger.info('Restart cancelled for %s', host)
 
 
 def menu_open_web_page(page):
@@ -796,3 +805,4 @@ def menu_open_web_page(page):
     elif page == 'Help File':
         url = 'readme.pdf'
         webbrowser.open(url)
+

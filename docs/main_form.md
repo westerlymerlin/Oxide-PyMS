@@ -9,6 +9,7 @@
   * [Qt](#main_form.Qt)
   * [QTimer](#main_form.QTimer)
   * [QThreadPool](#main_form.QThreadPool)
+  * [status](#main_form.status)
   * [settings](#main_form.settings)
   * [writesettings](#main_form.writesettings)
   * [setrunning](#main_form.setrunning)
@@ -23,7 +24,6 @@
   * [valvechange](#main_form.valvechange)
   * [xymoveto](#main_form.xymoveto)
   * [xymove](#main_form.xymove)
-  * [rpi\_reboot](#main_form.rpi_reboot)
   * [batch](#main_form.batch)
   * [currentcycle](#main_form.currentcycle)
   * [ms](#main_form.ms)
@@ -68,9 +68,9 @@
     * [update\_ui\_results\_table](#main_form.UiMain.update_ui_results_table)
     * [move\_next](#main_form.UiMain.move_next)
     * [manual\_message](#main_form.UiMain.manual_message)
+    * [setmanaulvalves](#main_form.UiMain.setmanaulvalves)
   * [move\_x](#main_form.move_x)
   * [move\_y](#main_form.move_y)
-  * [restart\_pi](#main_form.restart_pi)
   * [menu\_open\_web\_page](#main_form.menu_open_web_page)
 
 <a id="main_form"></a>
@@ -125,6 +125,10 @@ Usage:
 <a id="main_form.QThreadPool"></a>
 
 ## QThreadPool
+
+<a id="main_form.status"></a>
+
+## status
 
 <a id="main_form.settings"></a>
 
@@ -181,10 +185,6 @@ Usage:
 <a id="main_form.xymove"></a>
 
 ## xymove
-
-<a id="main_form.rpi_reboot"></a>
-
-## rpi\_reboot
 
 <a id="main_form.batch"></a>
 
@@ -593,6 +593,18 @@ def manual_message(message)
 Logs and displays a manual popup message indicating a manual step is required during
 execution. Temporarily pauses the timer during the process.
 
+<a id="main_form.UiMain.setmanaulvalves"></a>
+
+#### setmanaulvalves
+
+```python
+def setmanaulvalves(changed='')
+```
+
+Configures the visibility of the valves in the user interface based on the
+settings defined for each valve. Each valve's visibility is toggled through
+its corresponding property in the settings dictionary.
+
 <a id="main_form.move_x"></a>
 
 #### move\_x
@@ -612,16 +624,6 @@ def move_y()
 ```
 
 Move the Y axis to the next planchet location
-
-<a id="main_form.restart_pi"></a>
-
-#### restart\_pi
-
-```python
-def restart_pi(host)
-```
-
-Reboot a raspberry pi
 
 <a id="main_form.menu_open_web_page"></a>
 
