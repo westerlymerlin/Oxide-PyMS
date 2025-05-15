@@ -41,8 +41,8 @@ jobs:
           git commit --message "DocUCode Automated documentation from code"
           git push origin DocuCode
         }
-        env:
-          GH_TOKEN: ${{ secrets.ACTIONSECRET }}
+      env:
+        GH_TOKEN: ${{ secrets.ACTIONSECRET }}
     - name: Create PR Release to main
       run: gh pr create --title "Auto PR from github action" --body "Static code analysis (pylint > 9/10) has completed"
       env:
