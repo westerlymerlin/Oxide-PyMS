@@ -14,9 +14,9 @@ jobs:
       matrix:
         python-version: ["3.10"]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
@@ -36,11 +36,9 @@ jobs:
         git config user.email "DocUCode@westerlymerlin.internal"
         git config user.name "DocUCode"
         git add ./docs/*.md
-        if git diff --cached --name-only | grep --quiet md
-        then
+        if [git diff --cached --name-only | grep --quiet md]; then
           git commit --message "DocUCode Automated documentation from code"
-          git push --force origin master
-          exit 0
+          git push origin DocuCode
         fi
         env:
           GH_TOKEN: ${{ secrets.ACTIONSECRET }}
