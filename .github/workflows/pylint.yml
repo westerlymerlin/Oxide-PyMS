@@ -5,6 +5,7 @@ on:
     branches:
       - '**'
       - '!master'
+      - '!DocuCode'
 
 jobs:
   build:
@@ -23,9 +24,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
         pip install -r requirements.txt
+        python -m pip install pydoc_markdown
     - name: Analysing the code with pylint (pass score = 9/10)
       run: |
         pylint $(git ls-files '*.py')
+    - name: Run Documentation as code
+      run:
+        python -m packager.document_from_code
+    - name: Commit changes to the current branch
+      run: |
+        git config user.email "DocUCode@westerlymerlin.internal"
+        git config user.name "DocUCode"
+        git add ./docs/*.md
+        if (git diff --cached --name-only | grep --quiet md)
+        then
+          git commit --message "DocUCode Automated documentation from code"
+          git push origin DocuCode
+        else
+          echo "No docs have been updated, skipping commits"
+        fi
+        env:
+          GH_TOKEN: ${{ secrets.ACTIONSECRET }}
     - name: Create PR Release to main
       run: gh pr create --title "Auto PR from github action" --body "Static code analysis (pylint > 9/10) has completed"
       env:
