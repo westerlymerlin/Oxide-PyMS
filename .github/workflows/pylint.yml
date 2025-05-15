@@ -36,12 +36,10 @@ jobs:
         git config user.email "DocUCode@westerlymerlin.internal"
         git config user.name "DocUCode"
         git add ./docs/*.md
-        if (git diff --cached --name-only | grep --quiet md)
+        if git diff --cached --name-only | grep --quiet md
         then
           git commit --message "DocUCode Automated documentation from code"
           git push origin DocuCode
-        else
-          echo "No docs have been updated, skipping commits"
         fi
         env:
           GH_TOKEN: ${{ secrets.ACTIONSECRET }}
