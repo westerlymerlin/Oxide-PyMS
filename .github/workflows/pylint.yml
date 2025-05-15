@@ -1,4 +1,4 @@
-name: Code checks and create a pr to merge to the master branch - for Windows runner
+name: Code checks and create a pr to merge to the master branch - for Windows runner powershell script
 
 on:
   push:
@@ -36,9 +36,11 @@ jobs:
         git config user.email "DocUCode@westerlymerlin.internal"
         git config user.name "DocUCode"
         git add ./docs/*.md
-        if git diff --cached --name-only -S md (
+        if (git diff --name-only | Select-String -Pattern 'docs' -AllMatches)
+        {
           git commit --message "DocUCode Automated documentation from code"
-          git push origin DocuCode)
+          git push origin DocuCode
+        }
         env:
           GH_TOKEN: ${{ secrets.ACTIONSECRET }}
     - name: Create PR Release to main
