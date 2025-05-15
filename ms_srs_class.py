@@ -1,19 +1,44 @@
-"""Class to read data from a Stanford SRS RGA 100 mass spectrometer and calculate the best-fit value for t=0"""
-import socket
+"""
+MS SRS Class - Interface for Stanford SRS RGA 100 Mass Spectrometer
+
+This module provides a class-based interface for controlling and gathering data
+from a Stanford SRS RGA 100 mass spectrometer. It handles communication with the
+spectrometer, data collection, processing, and storage to both files and SQLite database.
+
+The module uses the srsinst.rga package to communicate with the spectrometer hardware
+and provides functionality to:
+- Connect to and control the RGA100 mass spectrometer
+- Run multiple ion detection (MID) and profile scans
+- Collect and process time-series mass spectral data
+- Calculate best-fit values for t=0 measurements
+- Store data in both raw file format and SQLite database
+- Track experiment IDs, sample identifiers, and batch information
+
+Key Classes:
+- MsClass: Main class implementing all RGA100 spectrometer functionality
+
+Dependencies:
+- srsinst.rga: Stanford Research Systems instrument interface
+- ncc_calc: Contains mathematical utilities like linbestfit
+- app_control: Application settings and utilities
+- logmanager: Logging functionality
+"""
+
 from datetime import datetime
 import os
 import threading
-import time
 import sqlite3
+
+import srsgui.inst.exceptions
 from srsinst.rga import RGA100
-from app_control import settings, writesettings, friendlydirname
+from app_control import settings, writesettings, friendlydirname, getrunning
 from ncc_calc import linbestfit
 from logmanager import logger
 
 
 class MsClass:
     """
-    Class representing a Hiden Mass Spectrometer.
+    Class representing a Stanford SRS RGA 100 Mass Spectrometer.
 
     Attributes:
     - __resultstabasepath: str - the path to the results database
@@ -61,11 +86,11 @@ class MsClass:
         self.midfile = settings['MassSpec']['hidenMID']
         self.profilefile = settings['MassSpec']['hidenProfile']
         self.runfile = settings['MassSpec']['hidenRunfile']
-        self.host = settings['MassSpec']['hidenhost']
-        self.port = settings['MassSpec']['hidenport']
         self.multiplier = 1 / settings['MassSpec']['multiplier']
         self.timeoutretries = settings['MassSpec']['timeoutretries']
         self.timeoutseconds = settings['MassSpec']['timeoutseconds']
+        self.rga = RGA100()
+        self.rga_id = 'Off Line'
         self.resetclass()
         self.time = []
         self.m1 = []
@@ -87,6 +112,10 @@ class MsClass:
         self.processing = 0
         self.running = False
         self.timeoutcounter = 0
+        if settings['MassSpec']['SRS-password'] != 'change-me':
+            timerthread = threading.Timer(0.1, self.connect_to_rga)
+            timerthread.start()
+
 
     def command_parser(self, command):
         """Command processor for any cycle command with 'quad' as its target"""
@@ -127,7 +156,7 @@ class MsClass:
 
     def starttimer(self, batchtype, identifier, batchdescription, batchid, batchitemid):
         """Start timer - used as t=0 when calculating best-fits"""
-        logger.debug('msHiden: start timer %s, %s, %s, %s, %s,', batchtype, identifier, batchdescription,
+        logger.debug('ms_srs: start timer %s, %s, %s, %s, %s,', batchtype, identifier, batchdescription,
                      batchid, batchitemid)
         self.daterun = datetime.now()
         self.id = self.next_id()
@@ -137,152 +166,73 @@ class MsClass:
         self.batchid = batchid
         self.batchitemid = batchitemid
 
+    def connect_to_rga(self):
+        """Connect to the SRS RGA using the settings in the config file."""
+        try:
+            self.rga.connect('tcpip', settings['MassSpec']['SRS-host'], settings['MassSpec']['SRS-user'],
+                          settings['MassSpec']['SRS-password'])
+            srsid = self.rga.check_id()
+            self.rga_id = srsid[0]
+            logger.info('ms_srs: Connected to RGA %s, s/n %s, firmware version %s ', srsid[0], srsid[1], srsid[2])
+        except srsgui.inst.exceptions.InstLoginFailureError:
+            logger.error('ms_srs: Failed to log in to RGA - Check credentials are valid')
+            self.rga_id = 'Off Line'
+        except srsgui.inst.exceptions.InstCommunicationError:
+            logger.error('ms_srs: Failed to connect to RGA - Check SRS is plugged in and IP address is correct')
+            self.rga_id = 'Off Line'
+
+    def disconnect_from_rga(self):
+        """Disconnect from the SRS RGA."""
+        self.rga.disconnect()
+
+    def get_rga_status(self):
+        """Get the status of the SRS RGA"""
+        if self.rga.is_connected():
+            return self.rga.status.get_error_text()
+        return 'Error SRS Off Line'
+
+    def getdata(self):
+        """Get data from the SRS RGA"""
+        return self.rga.get_name()
+
     def check_quad_is_online(self):
         """Self test to check the quad is online and ready"""
         if self.processing:
-            return 'Proessing'
+            return 'Processing'
         else:
-            return 'Dummy SRS response'
+            if settings['MassSpec']['SRS-password'] == 'change-me':
+                return 'SRS Not configured'
+            if self.rga.is_connected():
+                self.timeoutcounter =0
+                return self.rga_id
+            else:
+                self.timeoutcounter += 1
+                return 'Off Line'
+
 
     def start_mid(self):
         """Start a multiple ion detection run on the Hiden Mass Spectrometer"""
         self.processing = 1
-        runningfile = 'none  '
-        s = socket.create_connection((self.host, self.port), self.timeoutseconds)
-        self.socketreturn = s.recv(1024).decode()
-        s.send(bytes('-xStatus \r\n', 'utf-8'))
-        status = s.recv(1024).decode()
-        logger.debug('Status = %s', status)
-        if status[:-2] in ('StoppedShutDown', 'Protected'):
-            s.send(bytes('-f"%s" \r\n' % self.midfile, 'utf-8'))
-            try:
-                self.socketreturn = s.recv(1024).decode()
-            except socket.timeout:
-                time.sleep(4)
-                self.socketreturn = s.recv(1024).decode()
-            s.send(bytes('-xFilename \r\n', 'utf-8'))
-            runningfile = s.recv(1024).decode()
-            logger.info('Start MID loaded file - %s', runningfile)
-            time.sleep(1)
-            s.send(bytes('-xGo %s \r\n' % self.runfile, 'utf-8'))
-            time.sleep(.5)
-            # self.socketreturn = s.recv(1024).decode()
-            time.sleep(2)
-            s.send(bytes('-xStatus \r\n', 'utf-8'))
-            status = s.recv(1024).decode()
-            logger.debug('Run file status = %s', status)
-            self.running = True
-        s.close()
+        status = "running"
+        runningfile = 'mid'
         self.processing = 0
-        return [runningfile[:-2], status[:-2]]
+        return [runningfile, status]
 
     def start_profile(self):
         """Start a 1 to 10 amu scan on the Hiden Mass Spectrometer"""
         self.processing = 1
-        runningfile = 'none  '
-        s = socket.create_connection((self.host, self.port), self.timeoutseconds)
-        self.socketreturn = s.recv(1024).decode()
-        s.send(bytes('-xStatus \r\n', 'utf-8'))
-        status = s.recv(1024).decode()
-        logger.debug('Status = %s', status)
-        if status[:-2] in ('StoppedShutDown', 'Protected', 'Available'):
-            s.send(bytes('-f"%s" \r\n' % self.profilefile, 'utf-8'))
-            try:
-                self.socketreturn = s.recv(1024).decode()
-            except socket.timeout:
-                time.sleep(4)
-                self.socketreturn = s.recv(1024).decode()
-            s.send(bytes('-xFilename \r\n', 'utf-8'))
-            runningfile = s.recv(1024).decode()
-            logger.info('Start profile loaded file - %s', runningfile)
-            time.sleep(1)
-            s.send(bytes('-xGo %s \r\n' % self.runfile, 'utf-8'))
-            # self.socketreturn = s.recv(1024).decode()
-            time.sleep(2)
-            s.send(bytes('-xStatus \r\n', 'utf-8'))
-            status = s.recv(1024).decode()
-            logger.debug('Run file status = %s', status)
-            self.running = True
-        s.close()
+        status = "running"
+        runningfile = 'mid'
         self.processing = 0
-        return [runningfile[:-2], status[:-2]]
-
-    def getdata(self):
-        """Request mid data from Hiden Mass Spectrometer"""
-        try:
-            self.processing = 1
-            s = socket.create_connection((self.host, self.port), self.timeoutseconds)
-            self.socketreturn = s.recv(1024).decode()
-            s.send(bytes('-lData -v1 -c50 -t1 -m1 \r\n', 'utf-8'))
-            sdata = s.recv(16385).decode()
-            s.close()
-            outputdata = []
-            for item in sdata.split('\r\n'):
-                outputdata.append(item.split('\t'))
-            # outputdata = outputdata[len(outputdata) - 21:]
-            self.processing = 0
-            return outputdata[:-1]
-        except:
-            logger.error('msHiden: error in getdata routine %s', Exception)
-
-    def getcolumns(self):
-        """Request columns from Hiden Mass Spectrometer"""
-        s = socket.create_connection((self.host, self.port), self.timeoutseconds)
-        self.socketreturn = s.recv(1024).decode()
-        s.send(bytes('-lLegends -v1 \r\n', 'utf-8'))
-        legends = s.recv(1024).decode()
-        s.close()
-        return legends.split('\t')
-
-    def getcycle(self):
-        """Request cycles from Hiden Mass Spectrometer"""
-        s = socket.create_connection((self.host, self.port), self.timeoutseconds)
-        self.socketreturn = s.recv(1024).decode()
-        s.send(bytes('-lCycle -v1 \r\n', 'utf-8'))
-        scycle = s.recv(1024).decode()
-        s.close()
-        return scycle
-
-    def getenv(self):
-        """Request environment from Hiden Mass Spectrometer"""
-        s = socket.create_connection((self.host, self.port), self.timeoutseconds)
-        self.socketreturn = s.recv(1024).decode()
-        s.send(bytes('-lEnvironment -v1 \r\n', 'utf-8'))
-        senv = s.recv(1024).decode()
-        s.close()
-        logger.debug('Hidenclass: %s', senv)
-
-    def getloadedfile(self):
-        """Return the loaded file from the Hiden Mass Spectrometer"""
-        s = socket.create_connection((self.host, self.port), self.timeoutseconds)
-        self.socketreturn = s.recv(1024).decode()
-        s.send(bytes('-xFilename \r\n', 'utf-8'))
-        senv = s.recv(1024).decode()
-        s.close()
-        logger.debug('Hidenclass filename: %s', senv)
+        return [runningfile, status]
 
     def stop_runnning(self):
         """Stop the running experiment on the Hiden Mass Spectrometer"""
         self.processing = 1
-        s = socket.create_connection((self.host, self.port), self.timeoutseconds)
-        self.socketreturn = s.recv(1024).decode()
-        s.send(bytes('-xStatus \r\n', 'utf-8'))
-        status = s.recv(1024).decode()
-        logger.debug('Status = %s', status)
-        if self.running:
-            self.running = False
-            logger.info('msHiden - Stopping Hiden')
-            s.send(bytes('-f"%s" \r\n' % self.runfile, 'utf-8'))
-            self.socketreturn = s.recv(1024).decode()
-            time.sleep(2)
-            s.send(bytes('-xAbort \r\n', 'utf-8'))
-            time.sleep(2)
-            self.socketreturn = s.recv(1024).decode()
-            s.send(bytes('-xClose \r\n', 'utf-8'))
-            time.sleep(2)
-            self.socketreturn = s.recv(1024).decode()
-        s.close()
+        status = "stopped"
+        runningfile = 'mid'
         self.processing = 0
+        return [runningfile, status]
 
     def next_id(self):
         """Generate the next Helium run ID"""
@@ -374,5 +324,9 @@ class MsClass:
 ms = MsClass()
 
 if __name__ == '__main__':
+    writesettings()
     print('Starting ms class')
-    print("ms.starttimer('Line Blank', 'Line Blank', 'manual test', 272, 3486)")
+    ms.connect_to_rga()
+    print(ms.check_quad_is_online())
+    print(ms.get_rga_status())
+
