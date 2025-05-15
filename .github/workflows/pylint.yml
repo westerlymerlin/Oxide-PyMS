@@ -38,6 +38,7 @@ jobs:
         git add ./docs/*.md
         if (git diff --name-only | Select-String -Pattern 'docs' -AllMatches)
         {
+          echo "DocuCode Updates found"
           git commit --message "DocUCode Automated documentation from code"
           git push origin DocuCode
         }
