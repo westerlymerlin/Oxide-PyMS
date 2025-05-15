@@ -40,7 +40,7 @@ jobs:
         {
           echo "DocuCode Updates found"
           git commit --message "DocUCode Automated documentation from code"
-          git push origin DocuCode
+          git push -u origin DocuCode
         }
       env:
         GH_TOKEN: ${{ secrets.ACTIONSECRET }}
