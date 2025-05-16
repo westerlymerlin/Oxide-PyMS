@@ -7,7 +7,18 @@ from logmanager import logger
 
 
 def lasergetstatus():
-    """Get laser status"""
+    """
+    Fetches the current status of the laser system by sending a request to the configured
+    laserhost. The response includes details about the laser's keyswitch and door
+    interlock statuses. Updates the laserhost's alarm counters based on the response or
+    any exceptions encountered during the execution.
+
+    :raises requests.Timeout: If the request exceeds the configured timeout duration.
+    :raises requests.RequestException: If any other network-related exception occurs.
+    :return: A dictionary containing the status of the laser system. If an error occurs,
+        returns a dictionary with 'laser' key set to 'exception'.
+    :rtype: dict
+    """
     message = {"item": 'laserstatus', "command": 1}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     try:
@@ -27,7 +38,15 @@ def lasergetstatus():
         return {'laser': 'exception'}
 
 def pyroread():
-    """Get Pyrometer reading"""
+    """
+    Communicates with a pyrometer through a laser host to retrieve temperature data, process it according to the
+    calibration settings, and handle potential exceptions during the operation.
+
+    Temperature data retrieved from the pyrometer is recalibrated using a slope and intercept defined in the
+    settings. The function interacts with a remote API using an HTTP POST request and expects a JSON response
+    containing temperature metrics. Exception handling is included to manage timeouts and general API request
+    issues, ensuring that the function can return fallback data to maintain operational stability.
+    """
     message = {"item": 'gettemperature', "command": 1}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     try:
@@ -52,7 +71,13 @@ def pyroread():
 
 
 def valvegetstatus():
-    """Get valve status and return a list with each valve status as an item in the list"""
+    """
+    Fetches the status of valves from the specified API endpoint. The function sends a
+    POST request with specific headers and payload to retrieve the status of up to
+    16 valves. Each valve's status is represented as an integer in a list
+    (1 for open and 0 for closed). Handles timeouts and general request exceptions
+    gracefully, updating corresponding alarm states upon errors.
+    """
     message = {"item": 'valvestatus', "command": True}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['valvehost-api-key']}
     statusmessage = [0] * 16
@@ -77,7 +102,13 @@ def valvegetstatus():
         return 1
 
 def pressuresread():
-    """Get guage pressures"""
+    """
+    Reads pressure information from the pump host and updates the pressure data in the
+    application settings. The function sends a POST request to the pump host API, receives
+    the pressure data for different pumps, and processes it. In case of a timeout or
+    request exception, it logs the issue and increments the alarm counter for the pump
+    host while returning a default response to indicate an exception.
+    """
     message = {"item": 'getpressures', "command": True}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['pumphost-api-key']}
     try:
@@ -103,7 +134,15 @@ def pressuresread():
         return {"pressure": 'exception', "pump": "turbo"}
 
 def xyread():
-    """Get X Y Positions"""
+    """
+    Fetch the current status of the X-Y controller by sending a status query to the designated host.
+
+    This function communicates with an external X-Y controller service to retrieve information
+    about the status of the controller by submitting an API request. The function handles
+    exceptions related to request timeouts and general network errors during the operation.
+    In case of exceptions, the function increments the `xyhost` alarm counter and returns
+    a default response indicating an exception.
+    """
     message = {"item": 'getxystatus', "command": True}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['xyhost-api-key']}
     try:
