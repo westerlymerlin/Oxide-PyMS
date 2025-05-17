@@ -36,6 +36,12 @@ Author: Gary Twinn
 Database upgrader, used when database versions need changes to the table mstructure
 Author: Gary Twinn
 
+[document_from_code](./document_from_code.md)  
+Gerates documentation from comments in the code
+Coded to run in a github action against the master branch
+uses:
+pydoc-markdown to generate the documentation
+
 [host_commands](./host_commands.md)  
 Commands to the various controller APIs
 

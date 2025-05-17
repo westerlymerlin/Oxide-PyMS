@@ -57,7 +57,16 @@ class CycleClass:
         self.readdatabase()
 
     def readdatabase(self):
-        """Get the list of enabled cycles from the database"""
+        """
+        Fetches data from the database and populates internal class attributes.
+
+        This method connects to the database specified in the settings, executes SQL
+        queries to retrieve data, and updates the `cycles`, `samples`, and `locations`
+        attributes of the class. Cycles that are marked as enabled are added to the
+        `cycles` list. If a cycle is flagged as a sample, it is also appended to
+        the `samples` list. Additionally, all location entries are added to the
+        `locations` list.
+        """
         self.cycles.append('End')
         database = sqlite3.connect(settings['database']['databasepath'])
         cursor_obj = database.cursor()

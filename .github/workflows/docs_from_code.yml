@@ -31,9 +31,10 @@ jobs:
     - name: Analyse the code with pylint (pass score = 9/10)
       run: |
         pylint $(git ls-files '*.py')
-    - name: Run Documentation as code
-      run:
-        python -m packager.document_from_code
+    - name: Run Download and run documentation as code
+      run: |
+        curl -o document_from_code.py  https://raw.githubusercontent.com/westerlymerlin/pyAutomate/master/document_from_code.py
+        python -m document_from_code
     - name: Commit changes to the DocUCode branch
       run: |
         git config user.email "DocUCode@westerlymerlin.internal"
@@ -44,8 +45,8 @@ jobs:
         {
           echo "DocuCode Updates found"
           git commit --message "DocUCode automated documentation from code"
-          git push --set-upstream origin DocUCode
         }
+        git push --set-upstream origin DocUCode
       env:
         GH_TOKEN: ${{ secrets.ACTIONSECRET }}
     - name: Create PR Release to main
