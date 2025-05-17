@@ -31,8 +31,8 @@ jobs:
     - name: Analyse the code with pylint (pass score = 9/10)
       run: |
         pylint $(git ls-files '*.py')
-    - name: Run Documentation as code
-      run:
+    - name: Run Download and run documentation as code
+      run: |
         curl -o document_from_code.py  https://raw.githubusercontent.com/westerlymerlin/pyAutomate/master/document_from_code.py
         python -m document_from_code
     - name: Commit changes to the DocUCode branch
