@@ -23,7 +23,7 @@ def lasercommand(state):
         return {'laser': 'timeout'}
     except requests.RequestException:
         alarms['laserhost'] += 5
-        logger.exception('host_commands: Laser Command Timeout Error')
+        logger.exception('host_commands: Laser Command Exception')
         return {'laser': 'exception'}
 
 
@@ -114,16 +114,49 @@ def xymove(axis, steps):
         return {'xmoving': 'exception', 'xpos': 0, 'ymoving': 'exception', '"ypos': 0}
 
 
-def rpi_reboot(host):
-    """reboot the raspberry pi"""
-    message = {"item": 'restart', "command": 'pi'}
-    apikey = host + '-api-key'
-    headers = {"Accept": "application/json", "api-key": settings['hosts'][apikey]}
+def pyro_rangefinder(state):
+    """
+    Set the state of the Pyrometer Rangefinder by sending a command to the laser host API.
+
+    This function sends an HTTP POST request to the laser host API with the specified state,
+    along with necessary headers and payload. It handles timeout and general exceptions during
+    the request and logs appropriate warnings or errors.
+    """
+    message = {"item": 'pyrolaser', "command": state}
+    headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     try:
-        resp = requests.post(settings['hosts'][host], headers=headers,
-                             json=message, timeout=settings['hosts']['timeoutseconds'])
-        logger.info('Rebooting the %s Raspberry Pi', host)
-        return resp.json()
+        resp = requests.post(settings['hosts']['laserhost'], headers=headers, json=message,
+                             timeout=settings['hosts']['timeoutseconds'])
+        logger.info('host_commands: Setting Pyrometer Rangefinder to %s', state)
+        json_message = resp.json()
+        alarms['laserhost'] = 0
+        return json_message
+    except requests.Timeout:
+        alarms['laserhost'] += 5
+        logger.warning('host_commands: Pyrometer Rangefinder Timeout Error')
+        return {'laser': 'timeout'}
     except requests.RequestException:
-        logger.exception('host_commands: restart %s', host)
-        return {host: 'exception'}
+        alarms['laserhost'] += 5
+        logger.exception('host_commands: Pyrometer Rangefinder Exception')
+        return {'laser': 'exception'}
+
+
+def ion_pump(state):
+    """Sens a command to the in pump"""
+    try:
+        message = {"item": 'ion-command', "command": state}
+        headers = {"Accept": "application/json", "api-key": settings['hosts']['pumphost-api-key']}
+        resp = requests.post(settings['hosts']['pumphost'], headers=headers, json=message,
+                             timeout=settings['hosts']['timeoutseconds'])
+        logger.info('host_commands: Setting Ion Pump to %s', state)
+        json_message = resp.json()
+        alarms['pumphost'] = 0
+        return json_message
+    except requests.Timeout:
+        alarms['pumphost'] += 5
+        logger.warning('host_commands: Ion Pump Timeout Error')
+        return {'ion': 'timeout'}
+    except requests.RequestException:
+        alarms['pumphost'] += 5
+        logger.exception('host_commands: Ion Pump Exception')
+        return {'ion': 'exception'}
