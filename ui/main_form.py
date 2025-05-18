@@ -26,7 +26,7 @@ from pywin.dialogs import status
 
 from app_control import settings, writesettings, setrunning, alarms, VERSION
 from host_queries import valvegetstatus, lasergetstatus, pressuresread, xyread
-from host_commands import lasercommand, lasersetpower, valvechange, xymoveto, xymove
+from host_commands import lasercommand, lasersetpower, valvechange, xymoveto, xymove, pyro_rangefinder, ion_pump
 from batchclass import batch
 from cycleclass import currentcycle
 from ms_srs_class import ms
@@ -107,6 +107,10 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.actionLaserOpenStatusPage.triggered.connect(lambda: menu_open_web_page('Laser Status'))
         self.actionLaserOpenLogPage.triggered.connect(lambda: menu_open_web_page('Laser Log'))
         self.actionLaserViewerForm.triggered.connect(self.menu_show_laserviewer)
+        self.actionPyro_rangefinder_on.triggered.connect(lambda: pyro_rangefinder('on'))
+        self.actionPyro_rangefinder_off.triggered.connect(lambda: pyro_rangefinder('off'))
+        self.actionIonpump_on.triggered.connect(lambda: ion_pump('start'))
+        self.actionIonpump_off.triggered.connect(lambda: ion_pump('stop'))
         self.actionManualLaserForm.triggered.connect(self.menu_show_lasermanual)
         self.actionAboutPyMS.triggered.connect(self.menu_show_about)
         self.actionHelp.triggered.connect(lambda: menu_open_web_page('Help File'))

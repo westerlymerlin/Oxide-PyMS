@@ -1840,8 +1840,17 @@ image: &quot;&quot;;</string>
     <property name="title">
      <string>Pump Reader</string>
     </property>
+    <widget class="QMenu" name="menuIon_Pump">
+     <property name="title">
+      <string>Ion Pump</string>
+     </property>
+     <addaction name="actionIonpump_on"/>
+     <addaction name="actionIonpump_off"/>
+    </widget>
     <addaction name="actionPumpOpenStatusPage"/>
     <addaction name="actionPumpOpenLogPage"/>
+    <addaction name="separator"/>
+    <addaction name="menuIon_Pump"/>
    </widget>
    <widget class="QMenu" name="menuMass_Spectrometer">
     <property name="enabled">
@@ -1859,10 +1868,18 @@ image: &quot;&quot;;</string>
     <property name="title">
      <string>Laser Controller</string>
     </property>
+    <widget class="QMenu" name="menuPyro_Rangefinder">
+     <property name="title">
+      <string>Pyro Rangefinder</string>
+     </property>
+     <addaction name="actionPyro_rangefinder_on"/>
+     <addaction name="actionPyro_rangefinder_off"/>
+    </widget>
     <addaction name="actionLaserOpenStatusPage"/>
     <addaction name="actionLaserOpenLogPage"/>
     <addaction name="separator"/>
     <addaction name="actionLaserViewerForm"/>
+    <addaction name="menuPyro_Rangefinder"/>
     <addaction name="separator"/>
     <addaction name="actionManualLaserForm"/>
    </widget>
@@ -2080,6 +2097,36 @@ image: &quot;&quot;;</string>
   <action name="actionValve_G">
    <property name="text">
     <string>Valve G</string>
+   </property>
+  </action>
+  <action name="action_Ion_Pump_On">
+   <property name="text">
+    <string>Ion Pump On</string>
+   </property>
+  </action>
+  <action name="action_Ion_Pump_Off">
+   <property name="text">
+    <string>Ion Pump Off</string>
+   </property>
+  </action>
+  <action name="actionPyro_rangefinder_on">
+   <property name="text">
+    <string>On</string>
+   </property>
+  </action>
+  <action name="actionPyro_rangefinder_off">
+   <property name="text">
+    <string>Off</string>
+   </property>
+  </action>
+  <action name="actionIonpump_on">
+   <property name="text">
+    <string>On</string>
+   </property>
+  </action>
+  <action name="actionIonpump_off">
+   <property name="text">
+    <string>Off</string>
    </property>
   </action>
  </widget>
