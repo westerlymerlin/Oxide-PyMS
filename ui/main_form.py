@@ -64,12 +64,13 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.wValve6.setHidden(True)
         self.wValve7.setHidden(True)
         self.wValve8.setHidden(True)
+        self.wValve9.setHidden(True)
         self.wValve10.setHidden(True)
         self.wValve11.setHidden(True)
         self.wValve12.setHidden(True)
         self.wValve13.setHidden(True)
         self.wValve14.setHidden(True)
-        self.wValve9.setHidden(True)
+        self.wValve15.setHidden(True)
         self.setmanaulvalves()
         self.__position_window__(settings['mainform']['x'], settings['mainform']['y'])
         self.tbValve1.clicked.connect(lambda: valvechange('valve1', self.wValve1.isHidden()))
@@ -86,6 +87,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.tbValve12.clicked.connect(lambda: valvechange('valve12', self.wValve12.isHidden()))
         self.tbValve13.clicked.connect(lambda: valvechange('valve13', self.wValve13.isHidden()))
         self.tbValve14.clicked.connect(lambda: valvechange('valve14', self.wValve14.isHidden()))
+        self.tbValve15.clicked.connect(lambda: valvechange('valve15', self.wValve15.isHidden()))
         self.tbStop.clicked.connect(self.emergency_stop)
         self.tbRun.clicked.connect(self.run_click)
         self.actionExit.triggered.connect(self.closeEvent)
@@ -369,6 +371,9 @@ class UiMain(QMainWindow, Ui_MainWindow):
             if self.wValve14.isVisible() != valve_status[14]:
                 logger.debug('t=%s mainUIForm: Valve 14 changed', self.secondcount)
                 self.wValve14.setVisible(valve_status[14])
+            if self.wValve15.isVisible() != valve_status[15]:
+                logger.debug('t=%s mainUIForm: Valve 15 changed', self.secondcount)
+                self.wValve15.setVisible(valve_status[15])
         self.lblLaserPower.setText('%.1f' % settings['laser']['power'])
         valve_status = lasergetstatus()
         if valve_status['laser'] != 'exception':
