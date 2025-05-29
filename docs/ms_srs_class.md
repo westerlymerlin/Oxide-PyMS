@@ -252,7 +252,7 @@ Self test to check the quad is online and ready
 def start_mid()
 ```
 
-Start a multiple ion detection run on the Hiden Mass Spectrometer
+Start a multiple ion detection run on the SRS Mass Spectrometer
 
 <a id="ms_srs_class.MsClass.start_profile"></a>
 
@@ -262,7 +262,7 @@ Start a multiple ion detection run on the Hiden Mass Spectrometer
 def start_profile()
 ```
 
-Start a 1 to 10 amu scan on the Hiden Mass Spectrometer
+Start a 1 to 10 amu scan on the SRS Mass Spectrometer
 
 <a id="ms_srs_class.MsClass.stop_runnning"></a>
 
@@ -272,7 +272,7 @@ Start a 1 to 10 amu scan on the Hiden Mass Spectrometer
 def stop_runnning()
 ```
 
-Stop the running experiment on the Hiden Mass Spectrometer
+Stop the running experiment on the SRS Mass Spectrometer
 
 <a id="ms_srs_class.MsClass.next_id"></a>
 
