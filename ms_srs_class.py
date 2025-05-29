@@ -211,7 +211,8 @@ class MsClass:
 
 
     def start_mid(self):
-        """Start a multiple ion detection run on the Hiden Mass Spectrometer"""
+        """Start a multiple ion detection run on the SRS Mass Spectrometer"""
+        # ToDo: This needs the code adding to start a mid run on the SRS
         self.processing = 1
         status = "running"
         runningfile = 'mid'
@@ -219,7 +220,8 @@ class MsClass:
         return [runningfile, status]
 
     def start_profile(self):
-        """Start a 1 to 10 amu scan on the Hiden Mass Spectrometer"""
+        """Start a 1 to 10 amu scan on the SRS Mass Spectrometer"""
+        # ToDo: This needs the code adding to start a histogram run on the SRS
         self.processing = 1
         status = "running"
         runningfile = 'mid'
@@ -227,7 +229,8 @@ class MsClass:
         return [runningfile, status]
 
     def stop_runnning(self):
-        """Stop the running experiment on the Hiden Mass Spectrometer"""
+        """Stop the running experiment on the SRS Mass Spectrometer"""
+        # ToDo: This needs the code adding to stop a run on the SRS
         self.processing = 1
         status = "stopped"
         runningfile = 'mid'
@@ -255,6 +258,7 @@ class MsClass:
 
     def writefile(self):
         """Write Helium Data file to disk"""
+        # ToDo: This needs the code to get data from the srs
         data = self.getdata()
         try:
             for row in data:

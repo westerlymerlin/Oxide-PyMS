@@ -882,6 +882,38 @@ color: rgb(255, 0, 0);
       <string notr="true">image: url(:/valves/m-valvegreen-h.svg);</string>
      </property>
     </widget>
+    <widget class="QWidget" name="wValve15" native="true">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>562</y>
+       <width>65</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: url(:/valves/valve green horizontal.svg);</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="tbValve15">
+     <property name="geometry">
+      <rect>
+       <x>114</x>
+       <y>564</y>
+       <width>40</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
     <zorder>imgLaser</zorder>
     <zorder>wValve1</zorder>
     <zorder>tbValve1</zorder>
@@ -925,6 +957,8 @@ color: rgb(255, 0, 0);
     <zorder>wValveE</zorder>
     <zorder>wValveF</zorder>
     <zorder>wValveG</zorder>
+    <zorder>wValve15</zorder>
+    <zorder>tbValve15</zorder>
    </widget>
    <widget class="QLCDNumber" name="lcdElapsedTime">
     <property name="geometry">
@@ -1857,7 +1891,7 @@ image: &quot;&quot;;</string>
      <bool>true</bool>
     </property>
     <property name="title">
-     <string>Hiden Mass Spectrometer</string>
+     <string>SRS Mass Spectrometer</string>
     </property>
     <addaction name="actionStartMIDScan"/>
     <addaction name="actionStartProfileScan"/>
