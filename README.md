@@ -1,6 +1,6 @@
 ## Overview
-PyMS is a desktop application that provides a Graphical User Interface (GUI) for managing cycles of batches in the
-UCL Oxide Line. Built with Python and the Qt6 UI framework (via PySide6), PyMS offers intuitive control and monitoring
+PyMS is a desktop application that provides a Graphical User Interface (GUI) for managing cycles of batches in an 
+Oxide Helium Extraction Line. Built with Python and the Qt6 UI framework (via PySide6), PyMS offers intuitive control and monitoring
 capabilities for laboratory processes.
 ## Installation
 ### Windows
@@ -37,7 +37,33 @@ Download and run the installer package: [PyMS-installer.exe](./distribution/PyMS
 3. Launch the application using `PyMS.pyw`
 4. Refer to the manual for detailed usage instructions
 
-## Support and Contribution
-For support, please contact [support email or contact information]
-## License
-[License information](./LICENSE)
+
+
+&nbsp;   
+&nbsp;    
+&nbsp;  
+&nbsp;   
+&nbsp;   
+&nbsp;   
+--------------
+
+#### Copyright (C) 2025 Gary Twinn
+
+This program is free software: you can redistribute it and/or modify  
+it under the terms of the GNU General Public License as published by  
+the Free Software Foundation, either version 3 of the License, or  
+(at your option) any later version.  
+
+This program is distributed in the hope that it will be useful,  
+but WITHOUT ANY WARRANTY; without even the implied warranty of  
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the  
+GNU General Public License for more details.  
+
+You should have received a copy of the GNU General Public License  
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+
+Author:  Gary Twinn  
+Repository:  [github.com/westerlymerlin](https://github)
+
+-------------

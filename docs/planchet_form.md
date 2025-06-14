@@ -1,20 +1,4 @@
-# Contents for: planchet_form
-
-* [planchet\_form](#planchet_form)
-  * [sys](#planchet_form.sys)
-  * [QDialog](#planchet_form.QDialog)
-  * [QApplication](#planchet_form.QApplication)
-  * [Ui\_dialogPlanchet](#planchet_form.Ui_dialogPlanchet)
-  * [settings](#planchet_form.settings)
-  * [writesettings](#planchet_form.writesettings)
-  * [batch](#planchet_form.batch)
-  * [currentcycle](#planchet_form.currentcycle)
-  * [UiPlanchet](#planchet_form.UiPlanchet)
-    * [\_\_init\_\_](#planchet_form.UiPlanchet.__init__)
-    * [\_\_position\_window\_\_](#planchet_form.UiPlanchet.__position_window__)
-    * [startup](#planchet_form.UiPlanchet.startup)
-    * [formclose](#planchet_form.UiPlanchet.formclose)
-    * [savechecks](#planchet_form.UiPlanchet.savechecks)
+# None
 
 <a id="planchet_form"></a>
 
