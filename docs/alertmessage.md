@@ -1,11 +1,4 @@
-# Contents for: alertmessage
-
-* [alertmessage](#alertmessage)
-  * [smtplib](#alertmessage.smtplib)
-  * [json](#alertmessage.json)
-  * [base64](#alertmessage.base64)
-  * [logger](#alertmessage.logger)
-  * [alert](#alertmessage.alert)
+# None
 
 <a id="alertmessage"></a>
 

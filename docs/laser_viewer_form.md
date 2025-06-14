@@ -1,29 +1,4 @@
-# Contents for: laser_viewer_form
-
-* [laser\_viewer\_form](#laser_viewer_form)
-  * [sys](#laser_viewer_form.sys)
-  * [QDialog](#laser_viewer_form.QDialog)
-  * [QLabel](#laser_viewer_form.QLabel)
-  * [QApplication](#laser_viewer_form.QApplication)
-  * [QDrag](#laser_viewer_form.QDrag)
-  * [Qt](#laser_viewer_form.Qt)
-  * [QMimeData](#laser_viewer_form.QMimeData)
-  * [QRect](#laser_viewer_form.QRect)
-  * [QTimer](#laser_viewer_form.QTimer)
-  * [Ui\_LaserViewer](#laser_viewer_form.Ui_LaserViewer)
-  * [settings](#laser_viewer_form.settings)
-  * [writesettings](#laser_viewer_form.writesettings)
-  * [getrunning](#laser_viewer_form.getrunning)
-  * [pyroread](#laser_viewer_form.pyroread)
-  * [DragSquare](#laser_viewer_form.DragSquare)
-    * [mouseMoveEvent](#laser_viewer_form.DragSquare.mouseMoveEvent)
-  * [LaserViewerUI](#laser_viewer_form.LaserViewerUI)
-    * [\_\_init\_\_](#laser_viewer_form.LaserViewerUI.__init__)
-    * [\_\_position\_window\_\_](#laser_viewer_form.LaserViewerUI.__position_window__)
-    * [global\_timer](#laser_viewer_form.LaserViewerUI.global_timer)
-    * [dragEnterEvent](#laser_viewer_form.LaserViewerUI.dragEnterEvent)
-    * [dropEvent](#laser_viewer_form.LaserViewerUI.dropEvent)
-    * [formclose](#laser_viewer_form.LaserViewerUI.formclose)
+# None
 
 <a id="laser_viewer_form"></a>
 

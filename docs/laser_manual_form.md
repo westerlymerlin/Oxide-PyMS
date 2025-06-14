@@ -1,28 +1,4 @@
-# Contents for: laser_manual_form
-
-* [laser\_manual\_form](#laser_manual_form)
-  * [sys](#laser_manual_form.sys)
-  * [Qt](#laser_manual_form.Qt)
-  * [QTimer](#laser_manual_form.QTimer)
-  * [QThreadPool](#laser_manual_form.QThreadPool)
-  * [QDialog](#laser_manual_form.QDialog)
-  * [QApplication](#laser_manual_form.QApplication)
-  * [Ui\_dialogLaserControl](#laser_manual_form.Ui_dialogLaserControl)
-  * [settings](#laser_manual_form.settings)
-  * [writesettings](#laser_manual_form.writesettings)
-  * [lasergetstatus](#laser_manual_form.lasergetstatus)
-  * [lasercommand](#laser_manual_form.lasercommand)
-  * [lasersetpower](#laser_manual_form.lasersetpower)
-  * [logger](#laser_manual_form.logger)
-  * [LaserFormUI](#laser_manual_form.LaserFormUI)
-    * [\_\_init\_\_](#laser_manual_form.LaserFormUI.__init__)
-    * [\_\_position\_window\_\_](#laser_manual_form.LaserFormUI.__position_window__)
-    * [formclose](#laser_manual_form.LaserFormUI.formclose)
-    * [slidermove](#laser_manual_form.LaserFormUI.slidermove)
-    * [enable\_click](#laser_manual_form.LaserFormUI.enable_click)
-    * [laser\_click](#laser_manual_form.LaserFormUI.laser_click)
-    * [update\_laser](#laser_manual_form.LaserFormUI.update_laser)
-    * [\_\_save\_pyro\_calibration](#laser_manual_form.LaserFormUI.__save_pyro_calibration)
+# None
 
 <a id="laser_manual_form"></a>
 
