@@ -3,8 +3,7 @@ Settings viewer / editor form. allows user to edit setting values manually. sett
 settings.json file
 Author: Gary Twinn
 """
-import sys
-from PySide6.QtWidgets import QDialog, QAbstractItemView, QTableWidget, QTableWidgetItem, QApplication
+from PySide6.QtWidgets import QDialog, QAbstractItemView, QTableWidget, QTableWidgetItem
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 from ui.ui_layout_log_viewer import Ui_LogDialog
@@ -94,6 +93,8 @@ class UiSettingsViewer(QDialog, Ui_LogDialog):
                         settings[settings_ref[0]][settings_ref[1]][settings_ref[2]] = float(newval)
                     elif type(oldval) == int:
                         settings[settings_ref[0]][settings_ref[1]][settings_ref[2]] = int(newval)
+                    elif type(oldval) == bool:
+                        settings[settings_ref[0]][settings_ref[1]][settings_ref[2]] = bool(newval)
                     else:
                         settings[settings_ref[0]][settings_ref[1]][settings_ref[2]] = newval
                 if len(settings_ref) == 2:
@@ -102,6 +103,8 @@ class UiSettingsViewer(QDialog, Ui_LogDialog):
                         settings[settings_ref[0]][settings_ref[1]] = float(newval)
                     elif type(oldval) == int:
                         settings[settings_ref[0]][settings_ref[1]] = int(newval)
+                    elif type(oldval) == bool:
+                        settings[settings_ref[0]][settings_ref[1]] = bool(newval)
                     else:
                         settings[settings_ref[0]][settings_ref[1]] = newval
                 if len(settings_ref) == 1:
@@ -121,11 +124,3 @@ class UiSettingsViewer(QDialog, Ui_LogDialog):
     def formclose(self):
         """Form close handler"""
         self.deleteLater()
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    dialog = UiSettingsViewer()
-    dialog.loadsettings()
-    dialog.show()
-    sys.exit(app.exec())

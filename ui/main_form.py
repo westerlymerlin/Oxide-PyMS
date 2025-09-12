@@ -73,21 +73,21 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.wValve15.setHidden(True)
         self.setmanaulvalves()
         self.__position_window__(settings['mainform']['x'], settings['mainform']['y'])
-        self.tbValve1.clicked.connect(lambda: valvechange('valve1', self.wValve1.isHidden()))
-        self.tbValve2.clicked.connect(lambda: valvechange('valve2', self.wValve2.isHidden()))
-        self.tbValve3.clicked.connect(lambda: valvechange('valve3', self.wValve3.isHidden()))
-        self.tbValve4.clicked.connect(lambda: valvechange('valve4', self.wValve4.isHidden()))
-        self.tbValve5.clicked.connect(lambda: valvechange('valve5', self.wValve5.isHidden()))
-        self.tbValve6.clicked.connect(lambda: valvechange('valve6', self.wValve6.isHidden()))
-        self.tbValve7.clicked.connect(lambda: valvechange('valve7', self.wValve7.isHidden()))
-        self.tbValve8.clicked.connect(lambda: valvechange('valve8', self.wValve8.isHidden()))
-        self.tbValve9.clicked.connect(lambda: valvechange('valve9', self.wValve9.isHidden()))
-        self.tbValve10.clicked.connect(lambda: valvechange('valve10', self.wValve10.isHidden()))
-        self.tbValve11.clicked.connect(lambda: valvechange('valve11', self.wValve11.isHidden()))
-        self.tbValve12.clicked.connect(lambda: valvechange('valve12', self.wValve12.isHidden()))
-        self.tbValve13.clicked.connect(lambda: valvechange('valve13', self.wValve13.isHidden()))
-        self.tbValve14.clicked.connect(lambda: valvechange('valve14', self.wValve14.isHidden()))
-        self.tbValve15.clicked.connect(lambda: valvechange('valve15', self.wValve15.isHidden()))
+        self.tbValve1.clicked.connect(lambda: valvechange('digital1', self.wValve1.isHidden()))
+        self.tbValve2.clicked.connect(lambda: valvechange('digital2', self.wValve2.isHidden()))
+        self.tbValve3.clicked.connect(lambda: valvechange('digital3', self.wValve3.isHidden()))
+        self.tbValve4.clicked.connect(lambda: valvechange('digital4', self.wValve4.isHidden()))
+        self.tbValve5.clicked.connect(lambda: valvechange('digital5', self.wValve5.isHidden()))
+        self.tbValve6.clicked.connect(lambda: valvechange('digital6', self.wValve6.isHidden()))
+        self.tbValve7.clicked.connect(lambda: valvechange('digital7', self.wValve7.isHidden()))
+        self.tbValve8.clicked.connect(lambda: valvechange('digital8', self.wValve8.isHidden()))
+        self.tbValve9.clicked.connect(lambda: valvechange('digital9', self.wValve9.isHidden()))
+        self.tbValve10.clicked.connect(lambda: valvechange('digital10', self.wValve10.isHidden()))
+        self.tbValve11.clicked.connect(lambda: valvechange('digital11', self.wValve11.isHidden()))
+        self.tbValve12.clicked.connect(lambda: valvechange('digital12', self.wValve12.isHidden()))
+        self.tbValve13.clicked.connect(lambda: valvechange('digital13', self.wValve13.isHidden()))
+        self.tbValve14.clicked.connect(lambda: valvechange('digital14', self.wValve14.isHidden()))
+        self.tbValve15.clicked.connect(lambda: valvechange('digital15', self.wValve15.isHidden()))
         self.tbStop.clicked.connect(self.emergency_stop)
         self.tbRun.clicked.connect(self.run_click)
         self.actionExit.triggered.connect(self.closeEvent)
@@ -104,8 +104,6 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.actionValve_E.triggered.connect(lambda: self.setmanaulvalves('valvee'))
         self.actionValve_F.triggered.connect(lambda: self.setmanaulvalves('valvef'))
         self.actionValve_G.triggered.connect(lambda: self.setmanaulvalves('valveg'))
-        self.actionPumpOpenStatusPage.triggered.connect(lambda: menu_open_web_page('Pump Status'))
-        self.actionPumpOpenLogPage.triggered.connect(lambda: menu_open_web_page('Pump Log'))
         self.actionLaserOpenStatusPage.triggered.connect(lambda: menu_open_web_page('Laser Status'))
         self.actionLaserOpenLogPage.triggered.connect(lambda: menu_open_web_page('Laser Log'))
         self.actionLaserViewerForm.triggered.connect(self.menu_show_laserviewer)
@@ -222,7 +220,7 @@ class UiMain(QMainWindow, Ui_MainWindow):
         self.thread_manager.start(self.check_alarms)
         if not self.taskrunning:
             self.thread_manager.start(self.event_timer)
-        if self.timertick == 0 or self.timertick == 2:
+        if self.timertick in [0, 2]:
             self.thread_manager.start(self.update_ui_xy_positions)
         if self.timertick == 0:
             self.thread_manager.start(self.update_ui_pressures)
@@ -697,11 +695,11 @@ class UiMain(QMainWindow, Ui_MainWindow):
 
 
     def update_ui_xy_positions(self):
-        """Update the X anmd Y positions on the top of the Main Form"""
-        status = xyread()
-        if status['xmoving'] != 'timeout':
-            self.xposition = status['xpos']
-            self.yposition = status['ypos']
+        """Update the X and Y positions on the top of the Main Form"""
+        xy_position = xyread()
+        if xy_position['xmoving'] != 'timeout':
+            self.xposition = xy_position['xpos']
+            self.yposition = xy_position['ypos']
             self.lineXPosition.setText('%i' % self.xposition)
             self.lineYPosition.setText('%i' % self.yposition)
 
@@ -814,4 +812,3 @@ def menu_open_web_page(page):
     elif page == 'Help File':
         url = 'readme.pdf'
         webbrowser.open(url)
-

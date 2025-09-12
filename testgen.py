@@ -42,16 +42,22 @@ def commit_planchet(description):
 
 
 
-def commit_q(description):
+def commit_q(description, qshot_qty=10):
     """
-    Commits a new batch with a description and a series of 10 Q shots.
+    Commits a new batch with a description and a series of Q shots.
     """
     batch.cancel()
     batch.new('simple', description)
     batch.addstep('Line Clean','','')
     batch.addstep('Line Blank', '', '')
-    for _ in range (10):
+    counter =0
+    for _ in range (qshot_qty):
         batch.addstep('Q-Standard', '', '')
+        counter += 1
+        if counter == 20:
+            batch.addstep('Unload', '', '')
+            batch.addstep('Line Blank', '', '')
+            counter = 0
     batch.addstep('Line Blank', '', '')
     batch.save()
 
@@ -59,9 +65,11 @@ def commit_q(description):
 if __name__ == '__main__':
     descriptiontext = input('Enter the test description: ')
     batch_type = input('Planchet (p) or Qshots (q)? ')
+    if batch_type.lower() == 'q':
+        number_of_qshots = int(input('Enter the number of Qshots to run: '))
     if len(descriptiontext) > 0 and batch_type.lower() == 'p':
         commit_planchet(descriptiontext)
         print('New test planchet created')
     elif len(descriptiontext) > 0 and batch_type.lower() == 'q':
-        commit_q(descriptiontext)
+        commit_q(descriptiontext, number_of_qshots)
         print('New test Qlist created')
