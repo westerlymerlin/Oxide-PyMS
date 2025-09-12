@@ -1,10 +1,41 @@
 """
-Queries to the various controller APIs
+Host Queries Module - Network communication interface for hardware devices
+
+This module provides query functions for communicating with various hardware
+components in the PyMS mass spectrometry system over TCP/IP connections.
+The module handles network requests and responses for:
+
+- Laser system status monitoring and pyrometer temperature readings
+- Valve position and status queries
+- Pressure gauge readings from multiple sensors
+- XY stage position monitoring
+
+All functions implement error handling with timeout management and logging
+to ensure robust communication with remote hardware controllers.
+
+Functions:
+    lasergetstatus(): Query laser system operational status
+    pyroread(): Read pyrometer temperature measurements
+    valvegetstatus(): Check valve positions and states
+    pressuresread(): Retrieve pressure readings from gauges
+    xyread(): Get current XY stage coordinates
+
+Author: Gary Twinn
 """
+
 import requests
 from app_control import settings, alarms
 from logmanager import logger
 
+def check_float(value_string):
+    """
+    Converts the given string to a float. If the conversion fails due to a
+    `ValueError`, it will return a NaN (Not a Number) value instead.
+    """
+    try:
+        return float(value_string)
+    except ValueError:
+        return float('NaN')
 
 def lasergetstatus():
     """
@@ -12,12 +43,6 @@ def lasergetstatus():
     laserhost. The response includes details about the laser's keyswitch and door
     interlock statuses. Updates the laserhost's alarm counters based on the response or
     any exceptions encountered during the execution.
-
-    :raises requests.Timeout: If the request exceeds the configured timeout duration.
-    :raises requests.RequestException: If any other network-related exception occurs.
-    :return: A dictionary containing the status of the laser system. If an error occurs,
-        returns a dictionary with 'laser' key set to 'exception'.
-    :rtype: dict
     """
     message = {"item": 'laserstatus', "command": 1}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
@@ -78,19 +103,19 @@ def valvegetstatus():
     (1 for open and 0 for closed). Handles timeouts and general request exceptions
     gracefully, updating corresponding alarm states upon errors.
     """
-    message = {"item": 'valvestatus', "command": True}
+    message = {"item": 'digitalstatus', "command": True}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['valvehost-api-key']}
-    statusmessage = [0] * 16
+    statusmessage = [0] * 17
     try:
         resp = requests.post(settings['hosts']['valvehost'], headers=headers, json=message,
                              timeout=settings['hosts']['timeoutseconds'])
         json_message = resp.json()
         alarms['valvehost'] = 0
-        for item in json_message:
-            if item['status'] == 'open':
-                statusmessage[item['valve']] = 1
+        for item in json_message['values'].values():
+            if item['value'] == 'open':
+                statusmessage[item['digital']] = 1
             else:
-                statusmessage[item['valve']] = 0
+                statusmessage[item['digital']] = 0
         return statusmessage
     except requests.Timeout:
         logger.warning('host_queries: Valve Get Status Timeout Error')
@@ -109,28 +134,26 @@ def pressuresread():
     request exception, it logs the issue and increments the alarm counter for the pump
     host while returning a default response to indicate an exception.
     """
-    message = {"item": 'getpressures', "command": True}
-    headers = {"Accept": "application/json", "api-key": settings['hosts']['pumphost-api-key']}
+    message = {"item": 'serialstatus', "command": True}
+    headers = {"Accept": "application/json", "api-key": settings['hosts']['valvehost-api-key']}
     try:
-        resp = requests.post(settings['hosts']['pumphost'], headers=headers, json=message,
+        resp = requests.post(settings['hosts']['valvehost'], headers=headers, json=message,
                              timeout=settings['hosts']['timeoutseconds'])
         json_message = resp.json()
-        for item in json_message:
-            if item['pump'] == 'turbo':
-                settings['vacuum']['turbo']['current'] = item['pressure']
-                settings['vacuum']['turbo']['units'] = item['units']
-            if item['pump'] == 'ion':
-                settings['vacuum']['ion']['current'] = item['pressure']
-                settings['vacuum']['ion']['units'] = item['units']
-        alarms['pumphost'] = 0
+        for item in json_message['values'].values():
+            if item['name'] == 'Turbo Pressure':
+                settings['vacuum']['turbo']['current'] = check_float(item['value'])
+            if item['name'] == 'Ion Pressure':
+                settings['vacuum']['ion']['current'] = check_float(item['value'])
+        alarms['valvehost'] = 0
         return json_message
     except requests.Timeout:
-        logger.debug('host_queries: Get Pressures Pump Reader Timeout Error')
-        alarms['pumphost'] += 1
+        logger.debug('host_queries: Get Pressures Reader Timeout Error')
+        alarms['valvehost'] += 1
         return {"pressure": 'exception', "pump": "turbo"}
     except requests.RequestException:
-        logger.exception('host_queries: Get Pressures Pump Reader Exception')
-        alarms['pumphost'] += 1
+        logger.exception('host_queries: Get Pressures Reader Exception')
+        alarms['valvehost'] += 1
         return {"pressure": 'exception', "pump": "turbo"}
 
 def xyread():
@@ -159,3 +182,9 @@ def xyread():
         logger.exception('host_queries: Get Status X-Y Controller Exception')
         alarms['xyhost'] += 1
         return {"xmoving": 'exception', "xpos": 0, "ymoving": 'exception', "ypos": 0}
+
+
+if __name__ == '__main__':
+    print(pressuresread())
+    print(settings['vacuum']['turbo']['current'])
+    print(settings['vacuum']['ion']['current'])

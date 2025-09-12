@@ -4,7 +4,28 @@
 
 # host\_queries
 
-Queries to the various controller APIs
+Host Queries Module - Network communication interface for hardware devices
+
+This module provides query functions for communicating with various hardware
+components in the PyMS mass spectrometry system over TCP/IP connections.
+The module handles network requests and responses for:
+
+- Laser system status monitoring and pyrometer temperature readings
+- Valve position and status queries
+- Pressure gauge readings from multiple sensors
+- XY stage position monitoring
+
+All functions implement error handling with timeout management and logging
+to ensure robust communication with remote hardware controllers.
+
+Functions:
+    lasergetstatus(): Query laser system operational status
+    pyroread(): Read pyrometer temperature measurements
+    valvegetstatus(): Check valve positions and states
+    pressuresread(): Retrieve pressure readings from gauges
+    xyread(): Get current XY stage coordinates
+
+Author: Gary Twinn
 
 <a id="host_queries.requests"></a>
 
@@ -22,6 +43,17 @@ Queries to the various controller APIs
 
 ## logger
 
+<a id="host_queries.check_float"></a>
+
+#### check\_float
+
+```python
+def check_float(value_string)
+```
+
+Converts the given string to a float. If the conversion fails due to a
+`ValueError`, it will return a NaN (Not a Number) value instead.
+
 <a id="host_queries.lasergetstatus"></a>
 
 #### lasergetstatus
@@ -34,12 +66,6 @@ Fetches the current status of the laser system by sending a request to the confi
 laserhost. The response includes details about the laser's keyswitch and door
 interlock statuses. Updates the laserhost's alarm counters based on the response or
 any exceptions encountered during the execution.
-
-:raises requests.Timeout: If the request exceeds the configured timeout duration.
-:raises requests.RequestException: If any other network-related exception occurs.
-:return: A dictionary containing the status of the laser system. If an error occurs,
-    returns a dictionary with 'laser' key set to 'exception'.
-:rtype: dict
 
 <a id="host_queries.pyroread"></a>
 

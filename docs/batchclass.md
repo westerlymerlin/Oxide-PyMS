@@ -117,7 +117,14 @@ def __init__()
 def readdatabase()
 ```
 
-Reads the PyMS database for any open batches
+Reads the database and retrieves information about batch steps and their respective
+batches. It updates multiple attributes of the instance (such as batch details
+and run-specific data) based on the retrieved database records.
+
+The method operates on rows with 'status = 0' in the 'batchsteps' table and uses the
+'batches' table for fetching additional details for the corresponding batch ID. If any
+records are found, it populates relevant instance attributes and closes the database
+connection upon completion.
 
 <a id="batchclass.BatchClass.cancel"></a>
 
@@ -127,7 +134,12 @@ Reads the PyMS database for any open batches
 def cancel()
 ```
 
-Used to cancel a batch - marks all samples and cancelled and closes the batch
+Cancels pending batch steps in the database, updates their statuses,
+and resets relevant instance attributes.
+
+This method connects to the database, retrieves all batch steps with a status of 0 (indicating pending state),
+and updates such records to have a status of 2. Following this, it clears and resets the
+attributes of the instance related to batch details.
 
 <a id="batchclass.BatchClass.new"></a>
 

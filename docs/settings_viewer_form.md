@@ -8,10 +8,6 @@ Settings viewer / editor form. allows user to edit setting values manually. sett
 settings.json file
 Author: Gary Twinn
 
-<a id="settings_viewer_form.sys"></a>
-
-## sys
-
 <a id="settings_viewer_form.QDialog"></a>
 
 ## QDialog
@@ -27,10 +23,6 @@ Author: Gary Twinn
 <a id="settings_viewer_form.QTableWidgetItem"></a>
 
 ## QTableWidgetItem
-
-<a id="settings_viewer_form.QApplication"></a>
-
-## QApplication
 
 <a id="settings_viewer_form.Qt"></a>
 

@@ -495,7 +495,7 @@ Update the guage pressures on the top of the Main Form
 def update_ui_xy_positions()
 ```
 
-Update the X anmd Y positions on the top of the Main Form
+Update the X and Y positions on the top of the Main Form
 
 <a id="main_form.UiMain.update_ui_results_table"></a>
 

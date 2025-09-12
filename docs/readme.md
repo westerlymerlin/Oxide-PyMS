@@ -37,10 +37,58 @@ Database upgrader, used when database versions need changes to the table mstruct
 Author: Gary Twinn
 
 [host_commands](./host_commands.md)  
-Commands to the various controller APIs
+Host Commands Module - Hardware Control Interface for PyMS System
+
+This module provides command functions for controlling various hardware components
+in the PyMS (Python Mass Spectrometry) system. It handles communication and control
+of laboratory equipment including lasers, valves, positioning systems, sensors,
+and vacuum pumps.
+
+The module contains functions that send control commands to connected hardware devices,
+enabling automated operation of the mass spectrometry system components:
+
+Functions:
+- lasercommand(): Controls laser operations and parameters
+- lasersetpower(): Sets laser power levels
+- valvechange(): Controls valve positions and states
+- xymoveto(): Moves XY positioning system to absolute coordinates
+- xymove(): Performs relative XY positioning movements
+- pyro_rangefinder(): Interfaces with pyrometer/rangefinder sensors
+- ion_pump(): Controls ion pump operations
+
+This module works in conjunction with host_queries.py for reading device status
+and is part of the larger PyMS automation system for mass spectrometry analysis.
+
+Dependencies:
+- Hardware communication libraries for connected devices
+- app_control: Application settings and configuration
+- logmanager: System logging functionality
+
+Author: Gary Twinn
 
 [host_queries](./host_queries.md)  
-Queries to the various controller APIs
+Host Queries Module - Network communication interface for hardware devices
+
+This module provides query functions for communicating with various hardware
+components in the PyMS mass spectrometry system over TCP/IP connections.
+The module handles network requests and responses for:
+
+- Laser system status monitoring and pyrometer temperature readings
+- Valve position and status queries
+- Pressure gauge readings from multiple sensors
+- XY stage position monitoring
+
+All functions implement error handling with timeout management and logging
+to ensure robust communication with remote hardware controllers.
+
+Functions:
+    lasergetstatus(): Query laser system operational status
+    pyroread(): Read pyrometer temperature measurements
+    valvegetstatus(): Check valve positions and states
+    pressuresread(): Retrieve pressure readings from gauges
+    xyread(): Get current XY stage coordinates
+
+Author: Gary Twinn
 
 [imagefiler](./imagefiler.md)  
 Image Filer, creates an iimage from a screen print of an application bsed on the window title. If run as standalone
