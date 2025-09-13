@@ -37,6 +37,25 @@ def check_float(value_string):
     except ValueError:
         return float('NaN')
 
+
+def convert_pfeiffer_mt200(value):
+    """
+    Converts the pressure value read from a Pfeiffer MT200 device into a
+    scientifically usable format.
+
+    This function processes the pressure value encoded as a string by the
+    Pfeiffer MT200 device by separating it into its mantissa and exponent parts,
+    and computing the actual pressure in terms of scientific notation.
+
+    A string containing the pressure reading, where the first 4 characters
+    represent the mantissa as an 4 sf integer value and the remaining characters
+    represent the exponent offset from -20.
+    """
+    mantissa = float(value[:4]) / 1000
+    exponent = int(value[4:]) - 20
+    return mantissa * (10 ** exponent)
+
+
 def lasergetstatus():
     """
     Fetches the current status of the laser system by sending a request to the configured
@@ -142,7 +161,7 @@ def pressuresread():
         json_message = resp.json()
         for item in json_message['values'].values():
             if item['name'] == 'Turbo Pressure':
-                settings['vacuum']['turbo']['current'] = check_float(item['value'])
+                settings['vacuum']['turbo']['current'] = convert_pfeiffer_mt200(item['value'])
             if item['name'] == 'Ion Pressure':
                 settings['vacuum']['ion']['current'] = check_float(item['value'])
         alarms['valvehost'] = 0
