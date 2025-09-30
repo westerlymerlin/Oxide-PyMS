@@ -72,7 +72,7 @@ def lasersetpower(power):
     headers required for authentication and other configurations. It handles possible exceptions
     such as timeouts and request failures, and updates the system settings and alarms accordingly.
     """
-    message = {"item": 'setlaserpower', "command": power}
+    message = {"item": 'set_laser_power', "command": power}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     try:
         resp = requests.post(settings['hosts']['laserhost'], headers=headers, json=message,
@@ -185,7 +185,7 @@ def pyro_rangefinder(state):
     along with necessary headers and payload. It handles timeout and general exceptions during
     the request and logs appropriate warnings or errors.
     """
-    message = {"item": 'pyrolaser', "command": state}
+    message = {"item": 'pyro_laser', "command": state}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     try:
         resp = requests.post(settings['hosts']['laserhost'], headers=headers, json=message,

@@ -63,15 +63,15 @@ def lasergetstatus():
     interlock statuses. Updates the laserhost's alarm counters based on the response or
     any exceptions encountered during the execution.
     """
-    message = {"item": 'laserstatus', "command": 1}
+    message = {"item": 'laser_status', "command": 1}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     try:
         resp = requests.post(settings['hosts']['laserhost'], headers=headers, json=message,
                              timeout=settings['hosts']['timeoutseconds'])
         json_message = resp.json()
         alarms['laserhost'] = 0
-        alarms['laseralarm'] = json_message['keyswitch'] + json_message['doorinterlock']
-        return json_message
+        alarms['laseralarm'] = json_message['values']['key'] + json_message['values']['door']
+        return json_message['values']
     except requests.Timeout:
         logger.debug('host_queries: Laser Get Status Timeout Error')
         alarms['laserhost'] += 1
@@ -91,7 +91,7 @@ def pyroread():
     containing temperature metrics. Exception handling is included to manage timeouts and general API request
     issues, ensuring that the function can return fallback data to maintain operational stability.
     """
-    message = {"item": 'gettemperature', "command": 1}
+    message = {"item": 'get_temperature', "command": 1}
     headers = {"Accept": "application/json", "api-key": settings['hosts']['laserhost-api-key']}
     try:
         resp = requests.post(settings['hosts']['laserhost'], headers=headers, json=message,
@@ -99,11 +99,11 @@ def pyroread():
         json_message = resp.json()
         slope = settings['pyrometer']['slope']
         intercept = settings['pyrometer']['intercept']
-        json_message['temperature'] = int(json_message['temperature'] * slope + intercept)
-        json_message['averagetemp'] = int(json_message['averagetemp'] * slope + intercept)
-        json_message['maxtemp'] = int(json_message['maxtemp'] * slope + intercept)
-        json_message['averagemaxtemp'] = int(json_message['averagemaxtemp'] * slope + intercept)
-        return json_message
+        json_message['values']['temperature'] = int(json_message['values']['temperature'] * slope + intercept)
+        json_message['values']['averagetemp'] = int(json_message['values']['averagetemp'] * slope + intercept)
+        json_message['values']['maxtemp'] = int(json_message['values']['maxtemp'] * slope + intercept)
+        json_message['values']['averagemaxtemp'] = int(json_message['values']['averagemaxtemp'] * slope + intercept)
+        return json_message['values']
     except requests.Timeout:
         logger.debug('host_queries: Laser Get Pyrometer Timeout Error')
         alarms['laserhost'] += 1
