@@ -54,6 +54,25 @@ def check_float(value_string)
 Converts the given string to a float. If the conversion fails due to a
 `ValueError`, it will return a NaN (Not a Number) value instead.
 
+<a id="host_queries.convert_pfeiffer_mt200"></a>
+
+#### convert\_pfeiffer\_mt200
+
+```python
+def convert_pfeiffer_mt200(value)
+```
+
+Converts the pressure value read from a Pfeiffer MT200 device into a
+scientifically usable format.
+
+This function processes the pressure value encoded as a string by the
+Pfeiffer MT200 device by separating it into its mantissa and exponent parts,
+and computing the actual pressure in terms of scientific notation.
+
+A string containing the pressure reading, where the first 4 characters
+represent the mantissa as an 4 sf integer value and the remaining characters
+represent the exponent offset from -20.
+
 <a id="host_queries.lasergetstatus"></a>
 
 #### lasergetstatus
