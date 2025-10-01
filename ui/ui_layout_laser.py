@@ -80,7 +80,7 @@ class Ui_dialogLaserControl(object):
         self.label_3.setGeometry(QRect(170, 160, 61, 16))
         self.lblStatus = QLabel(dialogLaserControl)
         self.lblStatus.setObjectName(u"lblStatus")
-        self.lblStatus.setGeometry(QRect(140, 30, 101, 41))
+        self.lblStatus.setGeometry(QRect(110, 30, 111, 41))
         self.lblStatus.setStyleSheet(u"")
         self.lblStatus.setFrameShape(QFrame.Shape.NoFrame)
         self.lblStatus.setFrameShadow(QFrame.Shadow.Plain)
